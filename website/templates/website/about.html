@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    {% load static from staticfiles %}
+    <script src="{% static 'js/jquery-1.12.2.min.js' %}"></script>
+    <script src="{% static 'js/jquery-csrf.js' %}"></script>
+
+    <!-- bootstrap은 3.3.7 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+
+    <!--<link rel="stylesheet" type="text/css" href="{% static "base_modified.css" %}">-->
+    <style>
+        @media screen and (max-width: 768px) {
+            /* 모바일에 사용될 스타일 시트를 여기에 작성합니다. */
+            .mobile_display_none {
+                display: none;
+            }
+            .mobile_display_block {
+                display: block;
+            }
+        }
+        @media screen and (min-width: 769px) {
+            .desktop_display_none {
+                display: none;
+            }
+            .desktop_display_block {
+                display: block;
+            }
+        }
+
+        .form-label {
+            float: left;
+            text-align: left;
+            font-weight: normal;
+        }
+
+        .form-select {
+            display: inline-block;
+            width: auto;
+            vertical-align: middle;
+        }
+        .square_list_wrapper {
+            width: 350px;
+            height: 350px;
+        }
+        .padding_side_5 {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        .list_text {
+            white-space: nowrap;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .img_350_250 {
+            width: 350px;
+            height: 250px;
+        }
+        .ad_banner_height_fix {
+            height: 100px;
+        }
+
+        .btn_today_or_other {
+            width: 320px;
+            height: 40px;
+            font-size: 20px
+        }
+        .btn_padder {
+            height: 10px;
+        }
+        .birthday_selecting_text {
+            white-space: nowrap;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .sajufortune_text {
+            color: #9ba045;
+            font-size: 54px;
+            font-weight: bold;
+        }
+        .about_saju {
+            color: #9ba045;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .ad_square_list { width: 336px; height: 280px; }
+        @media(min-width: 769px) { .ad_square_list { width: 336px; height: 280px; } }
+        @media(min-width: 500px) { .ad_square_list { width: 336px; height: 280px; } }
+        .ad_square_list_wrapper { height: 280px; }
+        @media(min-width: 769px) { .ad_square_list { height: 280px; } }
+        @media(min-width: 500px) { .ad_square_list { height: 280px; } }
+        .ad_square_detail { width: 300px; height: 250px; }
+        @media(min-width: 500px) { .ad_square_detail { width: 300px; height: 250px; } }
+        @media(min-width: 769px) { .ad_square_detail { width: 300px; height: 250px; } }
+        .ad_square_detail_wrapper { height: 250px; }
+        @media(min-width: 500px) { .ad_square_detail_wrapper { height: 250px; } }
+        @media(min-width: 769px) { .ad_square_detail_wrapper { height: 250px; } }
+        .ad_btn { width: 320px; height: 100px; }
+        @media(min-width: 500px) { .ad_btn { width: 320px; height: 100px; } }
+        @media(min-width: 769px) { .ad_btn { width: 320px; height: 100px; } }
+        .ad_btn_wrapper { height: 100px; }
+        @media(min-width: 500px) { .ad_btn_wrapper { height: 100px; } }
+        @media(min-width: 769px) { .ad_btn_wrapper { height: 100px; } }
+        .ad_banner { width: 320px; height: 100px; }
+        @media(min-width: 500px) { .ad_banner { width: 468px; height: 60px; } }
+        @media(min-width: 769px) { .ad_banner { width: 728px; height: 90px; } }
+        .ad_banner_wrapper { height: 100px; }
+        @media(min-width: 500px) { .ad_banner_wrapper { height: 60px; } }
+        @media(min-width: 769px) { .ad_banner_wrapper { height: 90px; } }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="text-center">
+                <p class="sajufortune_text">SajuFortune</p>
+            </div>
+        </div>
+        <div class="col-xs-12 ad_banner_height_fix">
+            <div class="text-center ad_banner_wrapper"><!--광고 덮을시엔 크기 지정해주고 text-center이용 width는 필요없어보인다 하면 왼쪽으로 붙어버림 height만 할 것-->
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- example_responsive_1 -->
+                <ins class="adsbygoogle ad_banner"
+                     style="display:inline-block; background-color: green"
+                     data-ad-client="ca-pub-XXXXXXX11XXX9"
+                     data-ad-slot="8XXXXX1"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+    </div>
+    <!--forloop counter를쓰자-->
+    <!--페이지는 12개불러오면 13개까지 불러와보고 12개만 보낸 후에 라스트인지 아닌지 변수를 자바스크립트로 보내서 넥스트 누를 시에 마지막페이지면 마지막페이지라고 알리는 형식
+    get 요청 파라미터로 페이지 순서 부르더라도 없는 페이지 부르면 404리다이렉트-->
+
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6">
+            <div class="col-xs-12">
+
+                <div class="center-block">
+                    <div class="text-center">
+                        <p class="birthday_selecting_text h3">
+                        {% block birthday_selecting %}Birthday Selecting{% endblock %}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6">
+        <form class="form-inline text-center" >
+            <div class="form-group col-xs-4">
+                <select class="form-control form-select" id="select_year" style="width: 100%"></select>
+            </div>
+            <div class="form-group col-xs-4">
+                <select class="form-control form-select" id="select_month" style="width: 100%"></select>
+            </div>
+            <div class="form-group col-xs-4">
+                <select class="form-control form-select" id="select_month" style="width: 100%"></select>
+            </div>
+        </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="btn_padder"></div>
+        <div class="text-center">
+            <button type="button" class="btn btn_today_or_other">{% block today %}Today{% endblock %}</button>
+        </div>
+        <div class="btn_padder"></div>
+        <div class="text-center">
+            <button type="button" class="btn btn_today_or_other">{% block tomorrow %}Tomorrow{% endblock %}</button>
+        </div>
+        <div class="btn_padder"></div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn_today_or_other">{% block dayaftertomorrow %}DayAfterTomorrow{% endblock %}</button>
+        </div>
+        <div class="btn_padder"></div>
+
+        <div class="text-center ad_btn_wrapper"><!--광고 덮을시엔 크기 지정해주고 text-center이용 width는 필요없어보인다 하면 왼쪽으로 붙어버림 height만 할 것-->
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- example_responsive_1 -->
+            <ins class="adsbygoogle ad_btn"
+                 style="display:inline-block; background-color: green"
+                 data-ad-client="ca-pub-XXXXXXX11XXX9"
+                 data-ad-slot="8XXXXX1"></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        <div class="btn_padder"></div>
+
+    </div>
+
+    <!--여기서부턴 정사각형 목록-->
+
+    <!--row 당 2개씩 -->
+
+    <div class="row">
+
+    </div>
+    <!-- more btn -->
+
+    <div class="row">
+        <div class="text-center">
+            {% block more_posts %}<button type="button" class="btn btn_today_or_other" href="{% url 'website:list' %}">more posts</button>{% endblock %}
+        </div>
+        <div class="btn_padder"></div>
+        <div class="col-xs-12 text-center">
+            {% block about_saju %}<a href="{% url 'website:main' %}"><p class="h3 about_saju">main page</p></a>{% endblock %}
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TestPage</title>
+
+    {% load static from staticfiles %}
+    <script src="{% static 'js/jquery-1.12.2.min.js' %}"></script>
+    <script src="{% static 'js/jquery-csrf.js' %}"></script>
+
+    <!-- bootstrap은 3.3.7 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+
+    <!--<link rel="stylesheet" type="text/css" href="{% static "base_modified.css" %}">-->
+</head>
+<body>
+{% if answer %}
+    ***************************{{ answer.q }}***************************
+{% endif %}
+<textarea id="textarea_test"></textarea>
+<button id="btn_test">test_btn</button>
+<!--여기에 너무 많은 시간을 투자하려고 하지 말아라-->
+</body>
+<script>
+    $(document).ready(function () {
+        $('#btn_test').click(function () {
+            var text = $('#textarea_test').val()*1;
+            var changed = text.toString(16);
+            console.log(changed);
+            location.href='http://www.google.com';
+        })
+    });
+</script>
+</html>

@@ -1,0 +1,42 @@
+                        <div class="center-block square_list_wrapper">
+                            <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
+
+                            {% if request.GET.f %}
+                                <a href="{% url 'post:detail' lang='spa' num=post.pk %}?f={{ request.GET.f }}">
+                            {% else %}
+                                <a href="{% url 'post:detail' lang='spa' num=post.pk %}">
+                            {% endif %}
+                            {% if post.photo %}
+                                <img class="img_350_250 img_clickable" src="{{ post.photo.url }}">
+                            {% else %}
+                                <div class="text-center">
+                                    <div class="fa btn_saju img_clickable img_350_250">
+                                        Sorry, No Image
+                                    </div>
+                                </div>
+                            {% endif %}
+                            </a>
+                            <!-- text -->
+                            <div class="text-center">
+                            {% if request.GET.f %}
+                                <a href="{% url 'post:detail' lang='spa' num=post.pk %}?f={{ request.GET.f }}">
+                            {% else %}
+                                <a href="{% url 'post:detail' lang='spa' num=post.pk %}">
+                            {% endif %}
+                                    <p class="h3 list_text">
+                                    {{ post.postinfospanish.name }}
+                                    </p>
+                                </a>
+                            </div>
+                            <div class="text-center">
+                                {% if request.GET.f %}
+                                    <a href="{% url 'post:detail' lang='spa' num=post.pk %}?f={{ request.GET.f }}">
+                                {% else %}
+                                    <a href="{% url 'post:detail' lang='spa' num=post.pk %}">
+                                {% endif %}
+                                        <p class="h5 list_text">
+                                        {{ post.postinfospanish.title }}
+                                        </p>
+                                    </a>
+                            </div>
+                        </div>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    {% load static from staticfiles %}
+    <script src="{% static 'js/jquery-1.12.2.min.js' %}"></script>
+    <script src="{% static 'js/jquery-csrf.js' %}"></script>
+    <script src="{% static 'js/birthday.js' %}"></script>
+
+    <!-- bootstrap은 3.3.7 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/saju_style.css" %}">
+
+    <!--<link rel="stylesheet" type="text/css" href="{% static "base_modified.css" %}">-->
+
+</head>
+<style>
+        .btn_pre_next {
+            width: 100px;
+        }
+</style>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="text-center">
+                <p class="sajufortune_text">SajuFortune</p>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            {% include 'ad/_ad_banner.html' %}
+        </div>
+    </div>
+    <!--forloop counter를쓰자-->
+    <!--페이지는 12개불러오면 13개까지 불러와보고 12개만 보낸 후에 라스트인지 아닌지 변수를 자바스크립트로 보내서 넥스트 누를 시에 마지막페이지면 마지막페이지라고 알리는 형식
+    get 요청 파라미터로 페이지 순서 부르더라도 없는 페이지 부르면 404리다이렉트-->
+
+    <!--광고시에 모바일에 허용되는 광고가 따로 있다 336 큰 직사각형 광고는 모바일에 안 먹히니 다른걸로 교체해야함 -->
+    <div class="row">
+
+        <div class="btn_padder"></div>
+
+    </div>
+
+    <!--여기서부턴 정사각형 목록-->
+
+    <!--row 당 2개씩 -->
+
+{% if posts %}
+    {% for post in posts %}
+        <div class="row">
+            <!--이건 더미 정사각형-->
+            <div class="center-block square_list_wrapper" id="{{ post.pk }}">
+                <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
+                {% if post.photo %}
+                <img class="img_350_250" src="{{ post.photo.url }}">
+                {% else %}
+                <img class="img_350_250" src="http://www.bluffpointegolf.com/wp-content/themes/bluffpointe/lib/img/350x250.gif">
+                {% endif %}
+                <!-- text -->
+                <div class="text-center">
+                    <p class="h3 list_text">
+                    {{ post.postinfoenglish.name }}</p>
+                </div>
+                <div class="text-center">
+                    <p class="h5 list_text">
+                    {{ post.postinfoenglish.title }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="media">
+                    <div class="media-body">
+                        <p class="media-heading h4">Top Aligned Media <small><i>This is Default</i></small></p>
+                        <p>{{ overall.dayoverallenglish.text|linebreaksbr }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div style="width: 160px; height: 600px; background-color: green"></div>
+            </div>
+
+        </div>
+    {% endfor %}
+{% endif %}
+    <!-- more btn -->
+    <div class="row">
+        <div class="btn_padder"></div>
+        <div class="btn_padder"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6">
+
+            <div class="col-xs-6">
+                <div class="text-center">
+                    {% if posts.has_next %}
+                        <button type="button" class="btn btn-default btn-sm btn_pre_next" href="{% url 'post:list' lang='eng' page='1' %}">
+                            {% block next %}
+                                <span class="glyphicon glyphicon glyphicon-chevron-left"></span><span>  Previous</span>
+                            {% endblock %}
+                        </button>
+                    {% else %}
+                        <button type="button" class="btn btn-default btn-sm disabled btn_pre_next" href="{% url 'post:list' lang='eng' page='1' %}">
+                            {% block it_is_latest %}
+                                It's latest
+                            {% endblock %}
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-xs-6">
+                <div class="text-center">
+                    {% if posts.has_previous %}
+                        <button type="button" class="btn btn-default btn-sm btn_pre_next" href="{% url 'post:list' lang='eng' page='1' %}">
+                            {% block previous %}
+                                <span>Next  </span><span class="glyphicon glyphicon glyphicon-chevron-right"></span>
+                            {% endblock %}
+                        </button>
+                    {% else %}
+                        <button type="button" class="btn btn-default btn-sm disabled btn_pre_next" href="{% url 'post:list' lang='eng' page='1' %}">
+                            {% block it_is_oldest %}
+                                It's oldest
+                            {% endblock %}
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="btn_padder"></div>
+        <div class="btn_padder"></div>
+    </div>
+</div>
+</body>
+</html>
