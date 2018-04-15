@@ -1,0 +1,41 @@
+        <div class="media">
+            <div class="media-body text-center">
+                {% block other_posts %}
+                <p class="media-heading h4">
+                    {{ celeb.celebrityenglish.name }} Posts
+                </p>
+
+                {% endblock %}
+            </div>
+            <br>
+        </div>
+        <!--이건 더미 정사각형-->
+        {% for post in posts %}
+            {% if posts|length == 1 %}
+                <div class="col-sm-6 col-sm-offset-3 padding_side_5">
+                    {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
+                </div>
+            {% else %}
+                {% if forloop.counter0 == 2 %}
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
+                    </div>
+                    <!--adsense 버전-->
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'ad/_ad_square_list.html' %}
+                    </div>
+                {% elif forloop.counter0 == 6 %}
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
+                    </div>
+                    <!--adsense 버전-->
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'ad/_ad_square_list.html' %}
+                    </div>
+                {% else %}
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}

@@ -14,7 +14,7 @@ urlpatterns = [
     re_path(r'^$', views.main, name='main'),
     re_path(r'^(?P<lang>ara|chi|eng|por|spa)/$', views.main_lang, name='main_lang'),
 
-    re_path(r'^about/(?P<lang>ara|chi|eng|por|spa)/$', views.main, name='about'),
+    re_path(r'^about/(?P<lang>ara|chi|eng|por|spa)/$', views.about, name='about'),
 
     re_path(r'^test/$', views.test, name='test'),
 

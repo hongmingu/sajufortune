@@ -52,7 +52,7 @@ def list_default(request, page):
         return JsonResponse({'error': 'You\'ve tried bad access'})
     else:
         page = request.GET.get(page, 1)
-        post_all = Post.objects.all()
+        post_all = Post.objects.all().order_by('-created')
         post_paginator = Paginator(post_all, 10)
 
         try:
@@ -113,22 +113,25 @@ def detail(request, num, lang):
 
         template = switch_get_post_detail_template(lang)
 
-        post_option_1 = None
-        try:
-            post_option_1 = Post.objects.get(pk=int_num - 3)
-        except Post.DoesNotExist:
-            post_option_2 = None
+        post_all = Post.objects.all().exclude(pk=num).order_by('?')
+        post_paginator = Paginator(post_all, 2)
 
-        post_option_2 = None
-        try:
-            post_option_2 = Post.objects.get(pk=int_num - 5)
-        except Post.DoesNotExist:
-            post_option_2 = None
+        other_posts = post_paginator.page(1)
+
+        birthday_dict = dict()
+        target_dict = dict()
+        birthday_dict['year'] = birthday_year
+        birthday_dict['month'] = birthday_month
+        birthday_dict['day'] = birthday_day
+        target_dict['year'] = target_year
+        target_dict['month'] = target_month
+        target_dict['day'] = target_day
 
         return render(request, template, {'post': post,
-                                          'post_option_1': post_option_1,
-                                          'post_option_2': post_option_2,
+                                          'other_posts': other_posts,
                                           'lang': lang,
+                                          'birthday': birthday_dict,
+                                          'target': target_dict,
                                           'overall': overall,
                                           'emotion': emotion,
                                           'love': love,
@@ -143,7 +146,7 @@ def detail(request, num, lang):
 def post_list(request, page, lang):
     if request.method == "GET":
         page = request.GET.get(page, 1)
-        post_all = Post.objects.all()
+        post_all = Post.objects.all().order_by('-created')
         post_paginator = Paginator(post_all, 10)
 
         try:
@@ -154,15 +157,15 @@ def post_list(request, page, lang):
             posts = post_paginator.page(post_paginator.num_pages)
 
         if lang == 'ara':
-            return render(request, 'post/list_ara.html', {'posts': posts, 'lang': lang})
+            return render(request, 'post/list/list_ara.html', {'posts': posts, 'lang': lang})
         elif lang == 'chi':
-            return render(request, 'post/list_chi.html', {'posts': posts, 'lang': lang})
+            return render(request, 'post/list/list_chi.html', {'posts': posts, 'lang': lang})
         elif lang == 'eng':
-            return render(request, 'post/list_eng.html', {'posts': posts, 'lang': lang})
+            return render(request, 'post/list/list_eng.html', {'posts': posts, 'lang': lang})
         elif lang == 'por':
-            return render(request, 'post/list_por.html', {'posts': posts, 'lang': lang})
+            return render(request, 'post/list/list_por.html', {'posts': posts, 'lang': lang})
         elif lang == 'spa':
-            return render(request, 'post/list_spa.html', {'posts': posts, 'lang': lang})
+            return render(request, 'post/list/list_spa.html', {'posts': posts, 'lang': lang})
 
     else:
         return JsonResponse({'error': 'You\'ve tried bad access'})
@@ -177,7 +180,7 @@ def post_detail(request, ftype, num, lang):
             if ftype == 'overall':
                 return render(request, 'post/overall_ara.html', {'post': post})
             elif ftype == 'detail':
-                return render(request, 'post/detail_ara.html', {'post': post})
+                return render(request, 'post/detail/detail_ara.html', {'post': post})
         elif lang == 'chi':
             if ftype == 'overall':
                 return render(request, 'post/overall_chi.html', {'post': post})
@@ -187,7 +190,7 @@ def post_detail(request, ftype, num, lang):
             if ftype == 'overall':
                 return render(request, 'post/overall_eng.html', {'post': post})
             elif ftype == 'detail':
-                return render(request, 'post/detail_eng.html', {'post': post})
+                return render(request, 'post/detail/detail_eng.html', {'post': post})
         elif lang == 'por':
             if ftype == 'overall':
                 return render(request, 'post/overall_por.html', {'post': post})

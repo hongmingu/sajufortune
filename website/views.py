@@ -15,6 +15,7 @@ from daywork.models import DayWork
 from dayrelationships.models import DayRelationships
 from django.core.cache import cache
 
+from celebrity.models import Celebrity
 
 def test(request):
     if request.method == "POST":
@@ -24,7 +25,7 @@ def test(request):
         get_cache = cache.get_or_set('posts'+get_data, get_data)
 
         answer = {'q': get_data}
-        return render(request, 'website/test.html', {'answer': answer})
+        return render(request, 'post/not_exist_post_default.html', {'answer': answer})
 
 
 def day(request, lang):
@@ -39,7 +40,7 @@ def day(request, lang):
         if birthday_year is None or birthday_month is None or birthday_day is None \
                 or target_year is None or target_month is None or target_day is None:
             # 제공되지 않은 값이 있을 경우
-            return render(request, 'website/day_eng.html', )
+            return render(request, 'website/day/day_eng.html', )
 
         try:
             birthday_year = int(birthday_year, 16)
@@ -50,11 +51,11 @@ def day(request, lang):
             target_day = int(target_day, 16)
         except ValueError:
             # 값이 제대로 변형되지 않은 경우
-            return render(request, 'website/day_eng.html', )
+            return render(request, 'website/day/day_eng.html', )
 
         if not validate_date(birthday_year, birthday_month, birthday_day, target_year, target_month, target_day):
             # 값이 변형되었더라도 제대로 된 기간을 제시하지 않은 경우
-            return render(request, 'website/day_eng.html', )
+            return render(request, 'website/day/day_eng.html', )
 
         result_num = get_result_num(birthday_year, birthday_month, birthday_day, target_year, target_month, target_day)
 
@@ -86,25 +87,23 @@ def day(request, lang):
         target_dict['month'] = target_month
         target_dict['day'] = target_day
 
-        # post에서 랜덤으로 배정해주거나, 다른 유명인의 투데이도 보라고 해주기 => 유명인 프로필 데이터랑 타겟데이 나눠야함.
-        post_list = Post.objects.all()
-        post_paginator = Paginator(post_list, 10)
+        celeb_list = Celebrity.objects.all().order_by('?')
+        celeb_paginator = Paginator(celeb_list, 2)
         try:
-            posts = post_paginator.page(1)
-        except PageNotAnInteger:
-            posts = post_paginator.page(1)
+            other_celebs = celeb_paginator.page(1)
         except EmptyPage:
-            posts = post_paginator.page(post_paginator.num_pages)
+            other_celebs = celeb_paginator.page(celeb_paginator.num_pages)
 
-        return render(request, 'website/day_eng.html', {'lang': lang,
+        return render(request, 'website/day/day_eng.html', {'lang': lang,
                                                         'birthday': birthday_dict,
                                                         'target': target_dict,
+                                                        'other_celebs': other_celebs,
                                                         'overall': overall,
                                                         'emotion': emotion,
                                                         'love': love,
-                                                        'money': money,
-                                                        'relationships': relationships,
-                                                        'work': work, })
+                                                            'money': money,
+                                                            'relationships': relationships,
+                                                            'work': work, })
     else:
         return JsonResponse({'Hello': 'You\'ve got wrong access! may god bless you.'})
 
@@ -112,7 +111,7 @@ def day(request, lang):
 def main(request):
     if request.method == "GET":
 
-        post_list = Post.objects.all()
+        post_list = Post.objects.all().order_by('-created')
         post_paginator = Paginator(post_list, 10)
         try:
             posts = post_paginator.page(1)
@@ -122,19 +121,20 @@ def main(request):
             posts = post_paginator.page(post_paginator.num_pages)
 
             # post_paginator.num_pages 는 마지막 페이지를 의미 1페이지가 마지막 페이지면 그렇게 되는거고
-        return render(request, 'website/main.html', {'posts': posts,})
+        return render(request, 'website/main/main.html', {'posts': posts,
+                                                          'lang': 'eng'})
     else:
         return JsonResponse({'Hello': 'You\'ve got wrong access! may god bless you.'})
 
 
 def switch_main_template_by_lang(lang):
     return {
-        'ara': 'website/main_ara.html',
-        'chi': 'website/main_chi.html',
-        'eng': 'website/main_eng.html',
-        'por': 'website/main_por.html',
-        'spa': 'website/main_ara.html',
-    }
+        'ara': 'website/main/main_ara.html',
+        'chi': 'website/main/main_chi.html',
+        'eng': 'website/main/main_eng.html',
+        'por': 'website/main/main_por.html',
+        'spa': 'website/main/main_ara.html',
+    }.get(lang, 'website/main/main_eng.html')
 
 
 def main_lang(request, lang):
@@ -177,9 +177,23 @@ def switch(lang):
     return {
         'ara': 'website/list_ara.html',
         'chi': 'website/list_chi.html',
-        'eng': 'website/list_eng.html',
+        'eng': 'website/celeb_list_eng.html',
         'por': 'website/list_por.html',
         'spa': 'website/list_spa.html',
     }
 
 
+def switch_about_template_by_lang(lang):
+    return {
+        'ara': 'website/about/about_ara.html',
+        'chi': 'website/about/about_chi.html',
+        'eng': 'website/about/about_eng.html',
+        'por': 'website/about/about_por.html',
+        'spa': 'website/about/about_spa.html',
+    }.get(lang, 'website/about/about_eng.html')
+
+
+def about(request, lang):
+    if request.method == "GET":
+        template = switch_about_template_by_lang(lang)
+        return render(request, template, {'lang': lang})

@@ -1,0 +1,110 @@
+        <div class="col-sm-8 col-sm-offset-2 padding_side_7" id="div_detail">
+            <div class="media">
+                <div class="media-body">
+
+                    <p class="media-heading h4">
+                        <small>生日: {{ birthday.year }}-{{ birthday.month }}-{{ birthday.day }}</small>
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small>关于: {{ target.year }}-{{ target.month }}-{{ target.day }}</small>
+                    </p>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        总体
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ overall.dayoverallchinese.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ overall.dayoverallchinese.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        情感
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ emotion.dayemotionchinese.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ emotion.dayemotionchinese.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                    <div class="col-xs-12 padding_side_5">
+                        {% include 'ad/_ad_square_detail.html' %}
+                    </div>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        爱
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ love.daylovechinese.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ love.daylovechinese.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        钱
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ money.daymoneychinese.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ money.daymoneychinese.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                    <div class="col-xs-12 padding_side_5">
+                        {% include 'ad/_ad_square_detail.html' %}
+                    </div>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        关系
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ relationships.dayrelationshipschinese.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ relationships.dayrelationshipschinese.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        工作
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ work.dayworkchinese.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ work.dayworkchinese.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 padding_side_5 mobile_display_none" id="div_side_scrapper">
+            {% include 'ad/_ad_side_scrapper.html' %}
+        </div>

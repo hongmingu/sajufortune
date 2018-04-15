@@ -1,0 +1,110 @@
+        <div class="col-sm-8 col-sm-offset-2 padding_side_7" id="div_detail">
+            <div class="media">
+                <div class="media-body">
+
+                    <p class="media-heading h4">
+                        <small>cumpleaños: {{ birthday.year }}-{{ birthday.month }}-{{ birthday.day }}</small>
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small>acerca de: {{ target.year }}-{{ target.month }}-{{ target.day }}</small>
+                    </p>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        en general
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ overall.dayoverallspanish.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ overall.dayoverallspanish.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        emoción
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ emotion.dayemotionspanish.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ emotion.dayemotionspanish.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                    <div class="col-xs-12 padding_side_5">
+                        {% include 'ad/_ad_square_detail.html' %}
+                    </div>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        amor
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ love.daylovespanish.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ love.daylovespanish.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        dinero
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ money.daymoneyspanish.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ money.daymoneyspanish.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                    <div class="col-xs-12 padding_side_5">
+                        {% include 'ad/_ad_square_detail.html' %}
+                    </div>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        relaciones
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ relationships.dayrelationshipsspanish.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ relationships.dayrelationshipsspanish.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        trabajo
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ work.dayworkspanish.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ work.dayworkspanish.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 padding_side_5 mobile_display_none" id="div_side_scrapper">
+            {% include 'ad/_ad_side_scrapper.html' %}
+        </div>

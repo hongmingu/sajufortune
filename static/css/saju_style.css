@@ -150,6 +150,10 @@ a:hover {
     text-decoration: none;
 }
 
+.inherit_color{
+    color: inherit;
+}
+
 .btn_saju {
 background-color: #26a01a;
 color: white;
@@ -266,4 +270,34 @@ a:hover {
 .fa-digg {
   background: #000000;
   color: white;
+}
+
+/* unvisited link */
+.ban_bs_text_link:link {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* visited link */
+.ban_bs_text_link:visited {
+    color: inherit;
+}
+
+/* mouse over link */
+.ban_bs_text_link:hover {
+    color: inherit;
+}
+
+/* selected link */
+.ban_bs_text_link:active {
+    color: inherit;
+}
+.sajufortune_color {
+    color: #26a01a;
+}
+.warning_color{
+    color: #c20c0a;
+}
+.warning_height{
+    height: 16px;
 }

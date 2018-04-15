@@ -1,0 +1,27 @@
+                    <div class="col-sm-6 padding_side_5">
+
+                        <div class="center-block square_list_wrapper">
+                            <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
+
+
+                            <a href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}?f={{ celebs.number }}">
+                            {% if celeb.photo %}
+                                <img class="img_350_250 img_clickable" src="{{ celeb.photo.url }}">
+                            {% else %}
+                                <div class="text-center">
+                                    <div class="fa btn_saju img_clickable img_350_250">
+                                        Sorry, No Image
+                                    </div>
+                                </div>
+                            {% endif %}
+                            </a>
+                            <!-- text -->
+                            <div class="text-center">
+                                <a class="inherit_color" href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}?f={{ celebs.number }}">
+                                    <p class="h3 list_text">
+                                    {{ celeb.celebrityenglish.name }}
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>

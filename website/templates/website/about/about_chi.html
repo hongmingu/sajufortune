@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    {% load static from staticfiles %}
+    <script src="{% static 'js/jquery-1.12.2.min.js' %}"></script>
+    <script src="{% static 'js/jquery-csrf.js' %}"></script>
+
+    <!-- bootstrap은 3.3.7 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/saju_style.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="text-center">
+                {% block sajufortune_main %}
+                <a href="{% url 'website:main' %}"><p class="sajufortune_text">SajuFortune</p></a>
+                {% endblock %}
+            </div>
+        </div>
+        <div class="col-xs-12">
+            {% include 'ad/_ad_banner.html' %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="btn_padder"></div>
+        <div class="btn_padder"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 padding_side_7" id="div_detail">
+            <div class="media">
+                <div class="media-body">
+
+
+                    <p class="media-heading h4">
+                        사주는 이렇고 저런겅
+                    </p>
+
+                    <p>
+                        이래저래하다능!! 맞다능!?
+                    </p>
+
+                    <br>
+
+                    <div class="col-xs-12">
+                        <p>
+                            <span class="fa fa-facebook" style="size: 30px; width: 10em"> Facebook</span><a href="https://www.facebook.com/sajufortune"><span class="h4"> https://www.facebook.com/sajufortune</span></a>
+                        </p>
+                    </div>
+                    <br>
+                    <div class="col-xs-12">
+                        <p>
+                            <span class="fa fa-twitter" style="size: 30px; width: 10em;"> Twitter</span><a href="https://www.facebook.com/sajufortune"><span class="h4"> https://www.facebook.com/sajufortune</span></a>
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-2 padding_side_5 mobile_display_none" id="div_side_scrapper">
+            {% include 'ad/_ad_side_scrapper.html' %}
+        </div>
+
+    </div>
+    <!--forloop counter를쓰자-->
+    <!--페이지는 12개불러오면 13개까지 불러와보고 12개만 보낸 후에 라스트인지 아닌지 변수를 자바스크립트로 보내서 넥스트 누를 시에 마지막페이지면 마지막페이지라고 알리는 형식
+    get 요청 파라미터로 페이지 순서 부르더라도 없는 페이지 부르면 404리다이렉트-->
+
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6">
+
+            <div class="col-xs-12">
+
+                <div class="center-block">
+                    <div class="text-center">
+                        <p class="birthday_selecting_text h3">
+                        {% block birthday_selecting %}Birthday Selecting{% endblock %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6 text-center warning_color">
+            <p class="h4 warning_height" id="p_birth_warning"></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6">
+        <form class="form-inline text-center" >
+            <div class="form-group col-xs-4">
+                <select class="form-control form-select padding_select_side" id="select_year" style="width: 100%;">
+                    <option selected disabled value="non_year">Year</option>
+                </select>
+            </div>
+            <div class="form-group col-xs-4">
+                <select class="form-control form-select padding_select_side" id="select_month" style="width: 100%">
+                    <option selected disabled value="non_month">Month</option>
+                </select>
+            </div>
+            <div class="form-group col-xs-4">
+                <select class="form-control form-select padding_select_side" id="select_day" style="width: 100%">
+                    <option selected disabled value="non_day">Day</option>
+                </select>
+            </div>
+        </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="btn_padder"></div>
+        <div class="text-center">
+            {% block today %}
+                <a class="fa btn_saju btn_today_or_other" id="btn_today" href="">Today</a>
+            {% endblock %}
+        </div>
+        <div class="btn_padder"></div>
+        <div class="text-center">
+            {% block tomorrow %}
+                <a class="fa btn_saju btn_today_or_other" id="btn_tomorrow" href="">Tomorrow</a>
+            {% endblock %}
+        </div>
+        <div class="btn_padder"></div>
+
+        <div class="text-center">
+            {% block dayaftertomorrow %}
+                <a class="fa btn_saju btn_today_or_other" id="btn_dayaftertomorrow" href="">DayAfterTomorrow</a>
+            {% endblock %}
+        </div>
+        <div class="btn_padder"></div>
+        <div class="btn_padder"></div>
+    </div>
+    <!--여기서부턴 정사각형 목록-->
+
+    <!--row 당 2개씩 -->
+
+    <!-- more btn -->
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            {% block more_posts %}
+                <a class="fa btn_saju btn_today_or_other" href="{% url 'post:list' lang=lang page='1' %}">
+                    Posts
+                </a>
+            {% endblock %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="btn_padder"></div>
+        <div class="btn_padder"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            {% block more_celebrities %}
+                <a class="fa btn_saju btn_today_or_other" href="{% url 'celebrity:list' lang=lang page='1' %}">
+                    Celebrities
+                </a>
+            {% endblock %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="text-center">
+                {% block sajufortune_main_bottom %}
+                <a href="{% url 'website:main' %}"><p class="sajufortune_text">Back To Main</p></a>
+                {% endblock %}
+            </div>
+        </div>
+        <div class="col-xs-12">
+            {% include 'ad/_ad_banner.html' %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="btn_padder"></div>
+        <div class="btn_padder"></div>
+    </div>
+</div>
+
+{% block choose_phrase %}
+    <div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="Would you set your birthday?"></div>
+    <div class="mobile_display_none desktop_display_none" id="phrase_language" data-sj="Would you set your language?"></div>
+    <div class="mobile_display_none desktop_display_none" id="url_day" data-sj="{% url 'website:day' lang='eng' %}"></div>
+    <div class="mobile_display_none desktop_display_none" id="url_ara" data-sj="{% url 'website:main_lang' lang='ara' %}"></div>
+    <div class="mobile_display_none desktop_display_none" id="url_chi" data-sj="{% url 'website:main_lang' lang='chi' %}"></div>
+    <div class="mobile_display_none desktop_display_none" id="url_eng" data-sj="{% url 'website:main_lang' lang='eng' %}"></div>
+    <div class="mobile_display_none desktop_display_none" id="url_por" data-sj="{% url 'website:main_lang' lang='por' %}"></div>
+    <div class="mobile_display_none desktop_display_none" id="url_spa" data-sj="{% url 'website:main_lang' lang='spa' %}"></div>
+
+{% endblock %}
+
+</body>
+<script>
+    $(document).ready(function () {
+        /* select birthday */
+        var select_year, select_month, select_day, i_birth;
+
+        var currentDate = new Date(new Date().getTime());
+        var current_year = currentDate.getFullYear();
+
+        select_year = $('#select_year');
+
+        for ( i_birth = current_year; i_birth >= 1900; i_birth -= 1 ) {
+            select_year.append("<option value=\""+i_birth+"\">"+i_birth+"</option>");
+        }
+
+        select_month = $('#select_month');
+
+        for ( i_birth = 1; i_birth <= 12; i_birth += 1 ) {
+            select_month.append("<option value=\""+i_birth+"\">"+i_birth+"</option>");
+        }
+
+        select_day = $('#select_day');
+
+        for ( i_birth = 1; i_birth <= 31; i_birth += 1 ) {
+            select_day.append("<option value=\""+i_birth+"\">"+i_birth+"</option>");
+        }
+        /*select birth end */
+
+        var selected_year, selected_month, selected_day;
+
+        $('#btn_today').click(function (e) {
+            e.preventDefault();
+            /*location.href = "http://stackoverflow.com";*/
+            selected_year = $("#select_year option:selected").val();
+            selected_month = $("#select_month option:selected").val();
+            selected_day = $("#select_day option:selected").val();
+
+            if (selected_year!="non_year" && selected_month!="non_month" && selected_day!="non_day"){
+
+                var targetDate = new Date(new Date().getTime());
+
+                var target_day = targetDate.getDate();
+                var target_month = targetDate.getMonth() + 1;
+                var target_year = targetDate.getFullYear();
+
+                var by, bm, bd, ty, tm, td;
+                by = parseInt(selected_year).toString(16);
+                bm = parseInt(selected_month).toString(16);
+                bd = parseInt(selected_day).toString(16);
+                ty = target_year.toString(16);
+                tm = target_month.toString(16);
+                td = target_day.toString(16);
+
+                location.href = $('#url_day').attr('data-sj') + "?by=" + by + "&bm=" + bm + "&bd=" + bd + "&ty=" + ty + "&tm=" + tm + "&td=" + td;
+            }
+            else {
+                $("#p_birth_warning").html($('#phrase_birthday').attr('data-sj'));
+            }
+        });
+
+        $('#btn_tomorrow').click(function (e) {
+            e.preventDefault();
+            /*location.href = "http://stackoverflow.com";*/
+            selected_year = $("#select_year option:selected").val();
+            selected_month = $("#select_month option:selected").val();
+            selected_day = $("#select_day option:selected").val();
+
+            if (selected_year!="non_year" && selected_month!="non_month" && selected_day!="non_day"){
+
+                var targetDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+
+                var target_day = targetDate.getDate();
+                var target_month = targetDate.getMonth() + 1;
+                var target_year = targetDate.getFullYear();
+
+                var by, bm, bd, ty, tm, td;
+                by = parseInt(selected_year).toString(16);
+                bm = parseInt(selected_month).toString(16);
+                bd = parseInt(selected_day).toString(16);
+                ty = target_year.toString(16);
+                tm = target_month.toString(16);
+                td = target_day.toString(16);
+
+                location.href = $('#url_day').attr('data-sj') + "?by=" + by + "&bm=" + bm + "&bd=" + bd + "&ty=" + ty + "&tm=" + tm + "&td=" + td;
+            }
+            else {
+                $("#p_birth_warning").html($('#phrase_birthday').attr('data-sj'));
+            }
+        });
+
+
+        $('#btn_dayaftertomorrow').click(function (e) {
+            e.preventDefault();
+            selected_year = $("#select_year option:selected").val();
+            selected_month = $("#select_month option:selected").val();
+            selected_day = $("#select_day option:selected").val();
+
+            if (selected_year!="non_year" && selected_month!="non_month" && selected_day!="non_day"){
+
+                var targetDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * 2);
+
+                var target_day = targetDate.getDate();
+                var target_month = targetDate.getMonth() + 1;
+                var target_year = targetDate.getFullYear();
+
+                var by, bm, bd, ty, tm, td;
+                by = parseInt(selected_year).toString(16);
+                bm = parseInt(selected_month).toString(16);
+                bd = parseInt(selected_day).toString(16);
+                ty = target_year.toString(16);
+                tm = target_month.toString(16);
+                td = target_day.toString(16);
+
+                location.href = $('#url_day').attr('data-sj') + "?by=" + by + "&bm=" + bm + "&bd=" + bd + "&ty=" + ty + "&tm=" + tm + "&td=" + td;
+            }
+            else {
+                $("#p_birth_warning").html($('#phrase_birthday').attr('data-sj'));
+            }
+        });
+
+
+        var selected_lang;
+
+        $('#btn_lang').click(function (e) {
+            e.preventDefault();
+            selected_lang = $("#select_lang option:selected").val();
+
+            switch (selected_lang){
+
+                case 'non_lang':
+                    $("#p_lang_warning").html($('#phrase_language').attr('data-sj'));
+                    break;
+                case 'ara':
+                    break;
+                case 'chi':
+                    break;
+                case 'eng':
+                    break;
+                case 'por':
+                    break;
+                case 'spa':
+                    break;
+                default:
+                    break;
+                }
+            });
+
+    });
+</script>
+</html>

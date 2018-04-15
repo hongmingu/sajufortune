@@ -1,0 +1,110 @@
+        <div class="col-sm-8 col-sm-offset-2 padding_side_7" id="div_detail">
+            <div class="media">
+                <div class="media-body">
+
+                    <p class="media-heading h4">
+                        <small> عيد ميلاد{{ birthday.year }}-{{ birthday.month }}-{{ birthday.day }}</small>
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small> حول{{ target.year }}-{{ target.month }}-{{ target.day }}</small>
+                    </p>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        بصورة شاملة
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ overall.dayoverallarabic.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ overall.dayoverallarabic.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        المشاعر
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ emotion.dayemotionarabic.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ emotion.dayemotionarabic.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                    <div class="col-xs-12 padding_side_5">
+                        {% include 'ad/_ad_square_detail.html' %}
+                    </div>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        حب
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ love.daylovearabic.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ love.daylovearabic.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        مال
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ money.daymoneyarabic.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ money.daymoneyarabic.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                    <div class="col-xs-12 padding_side_5">
+                        {% include 'ad/_ad_square_detail.html' %}
+                    </div>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        العلاقات
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ relationships.dayrelationshipsarabic.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ relationships.dayrelationshipsarabic.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                    <p class="media-heading h4">
+                        عمل
+                    </p>
+
+                    <p class="media-heading h4">
+                        <small><i>{{ work.dayworkarabic.quote }}</i></small>
+                    </p>
+                    <p>
+                        {{ work.dayworkarabic.text|linebreaksbr }}
+                    </p>
+
+                    <br>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 padding_side_5 mobile_display_none" id="div_side_scrapper">
+            {% include 'ad/_ad_side_scrapper.html' %}
+        </div>
