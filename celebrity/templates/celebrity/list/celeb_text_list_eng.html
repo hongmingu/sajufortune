@@ -1,25 +1,14 @@
 <!DOCTYPE html>
+{% block lang_code %}
 <html lang="en">
+{% endblock %}
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% block title %}Title{% endblock %}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-
-    {% load static from staticfiles %}
-    <script src="{% static 'js/jquery-1.12.2.min.js' %}"></script>
-    <script src="{% static 'js/jquery-csrf.js' %}"></script>
-
-    <!-- bootstrap은 3.3.7 -->
-    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
-    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
-
-    <link rel="stylesheet" type="text/css" href="{% static "css/saju_style.css" %}">
-
-    <!--<link rel="stylesheet" type="text/css" href="{% static "base_modified.css" %}">-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    {% include 'snippet/others/header_static.html' %}
 </head>
 <style>
 
@@ -70,6 +59,7 @@
     </div>
 
     <div class="row">
+        {% block celebs %}
         <!--이건 더미 정사각형-->
         <div class="media">
 
@@ -101,6 +91,7 @@
                 {% endfor %}
             {% endif %}
         </div>
+    {% endblock %}
     </div>
 
 

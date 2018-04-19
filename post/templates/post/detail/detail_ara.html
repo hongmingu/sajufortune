@@ -1,118 +1,58 @@
 {% extends 'post/detail/detail_eng.html' %}
-
-{% block title %}SajuFortune {{ post.postinfoenglish.title }}{% endblock %}
-
-{% block info %}
-<div class="text-center">
-    <p class="h3 list_text">
-    {{ post.postinfoenglish.name }}</p>
-</div>
-<div class="text-center">
-    <p class="h5 list_text">
-    {{ post.postinfoenglish.title }}</p>
-</div>
-{% endblock %}
-
-{% block overall %}
-<p class="media-heading h4">
-    Overall
-</p>
-
-<p class="media-heading h4">
-    <small><i>{{ overall.dayoverallenglish.quote }}</i></small>
-</p>
-<p>
-    {{ overall.dayoverallenglish.text|linebreaksbr }}
-</p>
-{% endblock %}
-
-{% block emotion %}
-<p class="media-heading h4">
-    Emotion
-</p>
-
-<p class="media-heading h4">
-    <small><i>{{ emotion.dayemotionenglish.quote }}</i></small>
-</p>
-<p>
-    {{ emotion.dayemotionenglish.text|linebreaksbr }}
-</p>
-{% endblock %}
-
-{% block love %}
-<p class="media-heading h4">
-    Love
-</p>
-
-<p class="media-heading h4">
-    <small><i>{{ love.dayloveenglish.quote }}</i></small>
-</p>
-<p>
-    {{ love.dayloveenglish.text|linebreaksbr }}
-</p>
-{% endblock %}
+{% block title %}SajuFortune {{ post.postarabic.title }}{% endblock %}
 
 
-{% block money %}
-<p class="media-heading h4">
-    Money
-</p>
+{% block post_info %}
+{% if post %}
 
-<p class="media-heading h4">
-    <small><i>{{ money.daymoneyenglish.quote }}</i></small>
-</p>
-<p>
-    {{ money.daymoneyenglish.text|linebreaksbr }}
-</p>
-{% endblock %}
+<div class="row">
+    <!--이건 더미 정사각형-->
 
-
-{% block relationship %}
-<p class="media-heading h4">
-    Relationships
-</p>
-
-<p class="media-heading h4">
-    <small><i>{{ relationships.dayrelationshipsenglish.quote }}</i></small>
-</p>
-<p>
-    {{ relationships.dayrelationshipsenglish.text|linebreaksbr }}
-</p>
-{% endblock %}
-
-
-{% block work %}
-<p class="media-heading h4">
-    Work
-</p>
-
-<p class="media-heading h4">
-    <small><i>{{ work.dayworkenglish.quote }}</i></small>
-</p>
-<p>
-    {{ work.dayworkenglish.text|linebreaksbr }}
-</p>
-{% endblock %}
-
-{% block other_posts_text %}
-    <p class="h3 about_saju">Other Posts</p>
-{% endblock %}
-
-{% block other_posts_objects %}
-
-{% if post_option_1 %}
-    {% with post=post_option_1 %}
-        <div class="col-sm-6 padding_side_5">
-            {% include 'snippet/square_list/_square_list_eng.html' %}
+    <div class="center-block square_list_wrapper">
+        <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
+        {% if post.photo %}
+            <img class="img_350_250" src="{{ post.photo.url }}">
+        {% else %}
+            <div class="text-center">
+                <div class="fa btn_saju img_350_250">
+                    Sorry, No Image
+                </div>
+            </div>
+        {% endif %}
+        <!-- text -->
+        <div class="text-center">
+            <p class="h3 list_text">
+            {{ post.celebrity.celebrityarabic.name }}</p>
         </div>
-    {% endwith %}
-{% endif %}
-{% if post_option_2 %}
-    {% with post=post_option_2 %}
-        <div class="col-sm-6 padding_side_5">
-            {% include 'snippet/square_list/_square_list_eng.html' %}
+        <div class="text-center">
+            <p class="h5 list_text">
+            {{ post.postarabic.title }}</p>
         </div>
-    {% endwith %}
-{% endif %}
+    </div>
+</div>
 
+<div class="row">
+    {% include 'snippet/day/detail/_day_detail_ara.html' %}
+</div>
+{% endif %}
 {% endblock %}
+
+
+                {% block go_list %}
+                    <span class="glyphicon glyphicon glyphicon glyphicon-th-large"></span><span>  قائمة  </span>
+                {% endblock %}
+    {% block more_about %}
+    {% include 'snippet/celeb/more_about/_celeb_more_about_ara.html' %}
+    {% endblock %}
+
+            {% block other_posts_text %}
+                <p class="h3 about_saju">وظائف اخرى</p>
+            {% endblock %}
+
+        {% block other_posts_objects %}
+            {% for post in other_posts %}
+                <div class="col-sm-6 padding_side_5">
+                    {% include 'snippet/square_list/_square_list_ara.html' %}
+                </div>
+            {% endfor %}
+        {% endblock %}

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+{% block lang_code %}
 <html lang="en">
+{% endblock %}
 <head>
     <title>{% block title %}Title{% endblock %}</title>
     {% include 'snippet/others/header_static.html' %}
@@ -65,19 +67,9 @@
     </div>
 
     <div class="row">
-        <div class="btn_padder"></div>
-        <div class="text-center">
-            <a class="fa btn_saju btn_today_or_other" id="btn_today" href="">{% block today %}Today{% endblock %}</a>
-        </div>
-        <div class="btn_padder"></div>
-        <div class="text-center">
-                <a class="fa btn_saju btn_today_or_other" id="btn_tomorrow" href="">{% block tomorrow %}Tomorrow{% endblock %}</a>
-        </div>
-        <div class="btn_padder"></div>
-
-        <div class="text-center">
-            <a class="fa btn_saju btn_today_or_other" id="btn_dayaftertomorrow" href="">{% block dayaftertomorrow %}DayAfterTomorrow{% endblock %}</a>
-        </div>
+        {% block buttons_day %}
+        {% include 'snippet/buttons/_buttons_day_eng.html' %}
+        {% endblock %}
         <div class="btn_padder"></div>
         <div class="btn_padder"></div>
     </div>

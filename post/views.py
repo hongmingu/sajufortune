@@ -34,6 +34,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404
 
 from post.models import Post
+from post.utils import *
+from website.utils import *
 
 from dayemotion.models import DayEmotion
 from daylove.models import DayLove
@@ -47,34 +49,7 @@ from django.core.cache import cache
 # Create your views here.
 
 
-def list_default(request, page):
-    if request.method == "POST":
-        return JsonResponse({'error': 'You\'ve tried bad access'})
-    else:
-        page = request.GET.get(page, 1)
-        post_all = Post.objects.all().order_by('-created')
-        post_paginator = Paginator(post_all, 10)
-
-        try:
-            posts = post_paginator.page(page)
-        except PageNotAnInteger:
-            posts = post_paginator.page(1)
-        except EmptyPage:
-            posts = post_paginator.page(post_paginator.num_pages)
-        return render(request, 'post/list_default.html', {'posts': posts})
-
-
-def switch_get_post_detail_template(lang):
-    return {
-        'ara': 'post/detail_ara.html',
-        'chi': 'post/detail_chi.html',
-        'eng': 'post/detail_eng.html',
-        'por': 'post/detail_por.html',
-        'spa': 'post/detail_spa.html',
-    }.get(lang, 'eng')
-
-
-def detail(request, num, lang):
+def post_detail(request, num, lang):
     if request.method == "GET":
         try:
             post = Post.objects.get(pk=num)
@@ -84,23 +59,31 @@ def detail(request, num, lang):
         int_num = int(num)
         # to get next two pages
 
-        birthday_year = post.celebrity.birthday_year
-        birthday_month = post.celebrity.birthday_month
-        birthday_day = post.celebrity.birthday_day
-        target_year = post.target_year
-        target_month = post.target_month
-        target_day = post.target_day
+        birthday_year = int(post.celebrity.birthday_year)
+        birthday_month = int(post.celebrity.birthday_month)
+        birthday_day = int(post.celebrity.birthday_day)
+        target_year = int(post.target_year)
+        target_month = int(post.target_month)
+        target_day = int(post.target_day)
+
+        if birthday_year is None or birthday_month is None or birthday_day is None \
+                or target_year is None or target_month is None or target_day is None:
+            # 제공되지 않은 값이 있을 경우
+            return render(request, 'celebrity/day/celeb_day_eng.html', {'lang': lang})
+
+        if not validate_date(birthday_year, birthday_month, birthday_day, target_year, target_month, target_day):
+            # 값이 변형되었더라도 제대로 된 기간을 제시하지 않은 경우
+            return render(request, 'celebrity/day/celeb_day_eng.html', {'lang': lang})
 
         result_num = int(((birthday_year + target_day) * 1) + ((birthday_month + target_month) * 3) +
                          ((birthday_day + target_year) * 5))
 
-        overall_num = (result_num % 106) + 1
-        emotion_num = (result_num % 105) + 1
-        love_num = (result_num % 104) + 1
-        money_num = (result_num % 103) + 1
-        relationship_num = (result_num % 102) + 1
-        work_num = (result_num % 101) + 1
-
+        overall_num = get_overall_num(result_num)
+        emotion_num = get_emotion_num(result_num)
+        love_num = get_love_num(result_num)
+        money_num = get_money_num(result_num)
+        relationship_num = get_relationship_num(result_num)
+        work_num = get_work_num(result_num)
         try:
             overall = DayOverall.objects.get(pk=1)
             emotion = DayEmotion.objects.get(pk=1)
@@ -110,8 +93,6 @@ def detail(request, num, lang):
             work = DayWork.objects.get(pk=1)
         except ObjectDoesNotExist:
             return render(request, 'post/not_exist_post_default.html', )
-
-        template = switch_get_post_detail_template(lang)
 
         post_all = Post.objects.all().exclude(pk=num).order_by('?')
         post_paginator = Paginator(post_all, 2)
@@ -126,6 +107,8 @@ def detail(request, num, lang):
         target_dict['year'] = target_year
         target_dict['month'] = target_month
         target_dict['day'] = target_day
+
+        template = switch_post_detail_template_by_lang(lang)
 
         return render(request, template, {'post': post,
                                           'other_posts': other_posts,
@@ -156,48 +139,9 @@ def post_list(request, page, lang):
         except EmptyPage:
             posts = post_paginator.page(post_paginator.num_pages)
 
-        if lang == 'ara':
-            return render(request, 'post/list/list_ara.html', {'posts': posts, 'lang': lang})
-        elif lang == 'chi':
-            return render(request, 'post/list/list_chi.html', {'posts': posts, 'lang': lang})
-        elif lang == 'eng':
-            return render(request, 'post/list/list_eng.html', {'posts': posts, 'lang': lang})
-        elif lang == 'por':
-            return render(request, 'post/list/list_por.html', {'posts': posts, 'lang': lang})
-        elif lang == 'spa':
-            return render(request, 'post/list/list_spa.html', {'posts': posts, 'lang': lang})
+        template = switch_post_list_template_by_lang(lang)
+
+        return render(request, template, {'posts': posts, 'lang': lang})
 
     else:
         return JsonResponse({'error': 'You\'ve tried bad access'})
-
-def post_detail(request, ftype, num, lang):
-    if request.method == "POST":
-        return JsonResponse({'error': 'You\'ve tried bad access'})
-    else:
-        post = Post.objects.get_object_or_404(pk=num)
-
-        if lang == 'ara':
-            if ftype == 'overall':
-                return render(request, 'post/overall_ara.html', {'post': post})
-            elif ftype == 'detail':
-                return render(request, 'post/detail/detail_ara.html', {'post': post})
-        elif lang == 'chi':
-            if ftype == 'overall':
-                return render(request, 'post/overall_chi.html', {'post': post})
-            elif ftype == 'detail':
-                return render(request, 'post/detail_chi.html', {'post': post})
-        elif lang == 'eng':
-            if ftype == 'overall':
-                return render(request, 'post/overall_eng.html', {'post': post})
-            elif ftype == 'detail':
-                return render(request, 'post/detail/detail_eng.html', {'post': post})
-        elif lang == 'por':
-            if ftype == 'overall':
-                return render(request, 'post/overall_por.html', {'post': post})
-            elif ftype == 'detail':
-                return render(request, 'post/detail_por.html', {'post': post})
-        elif lang == 'spa':
-            if ftype == 'overall':
-                return render(request, 'post/overall_spa.html', {'post': post})
-            elif ftype == 'detail':
-                return render(request, 'post/detail_spa.html', {'post': post})

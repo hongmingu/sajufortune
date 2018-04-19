@@ -1,49 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+{% extends 'celebrity/profile/celeb_profile_eng.html' %}
+{% block lang_code %}
+<html lang="zh-cn">
+{% endblock %}
+{% block title %}SajuFortune - {{ celeb.celebritychinese.name }}{% endblock %}
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-
-    {% load static from staticfiles %}
-    <script src="{% static 'js/jquery-1.12.2.min.js' %}"></script>
-    <script src="{% static 'js/jquery-csrf.js' %}"></script>
-
-    <!-- bootstrap은 3.3.7 -->
-    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
-    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
-
-    <link rel="stylesheet" type="text/css" href="{% static "css/saju_style.css" %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-</head>
-
-<body>
-
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="text-center">
-                {% block sajufortune_main %}
-                <a href="{% url 'website:main' %}"><p class="sajufortune_text">SajuFortune</p></a>
-                {% endblock %}
-            </div>
-        </div>
-        <div class="col-xs-12">
-            {% include 'ad/_ad_banner.html' %}
-        </div>
-    </div>
-    <!--forloop counter를쓰자-->
-    <!--페이지는 12개불러오면 13개까지 불러와보고 12개만 보낸 후에 라스트인지 아닌지 변수를 자바스크립트로 보내서 넥스트 누를 시에 마지막페이지면 마지막페이지라고 알리는 형식
-    get 요청 파라미터로 페이지 순서 부르더라도 없는 페이지 부르면 404리다이렉트-->
-
-    <div class="row">
-        <div class="btn_padder"></div>
-    </div>
-    <!--여기서부턴 정사각형 목록-->
-
+{% block celeb %}
 {% if celeb %}
     <div class="row">
         <!--이건 더미 정사각형-->
@@ -62,11 +23,11 @@
             {% block info %}
             <div class="text-center">
                 <p class="h3 list_text">
-                {{ celeb.celebrityenglish.name }}</p>
+                {{ celeb.celebritychinese.name }}</p>
             </div>
             <div class="text-center">
                 <p class="h4 list_text">
-                Birth: {{ celeb.birthday_year }}-{{ celeb.birthday_month }}-{{ celeb.birthday_day }}</p>
+                生日: {{ celeb.birthday_year }}-{{ celeb.birthday_month }}-{{ celeb.birthday_day }}</p>
             </div>
             {% endblock %}
         </div>
@@ -83,17 +44,17 @@
         <div class="btn_padder"></div>
         <div class="btn_padder"></div>
     </div>
+{% endblock %}
 
+{% block posts %}
     {% if posts %}
     <div class="row">
         <div class="media">
             <div class="media-body text-center">
-                {% block other_posts %}
                 <p class="media-heading h4">
-                    {{ celeb.celebrityenglish.name }} Posts
+                    {{ celeb.celebritychinese.name }} 帖子
                 </p>
 
-                {% endblock %}
             </div>
             <br>
         </div>
@@ -101,12 +62,12 @@
             {% for post in posts %}
                 {% if posts|length == 1 %}
                     <div class="col-sm-6 col-sm-offset-3 padding_side_5">
-                        {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
+                        {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_chi.html' %}
                     </div>
                 {% else %}
                     {% if forloop.counter0 == 2 %}
                         <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
+                            {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_chi.html' %}
                         </div>
                         <!--adsense 버전-->
                         <div class="col-sm-6 padding_side_5">
@@ -114,7 +75,7 @@
                         </div>
                     {% elif forloop.counter0 == 6 %}
                         <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
+                            {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_chi.html' %}
                         </div>
                         <!--adsense 버전-->
                         <div class="col-sm-6 padding_side_5">
@@ -122,253 +83,30 @@
                         </div>
                     {% else %}
                         <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
+                            {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_chi.html' %}
                         </div>
                     {% endif %}
                 {% endif %}
             {% endfor %}
     </div>
     {% endif %}
-
-    <!-- Share btn -->
-    <div class="row">
-        {% include 'snippet/others/_share_buttons.html' %}
-    </div>
-
-    <div class="row">
-        <div class="btn_padder"></div>
-        <div class="btn_padder"></div>
-    </div>
-    <div class="row">
-        <div class="col-sm-8 col-sm-offset-2 padding_side_7">
-            <div id="fb-root"></div>
-            <script>(function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.12';
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
-            <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-width="100%" data-numposts="10"></div>
-        </div>
-    </div>
-
-
-<div class="row">
-        <div class="col-sm-offset-3 col-sm-6">
-
-            <div class="col-xs-4">
-                <div class="text-center">
-                    {% if celeb.get_next_by_created %}
-                        {% if request.GET.f %}
-                            <a class="fa btn_saju width_100percent"
-                               href="{% url 'celebrity:profile' lang=lang num=celeb.get_next_by_created.pk %}?f={{ request.GET.f }}">
-                        {% else %}
-                            <a class="fa btn_saju width_100percent"
-                               href="{% url 'celebrity:profile' lang=lang num=celeb.get_next_by_created.pk %}">
-                        {% endif %}
-                        {% block next %}
-                            <span class="glyphicon glyphicon glyphicon-chevron-left"></span>
-                        {% endblock %}
-                    </a>
-                {% else %}
-                {% endif %}
-                </div>
-            </div>
-            <div class="col-xs-4">
-                <div class="text-center">
-                {% if request.GET.f %}
-                    <a type="button" class="fa btn_saju width_80percent" href="{% url 'celebrity:list' lang=lang page=request.GET.f %}">
-                {% else %}
-                    <a type="button" class="fa btn_saju width_80percent" href="{% url 'celebrity:list' lang=lang page='1' %}">
-                {% endif %}
-                    {% block go_list %}
-                        <span class="glyphicon glyphicon glyphicon glyphicon-th-large"></span><span>  list</span>
-                    {% endblock %}
-                    </a>
-                </div>
-
-            </div>
-            <div class="col-xs-4">
-                <div class="text-center">
-                    {% if celeb.get_previous_by_created %}
-                        {% if request.GET.f %}
-                            <a class="fa btn_saju width_100percent"
-                               href="{% url 'celebrity:profile' lang=lang num=celeb.get_previous_by_created.pk %}?f={{ request.GET.f }}">
-                        {% else %}
-                            <a class="fa btn_saju width_100percent"
-                               href="{% url 'celebrity:profile' lang=lang num=celeb.get_previous_by_created.pk %}">
-                        {% endif %}
-                        {% block previous %}
-                            <span class="glyphicon glyphicon glyphicon-chevron-right"></span>
-                        {% endblock %}
-                    </a>
-                {% else %}
-                {% endif %}
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-    <div class="row">
-
-        <div class="center-block">
-            <div class="text-center">
-                <p class="h3 list_text">
-                {{ celeb.celebrityenglish.name }} 's..</p>
-            </div>
-        </div>
-        <div class="btn_padder"></div>
-        <div class="text-center">
-            {% block today %}
-                <a class="fa btn_saju btn_today_or_other" id="btn_today" href="">Today</a>
-            {% endblock %}
-        </div>
-        <div class="btn_padder"></div>
-        <div class="text-center">
-            {% block tomorrow %}
-                <a class="fa btn_saju btn_today_or_other" id="btn_tomorrow" href="">Tomorrow</a>
-            {% endblock %}
-        </div>
-        <div class="btn_padder"></div>
-
-        <div class="text-center">
-            {% block dayaftertomorrow %}
-                <a class="fa btn_saju btn_today_or_other" id="btn_dayaftertomorrow" href="">DayAfterTomorrow</a>
-            {% endblock %}
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="btn_padder"></div>
-        <div class="btn_padder"></div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            {% include 'ad/_ad_square_detail.html' %}
-        </div>
-    </div>
-    <div class="row">
-        <div class="btn_padder"></div>
-        <div class="btn_padder"></div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-xs-12 text-center">
-            {% block more_posts %}
-                <a class="fa btn_saju btn_today_or_other" href="{% url 'post:list' lang='eng' page='1' %}">
-                    more posts
-                </a>
-            {% endblock %}
-        </div>
-    </div>
-    <div class="row">
-        <div class="btn_padder"></div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 text-center">
-            {% block more_celebrities %}
-                <a class="fa btn_saju btn_today_or_other" href="{% url 'celebrity:list' lang='eng' page='1' %}">
-                    more celebrities
-                </a>
-            {% endblock %}
-        </div>
-    </div>
-    <div class="row">
-        <div class="btn_padder"></div>
-        <div class="btn_padder"></div>
-    </div>
-</div>
-
-{% block choose_phrase %}
-    <div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="Would you set your birthday?"></div>
-    <div class="mobile_display_none desktop_display_none" id="phrase_language" data-sj="Would you set your language?"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_day" data-sj="{% url 'website:day' lang='eng' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_ara" data-sj="{% url 'website:main_lang' lang='ara' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_chi" data-sj="{% url 'website:main_lang' lang='chi' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_eng" data-sj="{% url 'website:main_lang' lang='eng' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_por" data-sj="{% url 'website:main_lang' lang='por' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_spa" data-sj="{% url 'website:main_lang' lang='spa' %}"></div>
-
-    <div class="mobile_display_none desktop_display_none" id="url_today" data-sj="{% url 'website:day' lang='eng' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="data_by" data-sj="{{ birthday.year }}"></div>
-    <div class="mobile_display_none desktop_display_none" id="data_bm" data-sj="{{ birthday.month }}"></div>
-    <div class="mobile_display_none desktop_display_none" id="data_bd" data-sj="{{ birthday.day }}"></div>
-
-    <div class="mobile_display_none desktop_display_none" id="data_td" data-sj-td="{{ target.day }}"></div>
-    <div class="mobile_display_none desktop_display_none" id="data_ad" data-sj-ad="{% include 'ad/_ad_side_scrapper.html' %}"></div>
-
-    <div class="mobile_display_none desktop_display_none" id="data_celeb_pk" data-sj="{{ celeb.pk }}"></div>
-    <div class="mobile_display_none desktop_display_none" id="data_celeb_day_url" data-sj="{% url 'celebrity:day' lang=lang num=celeb.pk %}"></div>
-
 {% endblock %}
 
-</body>
-<script>
-    $(document).ready(function () {
-        /* select birthday */
-        var select_year, select_month, select_day, i_birth;
+{% block go_list %}
+    <span class="glyphicon glyphicon glyphicon glyphicon-th-large"></span><span> 名单</span>
+{% endblock %}
 
-        var currentDate = new Date(new Date().getTime());
-        var current_year = currentDate.getFullYear();
+{% block who_s %}
+<p class="h3 list_text">
+{{ celeb.celebritychinese.name }} ..</p>
+{% endblock %}
 
-        /*select birth end */
-
-        $('#btn_today').click(function (e) {
-
-            e.preventDefault();
-            var targetDate = new Date(new Date().getTime());
-
-            var target_day = targetDate.getDate();
-            var target_month = targetDate.getMonth() + 1;
-            var target_year = targetDate.getFullYear();
-
-            var ty, tm, td;
-            ty = target_year.toString(16);
-            tm = target_month.toString(16);
-            td = target_day.toString(16);
-
-            location.href = $('#data_celeb_day_url').attr('data-sj') + "?ty=" + ty + "&tm=" + tm + "&td=" + td;
-
-        });
-
-        $('#btn_tomorrow').click(function (e) {
-            e.preventDefault();
-            /*location.href = "http://stackoverflow.com";*/
-            var targetDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-
-            var target_day = targetDate.getDate();
-            var target_month = targetDate.getMonth() + 1;
-            var target_year = targetDate.getFullYear();
-
-            var ty, tm, td;
-            ty = target_year.toString(16);
-            tm = target_month.toString(16);
-            td = target_day.toString(16);
-
-            location.href = $('#data_celeb_day_url').attr('data-sj') + "?ty=" + ty + "&tm=" + tm + "&td=" + td;
-
-        });
-
-
-        $('#btn_dayaftertomorrow').click(function (e) {
-            e.preventDefault();
-            /*location.href = "http://stackoverflow.com";*/
-            var targetDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * 2 );
-
-            var target_day = targetDate.getDate();
-            var target_month = targetDate.getMonth() + 1;
-            var target_year = targetDate.getFullYear();
-
-            var ty, tm, td;
-            ty = target_year.toString(16);
-            tm = target_month.toString(16);
-            td = target_day.toString(16);
-
-            location.href = $('#data_celeb_day_url').attr('data-sj') + "?ty=" + ty + "&tm=" + tm + "&td=" + td;
-        });
-    });
-</script>
-</html>
+{% block buttons_day %}
+{% include 'snippet/buttons/_buttons_day_chi.html' %}
+{% endblock %}
+{% block more_posts %}
+    <a class="fa btn_saju btn_today_or_other" href="{% url 'post:list' lang=lang page='1' %}">更多的帖子</a>
+{% endblock %}
+{% block more_celebrities %}
+    <a class="fa btn_saju btn_today_or_other" href="{% url 'celebrity:list' lang=lang page='1' %}">更多名人</a>
+{% endblock %}

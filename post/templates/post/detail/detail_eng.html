@@ -1,24 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>{% block title %}SajuFortune {{ post.postinfoenglish.title }}{% endblock %}</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-
-    {% load static from staticfiles %}
-    <script src="{% static 'js/jquery-1.12.2.min.js' %}"></script>
-    <script src="{% static 'js/birthday.js' %}"></script>
-    <script src="{% static 'js/side_ad_adder.js' %}"></script>
-
-    <!-- bootstrap은 3.3.7 -->
-    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
-    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
-
-    <link rel="stylesheet" type="text/css" href="{% static "css/saju_style.css" %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    {% include 'snippet/others/header_static.html' %}
 </head>
 <style>
 </style>
@@ -43,6 +27,8 @@
         <div class="btn_padder"></div>
     </div>
 
+
+{% block post_info %}
     {% if post %}
 
     <div class="row">
@@ -60,7 +46,6 @@
                 </div>
             {% endif %}
             <!-- text -->
-            {% block info %}
             <div class="text-center">
                 <p class="h3 list_text">
                 {{ post.celebrity.celebrityenglish.name }}</p>
@@ -69,7 +54,6 @@
                 <p class="h5 list_text">
                 {{ post.postenglish.title }}</p>
             </div>
-            {% endblock %}
         </div>
     </div>
 
@@ -77,6 +61,9 @@
         {% include 'snippet/day/detail/_day_detail_eng.html' %}
     </div>
 {% endif %}
+{% endblock %}
+
+
     <!-- more btn -->
     <div class="row">
         <div class="btn_padder"></div>
@@ -90,17 +77,7 @@
         <div class="btn_padder"></div>
     </div>
     <div class="row">
-        <div class="col-sm-8 col-sm-offset-2 padding_side_7">
-            <div id="fb-root"></div>
-            <script>(function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.12';
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
-            <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-width="100%" data-numposts="10"></div>
-        </div>
+        {% include 'snippet/others/facebook_reply.html' %}
     </div>
     <div class="row">
         <div class="btn_padder"></div>
@@ -119,9 +96,7 @@
                             <a class="fa btn_saju width_100percent"
                                href="{% url 'post:detail' lang=lang num=post.get_next_by_created.pk %}">
                         {% endif %}
-                        {% block next %}
-                            <span class="glyphicon glyphicon glyphicon-chevron-left"></span>
-                        {% endblock %}
+                        <span class="glyphicon glyphicon glyphicon-chevron-left"></span>
                     </a>
                 {% else %}
                 {% endif %}
@@ -151,9 +126,7 @@
                             <a class="fa btn_saju width_100percent"
                                href="{% url 'post:detail' lang=lang num=post.get_previous_by_created.pk %}">
                         {% endif %}
-                        {% block previous %}
-                            <span class="glyphicon glyphicon glyphicon-chevron-right"></span>
-                        {% endblock %}
+                        <span class="glyphicon glyphicon glyphicon-chevron-right"></span>
                     </a>
                 {% else %}
                 {% endif %}
@@ -164,7 +137,9 @@
         </div>
     </div>
     <div class="row">
+        {% block more_about %}
         {% include 'snippet/celeb/more_about/_celeb_more_about_eng.html' %}
+        {% endblock %}
     </div>
     <div class="row">
         <div class="btn_padder"></div>

@@ -1,30 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% if users.has_other_pages %}
-  <ul class="pagination">
-    {% if users.has_previous %}
-      <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
-    {% endif %}
-    {% for i in users.paginator.page_range %}
-      {% if users.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li><a href="?page={{ i }}">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if users.has_next %}
-      <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
-    {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
-    {% endif %}
-  </ul>
-{% endif %}
-</body>
-</html>
+{% extends 'post/list/list_eng.html' %}
+
+{% block title %}Title{% endblock %}
+
+{% block posts %}
+        {% if posts %}
+            {% if posts|length < 10 %}
+                {% for post in posts %}
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'snippet/square_list/_square_list_ara.html' %}
+                    </div>
+                {% endfor %}
+                <!--adsense 버전-->
+                <div class="col-sm-6 padding_side_5">
+                    {% include 'ad/_ad_square_list.html' %}
+                </div>
+                <!--adsense 버전-->
+                <div class="col-sm-6 padding_side_5">
+                    {% include 'ad/_ad_square_list.html' %}
+                </div>
+            {% else %}
+                {% for post in posts %}
+                    {% if forloop.counter0 == 2 %}
+                        <div class="col-sm-6 padding_side_5">
+                            {% include 'snippet/square_list/_square_list_ara.html' %}
+                        </div>
+                        <!--adsense 버전-->
+                        <div class="col-sm-6 padding_side_5">
+                            {% include 'ad/_ad_square_list.html' %}
+                        </div>
+                    {% elif forloop.counter0 == 6 %}
+                        <div class="col-sm-6 padding_side_5">
+                            {% include 'snippet/square_list/_square_list_ara.html' %}
+                        </div>
+                        <!--adsense 버전-->
+                        <div class="col-sm-6 padding_side_5">
+                            {% include 'ad/_ad_square_list.html' %}
+                        </div>
+                    {% else %}
+                        <div class="col-sm-6 padding_side_5">
+                            {% include 'snippet/square_list/_square_list_ara.html' %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+
+{% endblock %}

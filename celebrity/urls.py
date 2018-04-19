@@ -8,8 +8,8 @@ app_name = 'celebrity'
 
 urlpatterns = [
     # re_path(r'^password/change/$', views.main_create_log_in, name='main'),
-    re_path(r'^profile/(?P<lang>ara|chi|eng|por|spa)/(?P<num>\d+)/$', views.profile_celeb, name='profile'),
-    re_path(r'^list/(?P<lang>ara|chi|eng|por|spa)/(?P<page>\d+)/$', views.list_celeb, name='list'),
-    re_path(r'^list/text/(?P<lang>ara|chi|eng|por|spa)/$', views.list_text_celeb, name='list_text'),
-    re_path(r'^day/(?P<lang>ara|chi|eng|por|spa)/(?P<num>\d+)/$', views.day_celeb, name='day'),
+    re_path(r'^profile/(?P<lang>ara|chi|eng|por|spa)/(?P<num>\d+)/$', views.celeb_profile, name='profile'),
+    re_path(r'^list/(?P<lang>ara|chi|eng|por|spa)/(?P<page>\d+)/$', views.celeb_list, name='list'),
+    re_path(r'^list/text/(?P<lang>ara|chi|eng|por|spa)/$', views.celeb_list_text, name='list_text'),
+    re_path(r'^day/(?P<lang>ara|chi|eng|por|spa)/(?P<num>\d+)/$', views.celeb_day, name='day'),
 ]

@@ -1,116 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+{% extends 'celebrity/list/celeb_text_list_eng.html' %}
+{% block lang_code %}
+<html lang="ar">
+{% endblock %}
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+{% block title %}SajuFortune قائمة بدون صورة -{{ celebs.number }}-{% endblock %}
 
-
-    {% load static from staticfiles %}
-    <script src="{% static 'js/jquery-1.12.2.min.js' %}"></script>
-    <script src="{% static 'js/jquery-csrf.js' %}"></script>
-
-    <!-- bootstrap은 3.3.7 -->
-    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
-    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
-
-    <link rel="stylesheet" type="text/css" href="{% static "css/saju_style.css" %}">
-
-    <!--<link rel="stylesheet" type="text/css" href="{% static "base_modified.css" %}">-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-</head>
-<style>
-
-</style>
-<body>
-
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="text-center">
-                <p class="sajufortune_text">
-                    <a class="text_hover_none ban_bs_text_link" href="{% url 'website:main_lang' lang=lang %}">
-                    SajuFortune
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="col-xs-12">
-            {% include 'ad/_ad_banner.html' %}
-        </div>
-    </div>
-    <!--forloop counter를쓰자-->
-    <!--페이지는 12개불러오면 13개까지 불러와보고 12개만 보낸 후에 라스트인지 아닌지 변수를 자바스크립트로 보내서 넥스트 누를 시에 마지막페이지면 마지막페이지라고 알리는 형식
-    get 요청 파라미터로 페이지 순서 부르더라도 없는 페이지 부르면 404리다이렉트-->
+{% block about_saju %}
+    {% if request.GET.f %}
+    <a href="{% url 'celebrity:list' lang=lang page=request.GET.f %}"><p class="h3 about_saju">العودة إلى القائمة مع الصورة</p>
+    {% else %}
+    <a href="{% url 'celebrity:list' lang=lang page='1' %}"><p class="h3 about_saju">العودة إلى القائمة مع الصورة</p>
+    {% endif %}
+    </a>
+{% endblock %}
 
 
-    <div class="row">
-        <div class="btn_padder"></div>
-    </div>
+{% block celebs %}
+<!--이건 더미 정사각형-->
+<div class="media">
 
-    <div class="row">
-        <div class="col-xs-12 text-center">
-            {% block about_saju %}
-                {% if request.GET.f %}
-                <a href="{% url 'celebrity:list' lang=lang page=request.GET.f %}"><p class="h3 about_saju">back to list with photo</p>
-                {% else %}
-                <a href="{% url 'celebrity:list' lang=lang page='1' %}"><p class="h3 about_saju">back to list with photo</p>
-                {% endif %}
-                </a>
-            {% endblock %}
-        </div>
-    </div>
-    <!--여기서부턴 정사각형 목록-->
+    {% if celebs %}
+        {% for celeb in celebs %}
+            {% if forloop.counter0|divisibleby:'40' %}
+                <div class="col-xs-12 padding_side_5">
+                    <br>
+                    {% include 'ad/_ad_square_detail.html' %}
+                    <br>
+                </div>
 
-
-    <div class="row">
-        <div class="btn_padder"></div>
-    </div>
-
-    <div class="row">
-        <!--이건 더미 정사각형-->
-        <div class="media">
-
-            {% if celebs %}
-                {% for celeb in celebs %}
-                    {% if forloop.counter0|divisibleby:'40' %}
-                        <div class="col-xs-12 padding_side_5">
-                            <br>
-                            {% include 'ad/_ad_square_detail.html' %}
-                            <br>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="media-body">
-                                <p class="media-heading h3 text-center">
-                                    <a class="inherit_color" href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">{{ celeb.celebrityenglish.name }}</a>
-                                </p>
-                            </div>
-                        </div>
-                    {% else %}
-                        <div class="col-sm-4">
-                            <div class="media-body">
-                                <p class="media-heading h3 text-center">
-                                    <a class="inherit_color" href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">{{ celeb.celebrityenglish.name }}</a>
-                                </p>
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                <div class="col-sm-4">
+                    <div class="media-body">
+                        <p class="media-heading h3 text-center">
+                            <a class="inherit_color" href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">{{ celeb.celebrityarabic.name }}</a>
+                        </p>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-sm-4">
+                    <div class="media-body">
+                        <p class="media-heading h3 text-center">
+                            <a class="inherit_color" href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">{{ celeb.celebrityarabic.name }}</a>
+                        </p>
+                    </div>
+                </div>
             {% endif %}
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="btn_padder"></div>
-        <div class="btn_padder"></div>
-    </div>
+        {% endfor %}
+    {% endif %}
 </div>
-
-</body>
-<script>
-</script>
-</html>
+{% endblock %}

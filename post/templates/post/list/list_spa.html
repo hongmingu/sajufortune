@@ -1,10 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'post/list/list_eng.html' %}
 
-</body>
-</html>
+{% block title %}Title{% endblock %}
+
+{% block posts %}
+        {% if posts %}
+            {% if posts|length < 10 %}
+                {% for post in posts %}
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'snippet/square_list/_square_list_spa.html' %}
+                    </div>
+                {% endfor %}
+                <!--adsense 버전-->
+                <div class="col-sm-6 padding_side_5">
+                    {% include 'ad/_ad_square_list.html' %}
+                </div>
+                <!--adsense 버전-->
+                <div class="col-sm-6 padding_side_5">
+                    {% include 'ad/_ad_square_list.html' %}
+                </div>
+            {% else %}
+                {% for post in posts %}
+                    {% if forloop.counter0 == 2 %}
+                        <div class="col-sm-6 padding_side_5">
+                            {% include 'snippet/square_list/_square_list_spa.html' %}
+                        </div>
+                        <!--adsense 버전-->
+                        <div class="col-sm-6 padding_side_5">
+                            {% include 'ad/_ad_square_list.html' %}
+                        </div>
+                    {% elif forloop.counter0 == 6 %}
+                        <div class="col-sm-6 padding_side_5">
+                            {% include 'snippet/square_list/_square_list_spa.html' %}
+                        </div>
+                        <!--adsense 버전-->
+                        <div class="col-sm-6 padding_side_5">
+                            {% include 'ad/_ad_square_list.html' %}
+                        </div>
+                    {% else %}
+                        <div class="col-sm-6 padding_side_5">
+                            {% include 'snippet/square_list/_square_list_spa.html' %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    
+{% endblock %}

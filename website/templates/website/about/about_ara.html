@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'website/about/about_eng.html' %}
+{% block lang_code %}
+<html lang="ar">
+{% endblock %}
 
-</body>
-</html>
+{% block title %}SajuFortune - حول{% endblock %}
+
+
+{% block what_is_saju %}ما هذا؟{% endblock %}
+{% block saju_detail %}ساجو ثروة شرقية. يشبه بطاقة التارو أو برجك. على أساس أعياد الميلاد.{% endblock %}
+
+
+{% block birthday_selecting %}اختيار عيد ميلاد{% endblock %}
+{% block year %}عام{% endblock %}
+{% block month %}شهر{% endblock %}
+{% block day %}يوم{% endblock %}
+
+{% block buttons_day %}
+    {% include 'snippet/buttons/_buttons_day_ara.html' %}
+{% endblock %}
+
+{% block posts %}المشاركات{% endblock %}
+{% block celebrities %}مشاهير{% endblock %}
+{% block back_to_main %}العودة إلى الرئيسية{% endblock %}
+
+{% block choose_phrase %}
+<div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="من فضلك سوف تختار عيد ميلادك؟"></div>
+{% endblock %}
+

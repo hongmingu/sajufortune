@@ -1,15 +1,20 @@
-{% extends 'website/main/main.html' %}
-{% block title %}Title{% endblock %}
+{% extends 'website/main/main_eng.html' %}
+{% block lang_code %}
+<html lang="zh-cn">
+{% endblock %}
+{% block title %}SajuFortune - 检查你的财富。或者检查名人的命运。{% endblock %}
 
-{% block birthday_selecting %}Birthday Selecting{% endblock %}
-{% block year %}Year{% endblock %}
-{% block month %}Month{% endblock %}
-{% block day %}Day{% endblock %}
-{% block today %}Today{% endblock %}
-{% block tomorrow %}Tomorrow{% endblock %}
-{% block dayaftertomorrow %}DayAfterTomorrow{% endblock %}
-{% block language %}Language{% endblock %}
-{% block select_language %}choose{% endblock %}
+{% block birthday_selecting %}生日选择{% endblock %}
+{% block year %}年{% endblock %}
+{% block month %}月{% endblock %}
+{% block day %}天{% endblock %}
+
+{% block buttons_day %}
+    {% include 'snippet/buttons/_buttons_day_chi.html' %}
+{% endblock %}
+
+{% block language %}语言{% endblock %}
+{% block select_language %}选择{% endblock %}
 
 {% block posts %}
     <div class="row">
@@ -58,11 +63,11 @@
     </div>
 {% endblock %}
 
-{% block more_posts %}more posts{% endblock %}
-{% block more_celebrities %}more celebrities{% endblock %}
-{% block about_saju %}about Saju{% endblock %}
+{% block more_posts %}更多的帖子{% endblock %}
+{% block more_celebrities %}更多名人{% endblock %}
+{% block about %}关于{% endblock %}
 
 {% block choose_phrase %}
-<div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="Would you set your birthday?"></div>
-<div class="mobile_display_none desktop_display_none" id="phrase_language" data-sj="Would you set your language?"></div>
+<div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="请你选择你的生日？"></div>
+<div class="mobile_display_none desktop_display_none" id="phrase_language" data-sj="请设置你的语言。"></div>
 {% endblock %}

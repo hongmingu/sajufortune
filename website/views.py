@@ -1,4 +1,3 @@
-from website.utils import *
 from django.urls import reverse
 from django.shortcuts import redirect, render
 
@@ -7,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from post.models import Post
+from website.utils import *
 from dayemotion.models import DayEmotion
 from daylove.models import DayLove
 from daymoney.models import DayMoney
@@ -16,6 +16,7 @@ from dayrelationships.models import DayRelationships
 from django.core.cache import cache
 
 from celebrity.models import Celebrity
+
 
 def test(request):
     if request.method == "POST":
@@ -94,16 +95,17 @@ def day(request, lang):
         except EmptyPage:
             other_celebs = celeb_paginator.page(celeb_paginator.num_pages)
 
-        return render(request, 'website/day/day_eng.html', {'lang': lang,
-                                                        'birthday': birthday_dict,
-                                                        'target': target_dict,
-                                                        'other_celebs': other_celebs,
-                                                        'overall': overall,
-                                                        'emotion': emotion,
-                                                        'love': love,
-                                                            'money': money,
-                                                            'relationships': relationships,
-                                                            'work': work, })
+        template = switch_day_template_by_lang(lang)
+        return render(request, template , {'lang': lang,
+                                           'birthday': birthday_dict,
+                                           'target': target_dict,
+                                           'other_celebs': other_celebs,
+                                           'overall': overall,
+                                           'emotion': emotion,
+                                           'love': love,
+                                           'money': money,
+                                           'relationships': relationships,
+                                           'work': work, })
     else:
         return JsonResponse({'Hello': 'You\'ve got wrong access! may god bless you.'})
 
@@ -121,20 +123,10 @@ def main(request):
             posts = post_paginator.page(post_paginator.num_pages)
 
             # post_paginator.num_pages 는 마지막 페이지를 의미 1페이지가 마지막 페이지면 그렇게 되는거고
-        return render(request, 'website/main/main.html', {'posts': posts,
-                                                          'lang': 'eng'})
+        return render(request, 'website/main/main_eng.html', {'posts': posts,
+                                                              'lang': 'eng'})
     else:
         return JsonResponse({'Hello': 'You\'ve got wrong access! may god bless you.'})
-
-
-def switch_main_template_by_lang(lang):
-    return {
-        'ara': 'website/main/main_ara.html',
-        'chi': 'website/main/main_chi.html',
-        'eng': 'website/main/main_eng.html',
-        'por': 'website/main/main_por.html',
-        'spa': 'website/main/main_ara.html',
-    }.get(lang, 'website/main/main_eng.html')
 
 
 def main_lang(request, lang):
@@ -152,7 +144,7 @@ def main_lang(request, lang):
         except EmptyPage:
             posts = post_paginator.page(post_paginator.num_pages)
 
-        template = switch_main_template_by_lang(lang)
+        template = switch_main_lang_template_by_lang(lang)
             # post_paginator.num_pages 는 마지막 페이지를 의미 1페이지가 마지막 페이지면 그렇게 되는거고
 
         return render(request, template, {'posts': posts, 'lang': lang})
@@ -160,40 +152,8 @@ def main_lang(request, lang):
         return JsonResponse({'Hello': 'You\'ve got wrong access! may god bless you.'})
 
 
-'''
-
-def switch(x):
-    return {
-        'ara': PostArabic,
-        'chi': PostChinese,
-        'eng': PostEnglish,
-        'por': PostPortuguese,
-        'spa': PostSpanish,
-    }.get(x, PostAll)
-'''
-
-
-def switch(lang):
-    return {
-        'ara': 'website/list_ara.html',
-        'chi': 'website/list_chi.html',
-        'eng': 'website/celeb_list_eng.html',
-        'por': 'website/list_por.html',
-        'spa': 'website/list_spa.html',
-    }
-
-
-def switch_about_template_by_lang(lang):
-    return {
-        'ara': 'website/about/about_ara.html',
-        'chi': 'website/about/about_chi.html',
-        'eng': 'website/about/about_eng.html',
-        'por': 'website/about/about_por.html',
-        'spa': 'website/about/about_spa.html',
-    }.get(lang, 'website/about/about_eng.html')
-
-
 def about(request, lang):
     if request.method == "GET":
         template = switch_about_template_by_lang(lang)
         return render(request, template, {'lang': lang})
+

@@ -1,15 +1,20 @@
-{% extends 'website/main/main.html' %}
-{% block title %}Title{% endblock %}
+{% extends 'website/main/main_eng.html' %}
+{% block lang_code %}
+<html lang="es">
+{% endblock %}
+{% block title %}SajuFortune - Verifique sua fortuna. Ou verifique a sorte das celebridades.{% endblock %}
 
-{% block birthday_selecting %}Birthday Selecting{% endblock %}
-{% block year %}Year{% endblock %}
-{% block month %}Month{% endblock %}
-{% block day %}Day{% endblock %}
-{% block today %}Today{% endblock %}
-{% block tomorrow %}Tomorrow{% endblock %}
-{% block dayaftertomorrow %}DayAfterTomorrow{% endblock %}
-{% block language %}Language{% endblock %}
-{% block select_language %}choose{% endblock %}
+{% block birthday_selecting %}Seleção de Aniversário{% endblock %}
+{% block year %}Año{% endblock %}
+{% block month %}Mes{% endblock %}
+{% block day %}Día{% endblock %}
+
+{% block buttons_day %}
+    {% include 'snippet/buttons/_buttons_day_spa.html' %}
+{% endblock %}
+
+{% block language %}Idioma{% endblock %}
+{% block select_language %}escoger{% endblock %}
 
 {% block posts %}
     <div class="row">
@@ -58,11 +63,11 @@
     </div>
 {% endblock %}
 
-{% block more_posts %}more posts{% endblock %}
-{% block more_celebrities %}more celebrities{% endblock %}
-{% block about_saju %}about Saju{% endblock %}
+{% block more_posts %}más publicaciones{% endblock %}
+{% block more_celebrities %}más celebridades{% endblock %}
+{% block about %}acerca de{% endblock %}
 
 {% block choose_phrase %}
-<div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="Would you set your birthday?"></div>
-<div class="mobile_display_none desktop_display_none" id="phrase_language" data-sj="Would you set your language?"></div>
+<div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="Por favor, ¿elegirías tu cumpleaños?"></div>
+<div class="mobile_display_none desktop_display_none" id="phrase_language" data-sj="Por favor, establece tu idioma."></div>
 {% endblock %}

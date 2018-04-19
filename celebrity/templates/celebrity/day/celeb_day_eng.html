@@ -1,22 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    {% include 'snippet/others/header_static.html' %}
 
     {% load static from staticfiles %}
-    <script src="{% static 'js/jquery-1.12.2.min.js' %}"></script>
-    <script src="{% static 'js/jquery-csrf.js' %}"></script>
-    <script src="{% static 'js/side_ad_adder.js' %}"></script>
 
-    <!-- bootstrap은 3.3.7 -->
-    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
-    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
-
-    <link rel="stylesheet" type="text/css" href="{% static "css/saju_style.css" %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <title>Title</title>
+    <title>{% block title %}Title{% endblock %}</title>
 
 </head>
 
@@ -26,9 +15,7 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="text-center">
-                {% block sajufortune_main %}
-                <a href="{% url 'website:main' %}"><p class="sajufortune_text">SajuFortune</p></a>
-                {% endblock %}
+                <a href="{% url 'website:main_lang' lang=lang %}"><p class="sajufortune_text">SajuFortune</p></a>
             </div>
         </div>
         <div class="col-xs-12">
@@ -46,7 +33,10 @@
 
 {% if celeb %}
     <div class="row">
+    {% block photo_and_name %}
         {% include 'snippet/celeb/photo_and_name/_celeb_photo_and_name_eng.html' %}
+    {% endblock %}
+
     </div>
 
     <div class="row">
@@ -62,12 +52,16 @@
     </div>
 
     <div class="row">
+        {% block detail %}
         {% include 'snippet/day/detail/_day_detail_eng.html' %}
+        {% endblock %}
     </div>
 
     {% if posts %}
     <div class="row">
+    {% block other_posts %}
         {% include 'snippet/celeb/other_posts/_celeb_other_posts_eng.html' %}
+    {% endblock %}
     </div>
     {% endif %}
 
@@ -81,44 +75,20 @@
         <div class="btn_padder"></div>
     </div>
     <div class="row">
-        <div class="col-sm-8 col-sm-offset-2 padding_side_7">
-            <div id="fb-root"></div>
-            <script>(function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.12';
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
-            <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-width="100%" data-numposts="10"></div>
-        </div>
+        {% include 'snippet/others/facebook_reply.html' %}
     </div>
     <div class="row">
         <div class="center-block">
             <div class="text-center">
+                {% block who_s %}
                 <p class="h3 list_text">
                 {{ celeb.celebrityenglish.name }} 's..</p>
+                {% endblock %}
             </div>
         </div>
-        <div class="btn_padder"></div>
-        <div class="text-center">
-            {% block today %}
-                <a class="fa btn_saju btn_today_or_other" id="btn_today" href="">Today</a>
-            {% endblock %}
-        </div>
-        <div class="btn_padder"></div>
-        <div class="text-center">
-            {% block tomorrow %}
-                <a class="fa btn_saju btn_today_or_other" id="btn_tomorrow" href="">Tomorrow</a>
-            {% endblock %}
-        </div>
-        <div class="btn_padder"></div>
-
-        <div class="text-center">
-            {% block dayaftertomorrow %}
-                <a class="fa btn_saju btn_today_or_other" id="btn_dayaftertomorrow" href="">DayAfterTomorrow</a>
-            {% endblock %}
-        </div>
+    {% block buttons %}
+        {% include 'snippet/buttons/_buttons_day_eng.html' %}
+    {% endblock %}
     </div>
     <div class="row">
         <div class="btn_padder"></div>
@@ -167,106 +137,65 @@
     </div>
 </div>
 
-{% block choose_phrase %}
-    <div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="Would you set your birthday?"></div>
-    <div class="mobile_display_none desktop_display_none" id="phrase_language" data-sj="Would you set your language?"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_day" data-sj="{% url 'website:day' lang='eng' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_ara" data-sj="{% url 'website:main_lang' lang='ara' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_chi" data-sj="{% url 'website:main_lang' lang='chi' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_eng" data-sj="{% url 'website:main_lang' lang='eng' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_por" data-sj="{% url 'website:main_lang' lang='por' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_spa" data-sj="{% url 'website:main_lang' lang='spa' %}"></div>
+    <div class="mobile_display_none desktop_display_none" id="url_day" data-sj="{% url 'website:day' lang=lang %}"></div>
 
-    <div class="mobile_display_none desktop_display_none" id="url_today" data-sj="{% url 'website:day' lang='eng' %}"></div>
     <div class="mobile_display_none desktop_display_none" id="data_by" data-sj="{{ birthday.year }}"></div>
     <div class="mobile_display_none desktop_display_none" id="data_bm" data-sj="{{ birthday.month }}"></div>
-    <div class="mobile_display_none desktop_display_none" id="data_bd" data-sj="{{ birthday.day }}"></div>
+    <div class="mobile_display_2none desktop_display_none" id="data_bd" data-sj="{{ birthday.day }}"></div>
 
     <div class="mobile_display_none desktop_display_none" id="data_td" data-sj="{{ target.day }}"></div>
 
     <div class="mobile_display_none desktop_display_none" id="data_celeb_pk" data-sj="{{ celeb.pk }}"></div>
     <div class="mobile_display_none desktop_display_none" id="data_celeb_day_url" data-sj="{% url 'celebrity:day' lang=lang num=celeb.pk %}"></div>
 
-{% endblock %}
 
 </body>
 <script>
-    $(document).ready(function () {
+        $(document).ready(function () {
+        var i, target_day;
 
-        /* remove buttons start*/
-        var targetDate = new Date(new Date().getTime());
-        var targetTomorrowDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-        var targetDayAfterTomorrowDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * 2);
-
-
-        var target_day;
         target_day = $("#data_td").attr("data-sj");
 
+        for (i = 0; i < 3; i++) {
+            var date_for_button = new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * i);
 
-        var target_today = targetDate.getDate();
-        var target_tomorrow = targetTomorrowDate.getDate();
-        var target_dayaftertomorrow = targetDayAfterTomorrowDate.getDate();
+            var day_for_day_button = date_for_button.getDate();
+            var month_for_day_button = date_for_button.getMonth() + 1;
+            var year_for_day_button = date_for_button.getFullYear();
+            var btn_id = '#' + 'btn_day_' + i;
+            var btn_day = $(btn_id);
+            var btn_day_current_text = btn_day.text();
+            var btn_day_text_to_add = btn_day_current_text + " " + year_for_day_button + "-" +
+                month_for_day_button + "-" + day_for_day_button;
+            btn_day.text(btn_day_text_to_add);
+            btn_day.attr({
+                'data-sj-ty': year_for_day_button, 'data-sj-tm': month_for_day_button,
+                'data-sj-td': day_for_day_button
+            });
 
-        if(target_today == target_day){
-            $('#btn_today').remove();
-        } else if (target_tomorrow == target_day){
-            $('#btn_tomorrow').remove();
-        } else if (target_dayaftertomorrow == target_day){
-            $('#btn_dayaftertomorrow').remove();
+            if (day_for_day_button == target_day){
+                btn_day.remove()
+            }
         }
-        /* remove buttons end */
 
-        $('#btn_today').click(function (e) {
-
+        $('.btn_to_click').click(function (e) {
             e.preventDefault();
-            var targetDate = new Date(new Date().getTime());
 
-            var target_day = targetDate.getDate();
-            var target_month = targetDate.getMonth() + 1;
-            var target_year = targetDate.getFullYear();
+            var target_day = $(this).attr('data-sj-td');
+            var target_month = $(this).attr('data-sj-tm');
+            var target_year = $(this).attr('data-sj-ty');
 
             var ty, tm, td;
-            ty = target_year.toString(16);
-            tm = target_month.toString(16);
-            td = target_day.toString(16);
+            ty = parseInt(target_year).toString(16);
+            tm = parseInt(target_month).toString(16);
+            td = parseInt(target_day).toString(16);
 
-            location.href = $('#data_celeb_day_url').attr('data-sj') + "?ty=" + ty + "&tm=" + tm + "&td=" + td;
+            var link_text = $('#data_celeb_day_url').attr('data-sj') + "?ty=" + ty + "&tm=" + tm + "&td=" + td;
+            location.href = link_text;
 
-        });
-
-        $('#btn_tomorrow').click(function (e) {
-            e.preventDefault();
-            var targetDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-
-            var target_day = targetDate.getDate();
-            var target_month = targetDate.getMonth() + 1;
-            var target_year = targetDate.getFullYear();
-
-            var ty, tm, td;
-            ty = target_year.toString(16);
-            tm = target_month.toString(16);
-            td = target_day.toString(16);
-
-            location.href = $('#data_celeb_day_url').attr('data-sj') + "?ty=" + ty + "&tm=" + tm + "&td=" + td;
-
-        });
-
-
-        $('#btn_dayaftertomorrow').click(function (e) {
-            e.preventDefault();
-            var targetDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * 2 );
-
-            var target_day = targetDate.getDate();
-            var target_month = targetDate.getMonth() + 1;
-            var target_year = targetDate.getFullYear();
-
-            var ty, tm, td;
-            ty = target_year.toString(16);
-            tm = target_month.toString(16);
-            td = target_day.toString(16);
-
-            location.href = $('#data_celeb_day_url').attr('data-sj') + "?ty=" + ty + "&tm=" + tm + "&td=" + td;
         });
     });
+
 </script>
+
 </html>

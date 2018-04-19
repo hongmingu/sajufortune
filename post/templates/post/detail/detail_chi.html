@@ -1,48 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}SajuFortune {{ post.postinfoenglish.title }}{% endblock %}</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+{% extends 'post/detail/detail_eng.html' %}    
+{% block title %}SajuFortune {{ post.postchinese.title }}{% endblock %}
 
 
-    {% load static from staticfiles %}
-    <script src="{% static 'js/jquery-1.12.2.min.js' %}"></script>
-    <script src="{% static 'js/birthday.js' %}"></script>
-    <script src="{% static 'js/side_ad_adder.js' %}"></script>
-
-    <!-- bootstrap은 3.3.7 -->
-    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}">
-    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
-
-    <link rel="stylesheet" type="text/css" href="{% static "css/saju_style.css" %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-</head>
-<style>
-</style>
-<body>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="text-center">
-                <a class="text_hover_none" href="{% url 'website:main_lang' lang=lang %}">
-                    <p class="sajufortune_text">SajuFortune</p>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            {% include 'ad/_ad_banner.html' %}
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="btn_padder"></div>
-    </div>
-
+{% block post_info %}
     {% if post %}
 
     <div class="row">
@@ -60,147 +20,40 @@
                 </div>
             {% endif %}
             <!-- text -->
-            {% block info %}
             <div class="text-center">
                 <p class="h3 list_text">
-                {{ post.celebrity.celebrityenglish.name }}</p>
+                {{ post.celebrity.celebritychinese.name }}</p>
             </div>
             <div class="text-center">
                 <p class="h5 list_text">
-                {{ post.postenglish.title }}</p>
+                {{ post.postchinese.title }}</p>
             </div>
-            {% endblock %}
         </div>
     </div>
 
     <div class="row">
-        {% include 'snippet/day/detail/_day_detail_eng.html' %}
+        {% include 'snippet/day/detail/_day_detail_chi.html' %}
     </div>
 {% endif %}
-    <!-- more btn -->
-    <div class="row">
-        <div class="btn_padder"></div>
-        <div class="btn_padder"></div>
-    </div>
-    <div class="row">
-        {% include 'snippet/others/_share_buttons.html' %}
-    </div>
-    <div class="row">
-        <div class="btn_padder"></div>
-        <div class="btn_padder"></div>
-    </div>
-    <div class="row">
-        <div class="col-sm-8 col-sm-offset-2 padding_side_7">
-            <div id="fb-root"></div>
-            <script>(function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.12';
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
-            <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-width="100%" data-numposts="10"></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="btn_padder"></div>
-        <div class="btn_padder"></div>
-    </div>
-    <div class="row">
-        <div class="col-sm-offset-3 col-sm-6">
+{% endblock %}
 
-            <div class="col-xs-4">
-                <div class="text-center">
-                    {% if post.get_next_by_created %}
-                        {% if request.GET.f %}
-                            <a class="fa btn_saju width_100percent"
-                               href="{% url 'post:detail' lang=lang num=post.get_next_by_created.pk %}?f={{ request.GET.f }}">
-                        {% else %}
-                            <a class="fa btn_saju width_100percent"
-                               href="{% url 'post:detail' lang=lang num=post.get_next_by_created.pk %}">
-                        {% endif %}
-                        {% block next %}
-                            <span class="glyphicon glyphicon glyphicon-chevron-left"></span>
-                        {% endblock %}
-                    </a>
-                {% else %}
-                {% endif %}
-                </div>
-            </div>
-            <div class="col-xs-4">
-                <div class="text-center">
-                {% if request.GET.f %}
-                    <a type="button" class="fa btn_saju width_80percent" href="{% url 'post:list' lang=lang page=request.GET.f %}">
-                {% else %}
-                    <a type="button" class="fa btn_saju width_80percent" href="{% url 'post:list' lang=lang page='1' %}">
-                {% endif %}
+
                     {% block go_list %}
-                        <span class="glyphicon glyphicon glyphicon glyphicon-th-large"></span><span>  list</span>
+                        <span class="glyphicon glyphicon glyphicon glyphicon-th-large"></span><span>  名单</span>
                     {% endblock %}
-                    </a>
-                </div>
-
-            </div>
-            <div class="col-xs-4">
-                <div class="text-center">
-                    {% if post.get_previous_by_created %}
-                        {% if request.GET.f %}
-                            <a class="fa btn_saju width_100percent"
-                               href="{% url 'post:detail' lang=lang num=post.get_previous_by_created.pk %}?f={{ request.GET.f }}">
-                        {% else %}
-                            <a class="fa btn_saju width_100percent"
-                               href="{% url 'post:detail' lang=lang num=post.get_previous_by_created.pk %}">
-                        {% endif %}
-                        {% block previous %}
-                            <span class="glyphicon glyphicon glyphicon-chevron-right"></span>
-                        {% endblock %}
-                    </a>
-                {% else %}
-                {% endif %}
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-    <div class="row">
-        {% include 'snippet/celeb/more_about/_celeb_more_about_eng.html' %}
-    </div>
-    <div class="row">
-        <div class="btn_padder"></div>
-        <div class="btn_padder"></div>
-    </div>
-
-
-    {% if other_posts %}
-        <div class="row">
-            <div class="btn_padder"></div>
-            <div class="col-xs-12 text-center">
+        {% block more_about %}
+        {% include 'snippet/celeb/more_about/_celeb_more_about_chi.html' %}
+        {% endblock %}
+    
                 {% block other_posts_text %}
-                    <p class="h3 about_saju">Other Posts</p>
+                    <p class="h3 about_saju">其他职位</p>
                 {% endblock %}
-            </div>
-            <div class="btn_padder"></div>
-
-        </div>
-        <div class="row">
-            <!--이건 더미 정사각형-->
+            
             {% block other_posts_objects %}
                 {% for post in other_posts %}
                     <div class="col-sm-6 padding_side_5">
-                        {% include 'snippet/square_list/_square_list_eng.html' %}
+                        {% include 'snippet/square_list/_square_list_chi.html' %}
                     </div>
                 {% endfor %}
             {% endblock %}
-        </div>
-    {% endif %}
-
-    <div class="row">
-
-        <div class="col-xs-12">
-            {% include 'ad/_ad_banner.html' %}
-        </div>
-    </div>
-</div>
-</body>
-</html>
+        

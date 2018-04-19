@@ -1,12 +1,10 @@
 <!DOCTYPE html>
+{% block lang_code %}
 <html lang="en">
+{% endblock %}
 <head>
-    <title>{% block title %}Title{% endblock %}</title>
+    <title>SajuFortune {{ birthday.year }}-{{ birthday.month }}-{{ birthday.day }} & {{ target.year }}-{{ target.month }}-{{ target.day }}</title>
     {% include 'snippet/others/header_static.html' %}
-
-    {% load static from staticfiles %}
-    <script src="{% static 'js/day_buttons_links.js' %}"></script>
-
 </head>
 <body>
 <div class="container">
@@ -33,11 +31,12 @@
     <!--여기서부턴 정사각형 목록-->
 
     <!--row 당 2개씩 -->
-{% block day_detail %}
     <div class="row">
-        {% include 'snippet/day/detail/_day_detail_eng.html' %}
+        {% block day_detail %}
+            {% include 'snippet/day/detail/_day_detail_eng.html' %}
+        {% endblock %}
+
     </div>
-{% endblock %}
     <!-- more btn -->
     <div class="row">
         <div class="btn_padder"></div>
@@ -54,11 +53,12 @@
     <div class="row">
         {% include 'snippet/others/facebook_reply.html' %}
     </div>
-{% block buttons_day %}
     <div class="row">
-        {% include 'snippet/buttons/_buttons_day_eng.html' %}
+        {% block buttons_day %}
+            {% include 'snippet/buttons/_buttons_day_eng.html' %}
+        {% endblock %}
+
     </div>
-{% endblock %}
     <div class="row">
         <div class="btn_padder"></div>
         <div class="btn_padder"></div>
@@ -76,7 +76,7 @@
             <div class="col-xs-offset-4 col-xs-4">
                 <div class="text-center">
                     <a type="button" class="fa btn_saju width_80percent" href="{% url 'website:main_lang' lang=lang %}">
-                    {% block go_list %}
+                    {% block go_to_main %}
                         go to main
                     {% endblock %}
                     </a>
@@ -85,13 +85,12 @@
         </div>
     </div>
 
+{% block what_about_others %}
     {% if other_celebs %}
         <div class="row">
             <div class="btn_padder"></div>
             <div class="col-xs-12 text-center">
-                {% block what_about_other_celeb %}
-                    <p class="h3 about_saju">What about their's</p>
-                {% endblock %}
+                <p class="h3 about_saju">What about theirs</p>
             </div>
             <div class="btn_padder"></div>
 
@@ -143,6 +142,7 @@
             {% endblock %}
         </div>
     {% endif %}
+{% endblock %}
 
     <div class="row">
 
@@ -156,15 +156,71 @@
     </div>
 
 </div>
-{% block choose_phrase %}
-    <div class="mobile_display_none desktop_display_none" id="url_today" data-sj="{% url 'website:day' lang=lang %}"></div>
+
+    <div class="mobile_display_none desktop_display_none" id="url_day" data-sj="{% url 'website:day' lang=lang %}"></div>
     <div class="mobile_display_none desktop_display_none" id="data_by" data-sj-by="{{ birthday.year }}"></div>
     <div class="mobile_display_none desktop_display_none" id="data_bm" data-sj-bm="{{ birthday.month }}"></div>
     <div class="mobile_display_none desktop_display_none" id="data_bd" data-sj-bd="{{ birthday.day }}"></div>
 
     <div class="mobile_display_none desktop_display_none" id="data_td" data-sj-td="{{ target.day }}"></div>
 
-{% endblock %}
-
 </body>
+<script>
+    $(document).ready(function () {
+
+        var i, target_day;
+
+        target_day = $("#data_td").attr("data-sj-td");
+
+        for (i = 0; i < 3; i++) {
+            var date_for_button = new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * i);
+
+            var day_for_day_button = date_for_button.getDate();
+            var month_for_day_button = date_for_button.getMonth() + 1;
+            var year_for_day_button = date_for_button.getFullYear();
+            var btn_id = '#' + 'btn_day_' + i;
+            var btn_day= $(btn_id);
+            var btn_day_current_text = btn_day.text();
+            var btn_day_text_to_add = btn_day_current_text + " " + year_for_day_button + "-" +
+                month_for_day_button + "-" + day_for_day_button;
+            btn_day.text(btn_day_text_to_add);
+            btn_day.attr({'data-sj-ty': year_for_day_button, 'data-sj-tm': month_for_day_button,
+                'data-sj-td': day_for_day_button});
+
+            if (day_for_day_button == target_day){
+                btn_day.remove()
+            }
+        }
+
+        var selected_year, selected_month, selected_day;
+        /* get page by birth start */
+        selected_year = $("#data_by").attr("data-sj-by");
+        selected_month = $("#data_bm").attr("data-sj-bm");
+        selected_day = $("#data_bd").attr("data-sj-bd");
+
+        $('.btn_to_click').click(function (e) {
+            e.preventDefault();
+
+            if (selected_year!="non_year" && selected_month!="non_month" && selected_day!="non_day"){
+
+                var target_day = $(this).attr('data-sj-td');
+                var target_month = $(this).attr('data-sj-tm');
+                var target_year = $(this).attr('data-sj-ty');
+
+                var by, bm, bd, ty, tm, td;
+                by = parseInt(selected_year).toString(16);
+                bm = parseInt(selected_month).toString(16);
+                bd = parseInt(selected_day).toString(16);
+                ty = parseInt(target_year).toString(16);
+                tm = parseInt(target_month).toString(16);
+                td = parseInt(target_day).toString(16);
+                var link_text = $('#url_day').attr('data-sj') + "?by=" + by + "&bm=" + bm + "&bd=" + bd + "&ty=" + ty + "&tm=" + tm + "&td=" + td;
+                location.href = link_text;
+            }
+            else {
+                $("#p_birth_warning").html($('#phrase_birthday').attr('data-sj'));
+            }
+        });
+    });
+</script>
 </html>
