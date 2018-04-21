@@ -2,7 +2,7 @@ from django.urls import path, re_path
 from django.views.generic import TemplateView
 
 from . import views
-from django.views.decorators.cache import cache_page
+from django.views.decorators.cache import cache_page, never_cache
 
 app_name = 'website'
 
@@ -11,17 +11,15 @@ app_name = 'website'
 
 urlpatterns = [
 
-    re_path(r'^$', views.main, name='main'),
-    re_path(r'^(?P<lang>ara|chi|eng|por|spa)/$', views.main_lang, name='main_lang'),
+    re_path(r'^$', cache_page(60 * 15)(views.main), name='main'),
+    re_path(r'^(?P<lang>ara|chi|eng|por|spa)/$', cache_page(60 * 15)(views.main_lang), name='main_lang'),
 
-    re_path(r'^about/(?P<lang>ara|chi|eng|por|spa)/$', views.about, name='about'),
+    re_path(r'^about/(?P<lang>ara|chi|eng|por|spa)/$', cache_page(60 * 60 * 12)(views.about), name='about'),
 
-    re_path(r'^test/$', views.test, name='test'),
+    re_path(r'^day/(?P<lang>ara|chi|eng|por|spa)/$', cache_page(60 * 10)(views.day), name='day'),
 
-    re_path(r'^day/(?P<lang>ara|chi|eng|por|spa)/$', views.day, name='day'),
-    re_path(r'^part/(?P<dtype>work|money|emotion|love|relationship)/(?P<lang>ara|chi|eng|por|spa)/$', views.main,
-            name='part'),
 
+    re_path(r'^test/', views.test, name='test'),
 ]
 
 '''
@@ -39,3 +37,5 @@ Then in your views.py you would have
 def profile_page(request, username):
     # Rest of the method
 '''
+
+# 웹소켓 되면

@@ -148,6 +148,7 @@ def day(request, lang):
                 'month': target_month,
                 'day': target_day
             }
+
             cache_celeb_queryset = cache.get('celebrity_objects_all')
             if cache_celeb_queryset is not None:
                 celeb_list = cache_celeb_queryset.order_by('?')

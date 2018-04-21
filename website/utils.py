@@ -1,5 +1,12 @@
 from django.shortcuts import render
 
+from dayemotion.models import DayEmotion
+from daylove.models import DayLove
+from daymoney.models import DayMoney
+from dayoverall.models import DayOverall
+from dayrelationships.models import DayRelationships
+from daywork.models import DayWork
+
 
 def get_result_num(birthday_year, birthday_month, birthday_day, target_year, target_month, target_day):
     return int(((birthday_year + target_day) * 1) +
@@ -11,7 +18,7 @@ def get_overall_num(num):
     return (num % 106) + 1
 
 
-def get_relationship_num(num):
+def get_relationships_num(num):
     return (num % 105) + 1
 
 
@@ -71,3 +78,12 @@ def switch_about_template_by_lang(lang):
         'spa': 'website/about/about_spa.html',
     }.get(lang, 'website/about/about_eng.html')
 
+
+def get_day_fortune_model_by_index(index):
+    return {0: DayOverall,
+            1: DayEmotion,
+            2: DayLove,
+            3: DayMoney,
+            4: DayRelationships,
+            5: DayWork
+            }.get(index, DayOverall)
