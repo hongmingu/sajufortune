@@ -37,6 +37,14 @@ urlpatterns = [
 
 #이 아래 부분 미디어 파일 디벨롭 모드에서 쓰기 위해 필요
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += [
+        re_path(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
 '''
     url(r'^accounts/', include('dayoverall.urls', namespace='accounts')),
     url(r'base_test/$', TemplateView.as_view(template_name='base_test.html')),

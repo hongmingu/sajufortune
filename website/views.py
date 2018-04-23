@@ -13,6 +13,14 @@ from celebrity.models import Celebrity
 from website.utils import get_day_fortune_model_by_index
 
 
+def test2(request):
+    if request.method == "POST":
+        pass
+    else:
+        # cache_data = cache.get_or_set('render', None)
+        return render(request, 'website/main/test2.html')
+
+
 def test(request):
     if request.method == "POST":
         pass
@@ -129,13 +137,16 @@ def day(request, lang):
 
             cache_list = [cache_overall, cache_emotion, cache_love, cache_money, cache_relationships, cache_work]
 
-            for i in cache_list:
+            length_cache_list = len(cache_list)
+            range_cache_list = range(length_cache_list)
+
+            for i in range_cache_list:
                 if cache_list[i] is None:
                     try:
                         result = get_day_fortune_model_by_index(i).objects.get(pk=num_list[i])
                     except get_day_fortune_model_by_index(i).DoesNotExist:
-                        return render(request, '404.html',)
-                    cache.set('day' + str(i) + ':' + num_list[i], result, timeout=None)
+                        result = None
+                    cache.set('day' + str(i) + ':' + num_list[i], result, timeout=60*60*24)
                     cache_list[i] = result
 
             birthday_dict = {
@@ -154,7 +165,7 @@ def day(request, lang):
                 celeb_list = cache_celeb_queryset.order_by('?')
             else:
                 celeb_queryset = Celebrity.objects.all()
-                cache.set('celebrity_objects_all', celeb_queryset, timeout=None)
+                cache.set('celebrity_objects_all', celeb_queryset, timeout=60*60)
                 celeb_list = celeb_queryset.order_by('?')
 
             celeb_paginator = Paginator(celeb_list, 2)
@@ -177,7 +188,7 @@ def day(request, lang):
 
             cache.set('dayall' + lang +
                               birthday_year_raw + birthday_month_raw + birthday_day_raw +
-                              target_year_raw + target_month_raw + target_day_raw, render_day, timeout=60*10)
+                              target_year_raw + target_month_raw + target_day_raw, render_day, timeout=60*15)
             return render_day
     else:
         return JsonResponse({'Hello': 'You\'ve got wrong access! may god bless you.'})
@@ -190,14 +201,14 @@ def main(request):
         if cache_main is not None:
             return cache_main
         else:
-            cache_post_queryset = cache.get('post_objects_all')
+            cache_post_queryset = cache.get('post_objects_all_order_by_created')
             if cache_post_queryset is not None:
                 post_queryset = cache_post_queryset
             else:
-                post_queryset = Post.objects.all()
-                cache.set('post_objects_all', post_queryset, timeout=None)
+                post_queryset = Post.objects.all().order_by('-created')
+                cache.set('post_objects_all_order_by_created', post_queryset, timeout=60*60)
 
-            post_list = post_queryset.order_by('-created')
+            post_list = post_queryset
             post_paginator = Paginator(post_list, 10)
             try:
                 posts = post_paginator.page(1)
@@ -207,7 +218,7 @@ def main(request):
                 posts = post_paginator.page(post_paginator.num_pages)
             render_main = render(request, 'website/main/main_eng.html', {'posts': posts,
                                                                          'lang': 'eng'})
-            cache.set('main', render_main, timeout=60 * 15)
+            cache.set('main', render_main, timeout=60*15)
             return render_main
 
     else:
@@ -225,15 +236,15 @@ def main_lang(request, lang):
         else:
             template = switch_main_lang_template_by_lang(lang)
 
-            cache_post_queryset = cache.get('post_objects_all')
+            cache_post_queryset = cache.get('post_objects_all_order_by_created')
 
             if cache_post_queryset is not None:
                 post_queryset = cache_post_queryset
             else:
-                post_queryset = Post.objects.all()
-                cache.set('post_objects_all', post_queryset, timeout=None)
+                post_queryset = Post.objects.all().order_by('-created')
+                cache.set('post_objects_all_order_by_created', post_queryset, timeout=60*60)
 
-            post_list = post_queryset.order_by('-created')
+            post_list = post_queryset
 
             post_paginator = Paginator(post_list, 10)
             try:

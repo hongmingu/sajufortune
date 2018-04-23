@@ -7,7 +7,7 @@
 <style>
 </style>
 <body>
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-xs-12">
             <div class="text-center">
@@ -47,11 +47,11 @@
             {% endif %}
             <!-- text -->
             <div class="text-center">
-                <p class="h3 list_text">
+                <p class="h2 list_text">
                 {{ post.celebrity.celebrityenglish.name }}</p>
             </div>
             <div class="text-center">
-                <p class="h5 list_text">
+                <p class="h3 list_text">
                 {{ post.postenglish.title }}</p>
             </div>
         </div>
@@ -177,5 +177,7 @@
         </div>
     </div>
 </div>
+{% include 'snippet/others/bootstrap_tester.html' %}
+
 </body>
 </html>

@@ -63,7 +63,7 @@ class PostSpanish(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "name: %s, target_date: %s %s %s, post_pk: %s" % (self.post.name,
+        return "name: %s, target_date: %s %s %s, post_pk: %s" % (self.post.celebrity.name,
                                                                  self.post.target_year,
                                                                  self.post.target_month,
                                                                  self.post.target_day,
@@ -79,7 +79,7 @@ class PostChinese(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "name: %s, target_date: %s %s %s, post_pk: %s" % (self.post.name,
+        return "name: %s, target_date: %s %s %s, post_pk: %s" % (self.post.celebrity.name,
                                                                  self.post.target_year,
                                                                  self.post.target_month,
                                                                  self.post.target_day,
@@ -95,7 +95,7 @@ class PostArabic(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "name: %s, target_date: %s %s %s, post_pk: %s" % (self.post.name,
+        return "name: %s, target_date: %s %s %s, post_pk: %s" % (self.post.celebrity.name,
                                                                  self.post.target_year,
                                                                  self.post.target_month,
                                                                  self.post.target_day,
@@ -111,7 +111,7 @@ class PostPortuguese(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "name: %s, target_date: %s %s %s, post_pk: %s" % (self.post.name,
+        return "name: %s, target_date: %s %s %s, post_pk: %s" % (self.post.celebrity.name,
                                                                  self.post.target_year,
                                                                  self.post.target_month,
                                                                  self.post.target_day,

@@ -42,11 +42,6 @@
 
                     <br>
 
-                    <div class="col-xs-12 padding_side_5">
-                        {% include 'ad/_ad_square_detail.html' %}
-                    </div>
-
-                    <br>
                     {% block love %}
                     <p class="media-heading h4">
                         Love
@@ -62,6 +57,11 @@
 
                     <br>
 
+                    <div class="col-xs-12 padding_side_5">
+                        {% include 'ad/_ad_square_detail.html' %}
+                    </div>
+
+                    <br>
                     {% block money %}
                     <p class="media-heading h4">
                         Money
@@ -74,12 +74,6 @@
                         {{ money.daymoneyenglish.text|linebreaksbr }}
                     </p>
                     {% endblock %}
-
-                    <br>
-
-                    <div class="col-xs-12 padding_side_5">
-                        {% include 'ad/_ad_square_detail.html' %}
-                    </div>
 
                     <br>
 
@@ -110,6 +104,12 @@
                         {{ work.dayworkenglish.text|linebreaksbr }}
                     </p>
                     {% endblock %}
+
+                    <br>
+
+                    <div class="col-xs-12 padding_side_5">
+                        {% include 'ad/_ad_square_detail.html' %}
+                    </div>
 
                     <br>
 

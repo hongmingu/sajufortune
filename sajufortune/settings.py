@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'post',
     'celebrity',
     'website',
+    'debug_toolbar',
 ]
 
 '''
@@ -73,11 +74,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # this is for debug-toolbar
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     # 'django.middleware.cache.UpdateCacheMiddleware',
     # 'django.middleware.common.CommonMiddleware',
     # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
+    # this is for debug-toolbar
+INTERNAL_IPS = ('127.0.0.1',)
+
+#this is from origin
 ROOT_URLCONF = 'sajufortune.urls'
 
 TEMPLATES = [
@@ -160,7 +167,7 @@ STATICFILES_DIRS = [
 ]
 #### Media settings
 # 각 media 파일에 대한 URL Prefix
-MEDIA_URL = '/media_url/'
+MEDIA_URL = '/media/'
 # 항상 / 로 끝나도록 설정
 # MEDIA_URL = 'http://static.myservice.com/media/' 다른 서버로 media 파일 복사시
 

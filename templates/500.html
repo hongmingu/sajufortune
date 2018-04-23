@@ -2,9 +2,107 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>500</title>
+    <title>SajuFortune - Error</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    {% include 'snippet/others/header_static.html' %}
 </head>
+
 <body>
-sssssss
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="text-center">
+                <a href="{% url 'website:main_lang' lang='eng' %}"><p class="sajufortune_text">SajuFortune</p></a>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            {% include 'ad/_ad_banner.html' %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="btn_padder"></div>
+        <div class="btn_padder"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 padding_side_7" id="div_detail">
+            <div class="col-xs-12">
+                <div class="media">
+                    <div class="media-body">
+                        <p class="media-heading h2">
+                            It has wrong things from server. Sorry!!!!! sorry..
+                        </p>
+                        <br>
+                        <p class="h4">
+                            Sorry.. Please look around other pages than this page.
+                        </p>
+                        <p class="h4">
+                            Would you go to main page?
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-6">
+
+                <div class="col-xs-offset-4 col-xs-4">
+                    <div class="text-center">
+                        <a type="button" class="fa btn_saju width_80percent" href="{% url 'website:main_lang' lang='eng' %}">
+                            go to main
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2 padding_side_5 mobile_display_none" id="div_side_scrapper">
+            {% include 'ad/_ad_side_scrapper.html' %}
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="text-center">
+            <a class="fa btn_saju btn_today_or_other" href="{% url 'post:list' lang='eng' page='1' %}">
+                Posts
+            </a>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="btn_padder"></div>
+        <div class="btn_padder"></div>
+    </div>
+    <div class="row">
+        <div class="text-center">
+            <a class="fa btn_saju btn_today_or_other" href="{% url 'celebrity:list' lang='eng' page='1' %}">
+                Celebrities
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="btn_padder"></div>
+        <div class="btn_padder"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="text-center">
+                <a href="{% url 'website:main_lang' lang='eng' %}"><p class="sajufortune_text">Back To Main</p></a>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="btn_padder"></div>
+        <div class="btn_padder"></div>
+    </div>
+</div>
+{% include 'snippet/others/bootstrap_tester.html' %}
+
 </body>
 </html>

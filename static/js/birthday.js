@@ -1,27 +1,27 @@
     $(document).ready(function () {
-        var select_year, select_month, select_day, i;
+        /* select birthday */
+        var select_year, select_month, select_day, i_birth;
+
+        var currentDate = new Date(new Date().getTime());
+        var current_year = currentDate.getFullYear();
 
         select_year = $('#select_year');
-        select_year.append("<option selected disabled>"+"Year"+"</option>");
 
-        for ( i = 1900; i <= 2017; i += 1 ) {
-            select_year.append("<option>"+i+"</option>");
+        for ( i_birth = current_year; i_birth >= 1900; i_birth -= 1 ) {
+            select_year.append("<option value=\""+i_birth+"\">"+i_birth+"</option>");
         }
 
         select_month = $('#select_month');
-        select_month.append("<option selected disabled>"+"Month"+"</option>");
 
-        for ( i = 1; i <= 12; i += 1 ) {
-            select_month.append("<option>"+i+"</option>");
+        for ( i_birth = 1; i_birth <= 12; i_birth += 1 ) {
+            select_month.append("<option value=\""+i_birth+"\">"+i_birth+"</option>");
         }
 
         select_day = $('#select_day');
-        select_day.append("<option selected disabled>"+"Day"+"</option>");
 
-        for ( i = 1; i <= 31; i += 1 ) {
-            select_day.append("<option>"+i+"</option>");
+        for ( i_birth = 1; i_birth <= 31; i_birth += 1 ) {
+            select_day.append("<option value=\""+i_birth+"\">"+i_birth+"</option>");
         }
-
-
+        /*select birth end */
 
     });

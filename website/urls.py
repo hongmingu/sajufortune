@@ -11,16 +11,17 @@ app_name = 'website'
 
 urlpatterns = [
 
-    re_path(r'^$', cache_page(60 * 15)(views.main), name='main'),
+    re_path(r'^$', cache_page(0)(views.main), name='main'),
     re_path(r'^(?P<lang>ara|chi|eng|por|spa)/$', cache_page(60 * 15)(views.main_lang), name='main_lang'),
 
     re_path(r'^about/(?P<lang>ara|chi|eng|por|spa)/$', cache_page(60 * 60 * 12)(views.about), name='about'),
 
     re_path(r'^day/(?P<lang>ara|chi|eng|por|spa)/$', cache_page(60 * 10)(views.day), name='day'),
 
-
+    re_path(r'^test2/', views.test2, name='test2'),
     re_path(r'^test/', views.test, name='test'),
 ]
+
 
 '''
 If your url is something like domain/search/?q=haha, Then you would use request.GET.get('q', '').

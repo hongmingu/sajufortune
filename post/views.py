@@ -51,23 +51,29 @@ from django.core.cache import cache
 
 def post_detail(request, num, lang):
     if request.method == "GET":
-        try:
-            post = Post.objects.get(pk=num)
-        except Post.DoesNotExist:
-            return render(request, '404.html', )
-        birthday_year_raw = post.celebrity.birthday_year
-        birthday_month_raw = post.celebrity.birthday_month
-        birthday_day_raw = post.celebrity.birthday_day
-        target_year_raw = post.target_year
-        target_month_raw = post.target_month
-        target_day_raw = post.target_day
 
-        cache_post_detail = cache.get('post_detail' + lang +
-                              birthday_year_raw + birthday_month_raw + birthday_day_raw +
-                              target_year_raw + target_month_raw + target_day_raw)
+        cache_post_detail = cache.get('post_detail' + lang + num)
+
         if cache_post_detail is not None:
             return cache_post_detail
+
         else:
+            cache_post_objects_get_num = cache.get('post_objects_get_num'+num)
+            if cache_post_objects_get_num is not None:
+                post = cache_post_objects_get_num
+            else:
+                try:
+                    post = Post.objects.get(pk=num)
+                except Post.DoesNotExist:
+                    return render(request, '404.html', )
+                cache.set('post_objects_get_num'+num, post, timeout=60*60)
+
+            birthday_year_raw = post.celebrity.birthday_year
+            birthday_month_raw = post.celebrity.birthday_month
+            birthday_day_raw = post.celebrity.birthday_day
+            target_year_raw = post.target_year
+            target_month_raw = post.target_month
+            target_day_raw = post.target_day
             if birthday_year_raw is None or birthday_month_raw is None or birthday_day_raw is None \
                     or target_year_raw is None or target_month_raw is None or target_day_raw is None:
                 # 제공되지 않은 값이 있을 경우
@@ -108,13 +114,16 @@ def post_detail(request, num, lang):
 
             cache_list = [cache_overall, cache_emotion, cache_love, cache_money, cache_relationships, cache_work]
 
-            for i in cache_list:
+            length_cache_list = len(cache_list)
+            range_cache_list = range(length_cache_list)
+
+            for i in range_cache_list:
                 if cache_list[i] is None:
                     try:
                         result = get_day_fortune_model_by_index(i).objects.get(pk=num_list[i])
                     except get_day_fortune_model_by_index(i).DoesNotExist:
-                        return render(request, '404.html',)
-                    cache.set('day' + str(i) + ':' + num_list[i], result, timeout=None)
+                        result = None
+                    cache.set('day' + str(i) + ':' + num_list[i], result, timeout=60*60*24)
                     cache_list[i] = result
 
             birthday_dict = {
@@ -128,15 +137,15 @@ def post_detail(request, num, lang):
                 'day': target_day
             }
 
-            cache_post_queryset = cache.get('post_objects_all')
+            cache_post_queryset = cache.get('post_objects_all_exclude'+num)
 
             if cache_post_queryset is not None:
                 post_queryset = cache_post_queryset
             else:
-                post_queryset = Post.objects.all()
-                cache.set('post_objects_all', post_queryset, timeout=None)
+                post_queryset = Post.objects.all().exclude(pk=num)
+                cache.set('post_objects_all_exclude'+num, post_queryset, timeout=60*60)
 
-            post_all = post_queryset.exclude(pk=num).order_by('?')
+            post_all = post_queryset.order_by('?')
             post_paginator = Paginator(post_all, 2)
 
             other_posts = post_paginator.page(1)
@@ -153,9 +162,7 @@ def post_detail(request, num, lang):
                                                 'money': cache_list[3],
                                                 'relationships': cache_list[4],
                                                 'work': cache_list[5], })
-            cache.set('post_detail' + lang +
-                              birthday_year_raw + birthday_month_raw + birthday_day_raw +
-                              target_year_raw + target_month_raw + target_day_raw, render_post_detail, timeout=60*10)
+            cache.set('post_detail' + lang + num, render_post_detail,timeout=60*15)
             return render_post_detail
 
     else:
@@ -164,20 +171,32 @@ def post_detail(request, num, lang):
 
 def post_list(request, page, lang):
     if request.method == "GET":
-        page = request.GET.get(page, 1)
-        post_all = Post.objects.all().order_by('-created')
-        post_paginator = Paginator(post_all, 10)
+        cache_post_list = cache.get('post_list'+lang+page)
+        if cache_post_list is not None:
+            return cache_post_list
+        else:
+            cache_post_queryset = cache.get('post_objects_all_order_by_created')
+            if cache_post_queryset is not None:
+                post_queryset = cache_post_queryset
+            else:
+                post_queryset = Post.objects.all().order_by('-created')
+                cache.set('post_objects_all_order_by_created', post_queryset, timeout=60*60)
 
-        try:
-            posts = post_paginator.page(page)
-        except PageNotAnInteger:
-            posts = post_paginator.page(1)
-        except EmptyPage:
-            posts = post_paginator.page(post_paginator.num_pages)
+            page = request.GET.get(page, 1)
+            post_list = post_queryset
+            post_paginator = Paginator(post_list, 10)
+            try:
+                posts = post_paginator.page(page)
+            except PageNotAnInteger:
+                posts = post_paginator.page(1)
+            except EmptyPage:
+                posts = post_paginator.page(post_paginator.num_pages)
 
-        template = switch_post_list_template_by_lang(lang)
+            template = switch_post_list_template_by_lang(lang)
 
-        return render(request, template, {'posts': posts, 'lang': lang})
+            render_post_list = render(request, template, {'posts': posts, 'lang': lang})
+            cache.set('post_list'+lang+page, render_post_list, timeout=60*15)
+            return render_post_list
 
     else:
         return JsonResponse({'error': 'You\'ve tried bad access'})
