@@ -1,0 +1,6 @@
+{
+  "django": {
+    "allowed_hosts": "*",
+    "secret_key": "z%&ulb8(rajj*p^zk4lse1)qb5#kijuqpe$&^6ixovf-)euto+"
+  }
+}
