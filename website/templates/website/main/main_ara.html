@@ -1,9 +1,28 @@
 {% extends 'website/main/main_eng.html' %}
 {% block lang_code %}
-<html lang="ar">
+    <html lang="ar">
 {% endblock %}
 {% block title %}SajuFortune - تحقق ثروتك. أو تحقق من ثروات المشاهير.{% endblock %}
+{% block meta %}
+    <meta name="keywords" content="saju, sajufortune, fortune, horoscope, astrology, celebrity"/>
+    <meta name="author" content="SajuFortune"/>
+    <meta name="title" content="SajuFortune"/>
+    <meta name="description" content="تحقق ثروتك. أو تحقق من ثروات المشاهير"/>
 
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="SajuFortune"/>
+    <meta property="og:site_name" content="SajuFortune"/>
+    <meta property="og:description" content="تحقق ثروتك. أو تحقق من ثروات المشاهير"/>
+    <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@SajuFortune"/>
+    <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+    <meta name="twitter:creator" content="@SajuFortune">
+
+    <meta property="fb:app_id" content="2043859895827697"/>
+{% endblock %}
 {% block birthday_selecting %}اختيار عيد ميلاد{% endblock %}
 {% block year %}عام{% endblock %}
 {% block month %}شهر{% endblock %}
@@ -68,6 +87,7 @@
 {% block about %}حول{% endblock %}
 
 {% block choose_phrase %}
-<div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="من فضلك سوف تختار عيد ميلادك؟"></div>
-<div class="mobile_display_none desktop_display_none" id="phrase_language" data-sj="يرجى ضبط لغتك."></div>
+    <div class="mobile_display_none desktop_display_none" id="phrase_birthday"
+         data-sj="من فضلك سوف تختار عيد ميلادك؟"></div>
+    <div class="mobile_display_none desktop_display_none" id="phrase_language" data-sj="يرجى ضبط لغتك."></div>
 {% endblock %}

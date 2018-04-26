@@ -1,10 +1,29 @@
 {% extends 'website/about/about_eng.html' %}
 {% block lang_code %}
-<html lang="ar">
+    <html lang="ar">
 {% endblock %}
 
 {% block title %}SajuFortune - حول{% endblock %}
+{% block meta %}
+    <meta name="keywords" content="saju, sajufortune, fortune, horoscope, astrology, celebrity, about, explanation"/>
+    <meta name="author" content="SajuFortune"/>
+    <meta name="title" content="SajuFortune"/>
+    <meta name="description" content="تحقق ثروتك. أو تحقق من ثروات المشاهير"/>
 
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="SajuFortune"/>
+    <meta property="og:site_name" content="SajuFortune"/>
+    <meta property="og:description" content="تحقق ثروتك. أو تحقق من ثروات المشاهير"/>
+    <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@SajuFortune"/>
+    <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+    <meta name="twitter:creator" content="@SajuFortune">
+
+    <meta property="fb:app_id" content="2043859895827697"/>
+{% endblock %}
 
 {% block what_is_saju %}ما هذا؟{% endblock %}
 {% block saju_detail %}ساجو ثروة شرقية. يشبه بطاقة التارو أو برجك. على أساس أعياد الميلاد.{% endblock %}
@@ -24,6 +43,7 @@
 {% block back_to_main %}العودة إلى الرئيسية{% endblock %}
 
 {% block choose_phrase %}
-<div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="من فضلك سوف تختار عيد ميلادك؟"></div>
+    <div class="mobile_display_none desktop_display_none" id="phrase_birthday"
+         data-sj="من فضلك سوف تختار عيد ميلادك؟"></div>
 {% endblock %}
 

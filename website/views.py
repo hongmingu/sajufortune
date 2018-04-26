@@ -1,83 +1,14 @@
-from django.urls import reverse
-from django.shortcuts import redirect
-
-from django.http import JsonResponse
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-from post.models import Post
-from website.utils import *
 from django.core.cache import cache
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponse
+from django.http import JsonResponse
+from django.shortcuts import redirect
+from django.urls import reverse
 
 from celebrity.models import Celebrity
-
+from post.models import Post
+from website.utils import *
 from website.utils import get_day_fortune_model_by_index
-
-
-def test2(request):
-    if request.method == "POST":
-        pass
-    else:
-        # cache_data = cache.get_or_set('render', None)
-        return render(request, 'website/main/test2.html')
-
-
-def test(request):
-    if request.method == "POST":
-        pass
-    else:
-        # cache_data = cache.get_or_set('render', None)
-        return render(request, 'website/main/test.html')
-        # 각각 div 놓고 거기에 데이터까지 준 다음에 그걸로 따로 ajax 통신해서 각자 데이터 가져가게끔 
-        # if cache_data is None:
-        #     rendered_data = render(request, 'website/main/test.html')
-        #     cache.set('render', rendered_data)
-        #     return rendered_data
-        # else:
-        #     return cache_data
-
-        # get_data = request.GET.get('q', 'default_value')
-        # get_cache = cache.get_or_set('posts'+get_data, get_data)
-        #
-        # answer = {'q': get_data}
-        # return render(request, 'post/not_exist_post_default.html', {'answer': answer})
-
-'''
-class Post(models.Model):  
-    ... # 생략
-    def save(self, *args, **kwargs):
-        cache.delete('posts')
-        super().save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        cache.delete('posts')
-        super().delete(*args, **kwargs)
-        
-        # Good
-entry.blog_id
-# DB에 접속
-e = Entry.objects.get(id=5)
-
-# 관련된 Blog 객체를 가져오기 위해 DB에 한번 더 접속
-b = e.blog
-
-# select_related을 사용
-# DB에 접속
-e = Entry.objects.select_related('blog').get(id=5)
-
-# 이미 위에서 관련된 Blog객체들을 가져왔기 때문에 DB에 접속하지 않음
-b = e.blog
-# Bad
-entry.blog.id
-
-# Good
-my_band.members.add(me, my_friend)
-
-# Bad
-my_band.members.add(me)
-my_band.members.add(my_friend)
-
-render 값을 cache할 수 있는가?
-'''
 
 
 def day(request, lang):
@@ -275,3 +206,5 @@ def about(request, lang):
         return JsonResponse({'Hello': 'You\'ve got wrong access! may god bless you.'})
 
 
+def ping_test(request):
+    return HttpResponse("pong", content_type='text/plain')

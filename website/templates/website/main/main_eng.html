@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 {% block lang_code %}
-<html lang="en">
+    <html lang="en">
 {% endblock %}
 <head>
-    <title>{% block title %}SajuFortune - Check your fortune. Or check the fortunes of celebrities.{% endblock %}</title>
+    <title>{% block title %}SajuFortune - Check your fortune. Or check the fortunes of
+        celebrities.{% endblock %}</title>
     {% include 'snippet/others/header_static.html' %}
 
     {% load static from staticfiles %}
@@ -12,44 +13,28 @@
     <script src="{% static 'js/day_buttons_links_main.js' %}"></script>
     <script src="{% static 'js/lang_selecter_main.js' %}"></script>
 
-    <link rel="apple-touch-icon" sizes="57x57" href="https://d3m4mlntjbzekh.cloudfront.net/etc/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="https://d3m4mlntjbzekh.cloudfront.net/etc/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="https://d3m4mlntjbzekh.cloudfront.net/etc/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="https://d3m4mlntjbzekh.cloudfront.net/etc/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="https://d3m4mlntjbzekh.cloudfront.net/etc/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="https://d3m4mlntjbzekh.cloudfront.net/etc/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="https://d3m4mlntjbzekh.cloudfront.net/etc/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="https://d3m4mlntjbzekh.cloudfront.net/etc/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://d3m4mlntjbzekh.cloudfront.net/etc/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="https://d3m4mlntjbzekh.cloudfront.net/etc/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://d3m4mlntjbzekh.cloudfront.net/etc/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="https://d3m4mlntjbzekh.cloudfront.net/etc/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://d3m4mlntjbzekh.cloudfront.net/etc/favicon/favicon-16x16.png">
-    <link rel="manifest" href="https://d3m4mlntjbzekh.cloudfront.net/etc/favicon/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="https://d3m4mlntjbzekh.cloudfront.net/etc/favicon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+    {% include 'snippet/others/favicon.html' %}
 
-{% block meta %}
-    <meta name="keywords" content="saju, sajufortune, fortune, horoscope, astrology, celebrity" />
-    <meta name="author" content="SajuFortune" />
-    <meta name="title" content="SajuFortune - Check your fortune. Or check the fortunes of celebrities." />
-    <meta name="description" content="Check your fortune. Or check the fortunes of celebrities." />
+    {% block meta %}
+        <meta name="keywords" content="saju, sajufortune, fortune, horoscope, astrology, celebrity"/>
+        <meta name="author" content="SajuFortune"/>
+        <meta name="title" content="SajuFortune"/>
+        <meta name="description" content="Check your fortune. Or check the fortunes of celebrities."/>
 
-    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="SajuFortune - Check your fortune. Or check the fortunes of celebrities." />
-    <meta property="og:site_name" content="SajuFortune" />
-    <meta property="og:description" content="Check your fortune. Or check the fortunes of celebrities." />
-    <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png" />
+        <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="SajuFortune"/>
+        <meta property="og:site_name" content="SajuFortune"/>
+        <meta property="og:description" content="Check your fortune. Or check the fortunes of celebrities."/>
+        <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
 
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@SajuFortune" />
-	<meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
-	<meta name="twitter:creator" content="@SajuFortune">
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@SajuFortune"/>
+        <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+        <meta name="twitter:creator" content="@SajuFortune">
 
-    <meta property="fb:app_id" content="2043859895827697" />
-{% endblock %}
+        <meta property="fb:app_id" content="2043859895827697"/>
+    {% endblock %}
 
 </head>
 
@@ -77,7 +62,7 @@
                 <div class="center-block">
                     <div class="text-center">
                         <p class="birthday_selecting_text h3">
-                        {% block birthday_selecting %}Birthday Selecting{% endblock %}
+                            {% block birthday_selecting %}Birthday Selecting{% endblock %}
                         </p>
                     </div>
                 </div>
@@ -92,29 +77,29 @@
     </div>
     <div class="row">
         <div class="col-sm-offset-3 col-sm-6">
-        <form class="form-inline text-center" >
-            <div class="form-group col-xs-4">
-                <select class="form-control form-select padding_select_side" id="select_year" style="width: 100%;">
-                    <option selected disabled value="non_year">{% block year %}Year{% endblock %}</option>
-                </select>
-            </div>
-            <div class="form-group col-xs-4">
-                <select class="form-control form-select padding_select_side" id="select_month" style="width: 100%">
-                    <option selected disabled value="non_month">{% block month %}Month{% endblock %}</option>
-                </select>
-            </div>
-            <div class="form-group col-xs-4">
-                <select class="form-control form-select padding_select_side" id="select_day" style="width: 100%">
-                    <option selected disabled value="non_day">{% block day %}Day{% endblock %}</option>
-                </select>
-            </div>
-        </form>
+            <form class="form-inline text-center">
+                <div class="form-group col-xs-4">
+                    <select class="form-control form-select padding_select_side" id="select_year" style="width: 100%;">
+                        <option selected disabled value="non_year">{% block year %}Year{% endblock %}</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-4">
+                    <select class="form-control form-select padding_select_side" id="select_month" style="width: 100%">
+                        <option selected disabled value="non_month">{% block month %}Month{% endblock %}</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-4">
+                    <select class="form-control form-select padding_select_side" id="select_day" style="width: 100%">
+                        <option selected disabled value="non_day">{% block day %}Day{% endblock %}</option>
+                    </select>
+                </div>
+            </form>
         </div>
     </div>
 
     <div class="row">
         {% block buttons_day %}
-        {% include 'snippet/buttons/_buttons_day_eng.html' %}
+            {% include 'snippet/buttons/_buttons_day_eng.html' %}
         {% endblock %}
         <div class="btn_padder"></div>
         <div class="btn_padder"></div>
@@ -122,27 +107,28 @@
 
     <div class="row">
         <div class="col-sm-offset-3 col-sm-6">
-        <form class="form-inline text-center" >
-            <div class="form-group col-xs-6">
-                <select class="form-control form-select" id="select_lang" style="width: 100%">
-                    <option selected disabled value="non_lang">{% block language %}Language{% endblock %}</option>
-                    <option value="ara">‏العربية‏</option>
-                    <option value="chi">中文</option>
-                    <option value="eng">English</option>
-                    <option value="por">Português</option>
-                    <option value="spa">Español</option>
-                </select>
-            </div>
-            <div class="col-xs-6">
-                <div class="text-center">
-                        <a type="button" class="fa btn_saju width_100percent" id="btn_lang" href="" style="margin-top: 0px;">
-                        {% block select_language %}
-                        choose
-                        {% endblock %}
-                        </a>
+            <form class="form-inline text-center">
+                <div class="form-group col-xs-6">
+                    <select class="form-control form-select" id="select_lang" style="width: 100%">
+                        <option selected disabled value="non_lang">{% block language %}Language{% endblock %}</option>
+                        <option value="ara">‏العربية‏</option>
+                        <option value="chi">中文</option>
+                        <option value="eng">English</option>
+                        <option value="por">Português</option>
+                        <option value="spa">Español</option>
+                    </select>
                 </div>
-            </div>
-        </form>
+                <div class="col-xs-6">
+                    <div class="text-center">
+                        <a type="button" class="fa btn_saju width_100percent" id="btn_lang" href=""
+                           style="margin-top: 0px;">
+                            {% block select_language %}
+                                choose
+                            {% endblock %}
+                        </a>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <div class="row">
@@ -157,60 +143,60 @@
     <!--여기서부턴 정사각형 목록-->
 
     <!--row 당 2개씩 -->
-{% block posts %}
+    {% block posts %}
 
-    <div class="row">
-        <!--이건 더미 정사각형-->
-        {% if posts %}
-            {% if posts|length < 10 %}
-                {% for post in posts %}
+        <div class="row">
+            <!--이건 더미 정사각형-->
+            {% if posts %}
+                {% if posts|length < 10 %}
+                    {% for post in posts %}
+                        <div class="col-sm-6 padding_side_5">
+                            {% include 'snippet/square_list/_square_list_eng.html' %}
+                        </div>
+                    {% endfor %}
+                    <!--adsense 버전-->
                     <div class="col-sm-6 padding_side_5">
-                        {% include 'snippet/square_list/_square_list_eng.html' %}
+                        {% include 'ad/_ad_square_list.html' %}
                     </div>
-                {% endfor %}
-                <!--adsense 버전-->
-                <div class="col-sm-6 padding_side_5">
-                    {% include 'ad/_ad_square_list.html' %}
-                </div>
-                <!--adsense 버전-->
-                <div class="col-sm-6 padding_side_5">
-                    {% include 'ad/_ad_square_list.html' %}
-                </div>
-            {% else %}
-                {% for post in posts %}
-                    {% if forloop.counter0 == 2 %}
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/square_list/_square_list_eng.html' %}
-                        </div>
-                        <!--adsense 버전-->
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'ad/_ad_square_list.html' %}
-                        </div>
-                    {% elif forloop.counter0 == 6 %}
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/square_list/_square_list_eng.html' %}
-                        </div>
-                        <!--adsense 버전-->
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'ad/_ad_square_list.html' %}
-                        </div>
-                    {% else %}
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/square_list/_square_list_eng.html' %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                    <!--adsense 버전-->
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'ad/_ad_square_list.html' %}
+                    </div>
+                {% else %}
+                    {% for post in posts %}
+                        {% if forloop.counter0 == 2 %}
+                            <div class="col-sm-6 padding_side_5">
+                                {% include 'snippet/square_list/_square_list_eng.html' %}
+                            </div>
+                            <!--adsense 버전-->
+                            <div class="col-sm-6 padding_side_5">
+                                {% include 'ad/_ad_square_list.html' %}
+                            </div>
+                        {% elif forloop.counter0 == 6 %}
+                            <div class="col-sm-6 padding_side_5">
+                                {% include 'snippet/square_list/_square_list_eng.html' %}
+                            </div>
+                            <!--adsense 버전-->
+                            <div class="col-sm-6 padding_side_5">
+                                {% include 'ad/_ad_square_list.html' %}
+                            </div>
+                        {% else %}
+                            <div class="col-sm-6 padding_side_5">
+                                {% include 'snippet/square_list/_square_list_eng.html' %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             {% endif %}
-        {% endif %}
-    </div>
-{% endblock %}
+        </div>
+    {% endblock %}
     <!-- more btn -->
 
     <div class="row">
         <div class="col-xs-12 text-center">
-                <a class="fa btn_saju btn_today_or_other" href="{% url 'post:list' lang=lang page='1' %}">
-                    {% block more_posts %}more posts{% endblock %}
-                </a>
+            <a class="fa btn_saju btn_today_or_other" href="{% url 'post:list' lang=lang page='1' %}">
+                {% block more_posts %}more posts{% endblock %}
+            </a>
         </div>
     </div>
     <div class="row">
@@ -219,11 +205,11 @@
     </div>
     <div class="row">
         <div class="col-xs-12 text-center">
-                <a class="fa btn_saju btn_today_or_other" href="{% url 'celebrity:list' lang=lang page='1' %}">
+            <a class="fa btn_saju btn_today_or_other" href="{% url 'celebrity:list' lang=lang page='1' %}">
                 {% block more_celebrities %}
-                more celebrities
+                    more celebrities
                 {% endblock %}
-               </a>
+            </a>
         </div>
     </div>
     <div class="row">
@@ -231,7 +217,8 @@
     </div>
     <div class="row">
         <div class="col-xs-12 text-center">
-            <a href="{% url 'website:about' lang=lang %}"><p class="h3 about_saju">{% block about %}about{% endblock %} Saju</p></a>
+            <a href="{% url 'website:about' lang=lang %}"><p class="h3 about_saju">{% block about %}about{% endblock %}
+                Saju</p></a>
         </div>
     </div>
     <div class="row">
@@ -241,23 +228,35 @@
 </div>
 
 {% block choose_phrase %}
-    <div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="Please would you choose your birthday?"></div>
-    <div class="mobile_display_none desktop_display_none" id="phrase_language" data-sj="Please set your language."></div>
+    <div class="mobile_display_none desktop_display_none" id="phrase_birthday"
+         data-sj="Please would you choose your birthday?"></div>
+    <div class="mobile_display_none desktop_display_none" id="phrase_language"
+         data-sj="Please set your language."></div>
 {% endblock %}
 
-    <div class="mobile_display_none desktop_display_none" id="url_day" data-sj="{% url 'website:day' lang=lang %}"></div>
+<div class="mobile_display_none desktop_display_none" id="url_day" data-sj="{% url 'website:day' lang=lang %}"></div>
 
-    <div class="mobile_display_none desktop_display_none" id="url_day_ara" data-sj="{% url 'website:day' lang='ara' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_day_chi" data-sj="{% url 'website:day' lang='chi' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_day_eng" data-sj="{% url 'website:day' lang='eng' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_day_por" data-sj="{% url 'website:day' lang='por' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_day_spa" data-sj="{% url 'website:day' lang='spa' %}"></div>
+<div class="mobile_display_none desktop_display_none" id="url_day_ara"
+     data-sj="{% url 'website:day' lang='ara' %}"></div>
+<div class="mobile_display_none desktop_display_none" id="url_day_chi"
+     data-sj="{% url 'website:day' lang='chi' %}"></div>
+<div class="mobile_display_none desktop_display_none" id="url_day_eng"
+     data-sj="{% url 'website:day' lang='eng' %}"></div>
+<div class="mobile_display_none desktop_display_none" id="url_day_por"
+     data-sj="{% url 'website:day' lang='por' %}"></div>
+<div class="mobile_display_none desktop_display_none" id="url_day_spa"
+     data-sj="{% url 'website:day' lang='spa' %}"></div>
 
-    <div class="mobile_display_none desktop_display_none" id="url_ara" data-sj="{% url 'website:main_lang' lang='ara' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_chi" data-sj="{% url 'website:main_lang' lang='chi' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_eng" data-sj="{% url 'website:main_lang' lang='eng' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_por" data-sj="{% url 'website:main_lang' lang='por' %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="url_spa" data-sj="{% url 'website:main_lang' lang='spa' %}"></div>
+<div class="mobile_display_none desktop_display_none" id="url_ara"
+     data-sj="{% url 'website:main_lang' lang='ara' %}"></div>
+<div class="mobile_display_none desktop_display_none" id="url_chi"
+     data-sj="{% url 'website:main_lang' lang='chi' %}"></div>
+<div class="mobile_display_none desktop_display_none" id="url_eng"
+     data-sj="{% url 'website:main_lang' lang='eng' %}"></div>
+<div class="mobile_display_none desktop_display_none" id="url_por"
+     data-sj="{% url 'website:main_lang' lang='por' %}"></div>
+<div class="mobile_display_none desktop_display_none" id="url_spa"
+     data-sj="{% url 'website:main_lang' lang='spa' %}"></div>
 
 {% include 'snippet/others/bootstrap_tester.html' %}
 </body>

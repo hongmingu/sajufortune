@@ -1,6 +1,38 @@
 {% extends 'celebrity/day/celeb_day_eng.html' %}
-{% block title %}Title{% endblock %}
+{% block lang_code %}
+    <html lang="es">
+{% endblock %}
+{% block title %}SajuFortune - {{ celeb.celebrityspanish.name }} @{{ target.year }}-{{ target.month }}-
+    {{ target.day }}{% endblock %}
+{% block meta %}
+    <meta name="keywords"
+          content="saju, sajufortune, fortune, horoscope, astrology, celebrity, {{ celeb.celebrityspanish.name }}"/>
+    <meta name="author" content="SajuFortune"/>
+    <meta name="title" content="SajuFortune -{{ celeb.celebrityspanish.name }}"/>
+    <meta name="description"
+          content="{{ celeb.celebrityspanish.name }} @{{ target.year }}-{{ target.month }}-{{ target.day }}"/>
 
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="SajuFortune -{{ celeb.celebrityspanish.name }}"/>
+    <meta property="og:site_name" content="SajuFortune"/>
+    <meta property="og:description"
+          content="{{ celeb.celebrityspanish.name }} @{{ target.year }}-{{ target.month }}-{{ target.day }}"/>
+
+    {% if post.photo %}
+        <meta property="og:image" content="{{ celeb.photo.url }}"/>
+        <meta name="twitter:image" content="{{ celeb.photo.url }}">
+    {% else %}
+        <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+        <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+    {% endif %}
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@SajuFortune"/>
+    <meta name="twitter:creator" content="@SajuFortune">
+
+    <meta property="fb:app_id" content="2043859895827697"/>
+{% endblock %}
 {% block photo_and_name %}
     {% include 'snippet/celeb/photo_and_name/_celeb_photo_and_name_spa.html' %}
 {% endblock %}
@@ -15,7 +47,7 @@
 
 {% block who_s %}
     <p class="h3 list_text">
-    {{ celeb.celebrityspanish.name }} ..
+        {{ celeb.celebrityspanish.name }} ..
     </p>
 {% endblock %}
 

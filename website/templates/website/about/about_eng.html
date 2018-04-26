@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% block lang_code %}
-<html lang="en">
+    <html lang="en">
 {% endblock %}
 <head>
     <meta charset="UTF-8">
@@ -9,12 +9,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     {% include 'snippet/others/header_static.html' %}
+    {% include 'snippet/others/favicon.html' %}
 
     {% load static from staticfiles %}
     <script src="{% static 'js/buttons_adding_text.js' %}"></script>
     <script src="{% static 'js/birthday.js' %}"></script>
     <script src="{% static 'js/day_buttons_links_about.js' %}"></script>
+    {% block meta %}
+        <meta name="keywords"
+              content="saju, sajufortune, fortune, horoscope, astrology, celebrity, about, description, explanation"/>
+        <meta name="author" content="SajuFortune"/>
+        <meta name="title" content="SajuFortune"/>
+        <meta name="description" content="Check your fortune. Or check the fortunes of celebrities."/>
 
+        <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="SajuFortune"/>
+        <meta property="og:site_name" content="SajuFortune"/>
+        <meta property="og:description" content="Check your fortune. Or check the fortunes of celebrities."/>
+        <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@SajuFortune"/>
+        <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+        <meta name="twitter:creator" content="@SajuFortune">
+
+        <meta property="fb:app_id" content="2043859895827697"/>
+    {% endblock %}
 </head>
 
 <body>
@@ -44,7 +65,8 @@
                         </p>
                         <br>
                         <p class="h4">
-                            {% block saju_detail %}Saju is an Oriental fortune. It is similar to a tarot card or horoscope. Based on birthdays.{% endblock %}
+                            {% block saju_detail %}Saju is an Oriental fortune. It is similar to a tarot card or
+                                horoscope. Based on birthdays.{% endblock %}
                         </p>
                         <br>
                     </div>
@@ -53,13 +75,15 @@
             </div>
             <div class="col-xs-12">
                 <p>
-                    <span class="fa fa-facebook" style="size: 30px; width: 10em"> Facebook</span><a href="https://www.facebook.com/sajufortune"><span class="h4"> https://www.facebook.com/sajufortune</span></a>
+                    <span class="fa fa-facebook" style="size: 30px; width: 10em"> Facebook</span><a
+                        href="https://www.facebook.com/sajufortune"><span class="h4"> https://www.facebook.com/sajufortune</span></a>
                 </p>
             </div>
             <br>
             <div class="col-xs-12">
                 <p>
-                    <span class="fa fa-twitter" style="size: 30px; width: 10em;"> Twitter</span><a href="https://www.facebook.com/sajufortune"><span class="h4"> https://www.facebook.com/sajufortune</span></a>
+                    <span class="fa fa-twitter" style="size: 30px; width: 10em;"> Twitter</span><a
+                        href="https://www.facebook.com/sajufortune"><span class="h4"> https://www.facebook.com/sajufortune</span></a>
                 </p>
             </div>
         </div>
@@ -78,7 +102,7 @@
                 <div class="center-block">
                     <div class="text-center">
                         <p class="birthday_selecting_text h3">
-                        {% block birthday_selecting %}Birthday Selecting{% endblock %}
+                            {% block birthday_selecting %}Birthday Selecting{% endblock %}
                         </p>
                     </div>
                 </div>
@@ -93,23 +117,23 @@
     </div>
     <div class="row">
         <div class="col-sm-offset-3 col-sm-6">
-        <form class="form-inline text-center" >
-            <div class="form-group col-xs-4">
-                <select class="form-control form-select padding_select_side" id="select_year" style="width: 100%;">
-                    <option selected disabled value="non_year">{% block year %}Year{% endblock %}</option>
-                </select>
-            </div>
-            <div class="form-group col-xs-4">
-                <select class="form-control form-select padding_select_side" id="select_month" style="width: 100%">
-                    <option selected disabled value="non_month">{% block month %}Month{% endblock %}</option>
-                </select>
-            </div>
-            <div class="form-group col-xs-4">
-                <select class="form-control form-select padding_select_side" id="select_day" style="width: 100%">
-                    <option selected disabled value="non_day">{% block day %}Day{% endblock %}</option>
-                </select>
-            </div>
-        </form>
+            <form class="form-inline text-center">
+                <div class="form-group col-xs-4">
+                    <select class="form-control form-select padding_select_side" id="select_year" style="width: 100%;">
+                        <option selected disabled value="non_year">{% block year %}Year{% endblock %}</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-4">
+                    <select class="form-control form-select padding_select_side" id="select_month" style="width: 100%">
+                        <option selected disabled value="non_month">{% block month %}Month{% endblock %}</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-4">
+                    <select class="form-control form-select padding_select_side" id="select_day" style="width: 100%">
+                        <option selected disabled value="non_day">{% block day %}Day{% endblock %}</option>
+                    </select>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -148,7 +172,8 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="text-center">
-                <a href="{% url 'website:main_lang' lang=lang %}"><p class="sajufortune_text">{% block back_to_main %}Back To Main{% endblock %}</p></a>
+                <a href="{% url 'website:main_lang' lang=lang %}"><p class="sajufortune_text">{% block back_to_main %}
+                    Back To Main{% endblock %}</p></a>
 
             </div>
         </div>
@@ -163,10 +188,11 @@
 </div>
 
 {% block choose_phrase %}
-    <div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="Please would you choose your birthday?"></div>
+    <div class="mobile_display_none desktop_display_none" id="phrase_birthday"
+         data-sj="Please would you choose your birthday?"></div>
 {% endblock %}
 
-    <div class="mobile_display_none desktop_display_none" id="url_day" data-sj="{% url 'website:day' lang=lang %}"></div>
+<div class="mobile_display_none desktop_display_none" id="url_day" data-sj="{% url 'website:day' lang=lang %}"></div>
 
 {% include 'snippet/others/bootstrap_tester.html' %}
 

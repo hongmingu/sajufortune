@@ -1,8 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+{% block lang_code %}
+    <html lang="en">
+{% endblock %}
 <head>
-    <title>{% block title %}SajuFortune {{ post.postinfoenglish.title }}{% endblock %}</title>
+    <title>{% block title %}SajuFortune {{ post.postenglish.title }}{% endblock %}</title>
     {% include 'snippet/others/header_static.html' %}
+    {% include 'snippet/others/favicon.html' %}
+
+    {% block meta %}
+        <meta name="keywords"
+              content="saju, sajufortune, fortune, horoscope, astrology, celebrity, {{ post.celebrity.celebrityenglish.name }}"/>
+        <meta name="author" content="SajuFortune"/>
+        <meta name="title" content="SajuFortune"/>
+        <meta name="description" content="{{ post.postenglish.title }}"/>
+
+        <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="SajuFortune"/>
+        <meta property="og:site_name" content="SajuFortune"/>
+        <meta property="og:description" content="{{ post.postenglish.title }}"/>
+        {% if post.photo %}
+            <meta property="og:image" content="{{ post.photo.url }}"/>
+            <meta name="twitter:image" content="{{ post.photo.url }}">
+        {% else %}
+            <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+            <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+        {% endif %}
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@SajuFortune"/>
+        <meta name="twitter:creator" content="@SajuFortune">
+
+        <meta property="fb:app_id" content="2043859895827697"/>
+    {% endblock %}
 </head>
 <style>
 </style>
@@ -28,40 +58,40 @@
     </div>
 
 
-{% block post_info %}
-    {% if post %}
+    {% block post_info %}
+        {% if post %}
 
-    <div class="row">
-        <!--이건 더미 정사각형-->
+            <div class="row">
+                <!--이건 더미 정사각형-->
 
-        <div class="center-block square_list_wrapper">
-            <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
-            {% if post.photo %}
-                <img class="img_350_250" src="{{ post.photo.url }}">
-            {% else %}
-                <div class="text-center">
-                    <div class="fa btn_saju img_350_250">
-                        Sorry, No Image
+                <div class="center-block square_list_wrapper">
+                    <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
+                    {% if post.photo %}
+                        <img class="img_350_250" src="{{ post.photo.url }}">
+                    {% else %}
+                        <div class="text-center">
+                            <div class="fa btn_saju img_350_250">
+                                Sorry, No Image
+                            </div>
+                        </div>
+                    {% endif %}
+                    <!-- text -->
+                    <div class="text-center">
+                        <p class="h2 list_text">
+                            {{ post.celebrity.celebrityenglish.name }}</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="h3 list_text">
+                            {{ post.postenglish.title }}</p>
                     </div>
                 </div>
-            {% endif %}
-            <!-- text -->
-            <div class="text-center">
-                <p class="h2 list_text">
-                {{ post.celebrity.celebrityenglish.name }}</p>
             </div>
-            <div class="text-center">
-                <p class="h3 list_text">
-                {{ post.postenglish.title }}</p>
-            </div>
-        </div>
-    </div>
 
-    <div class="row">
-        {% include 'snippet/day/detail/_day_detail_eng.html' %}
-    </div>
-{% endif %}
-{% endblock %}
+            <div class="row">
+                {% include 'snippet/day/detail/_day_detail_eng.html' %}
+            </div>
+        {% endif %}
+    {% endblock %}
 
 
     <!-- more btn -->
@@ -96,19 +126,21 @@
                             <a class="fa btn_saju width_100percent"
                                href="{% url 'post:detail' lang=lang num=post.get_next_by_created.pk %}">
                         {% endif %}
-                        <span class="glyphicon glyphicon glyphicon-chevron-left"></span>
+                    <span class="glyphicon glyphicon glyphicon-chevron-left"></span>
                     </a>
-                {% else %}
-                {% endif %}
+                    {% else %}
+                    {% endif %}
                 </div>
             </div>
             <div class="col-xs-4">
                 <div class="text-center">
-                {% if request.GET.f %}
-                    <a type="button" class="fa btn_saju width_80percent" href="{% url 'post:list' lang=lang page=request.GET.f %}">
-                {% else %}
-                    <a type="button" class="fa btn_saju width_80percent" href="{% url 'post:list' lang=lang page='1' %}">
-                {% endif %}
+                    {% if request.GET.f %}
+                        <a type="button" class="fa btn_saju width_80percent"
+                           href="{% url 'post:list' lang=lang page=request.GET.f %}">
+                    {% else %}
+                        <a type="button" class="fa btn_saju width_80percent"
+                           href="{% url 'post:list' lang=lang page='1' %}">
+                    {% endif %}
                     {% block go_list %}
                         <span class="glyphicon glyphicon glyphicon glyphicon-th-large"></span><span>  list</span>
                     {% endblock %}
@@ -126,10 +158,10 @@
                             <a class="fa btn_saju width_100percent"
                                href="{% url 'post:detail' lang=lang num=post.get_previous_by_created.pk %}">
                         {% endif %}
-                        <span class="glyphicon glyphicon glyphicon-chevron-right"></span>
+                    <span class="glyphicon glyphicon glyphicon-chevron-right"></span>
                     </a>
-                {% else %}
-                {% endif %}
+                    {% else %}
+                    {% endif %}
                 </div>
 
             </div>
@@ -138,7 +170,7 @@
     </div>
     <div class="row">
         {% block more_about %}
-        {% include 'snippet/celeb/more_about/_celeb_more_about_eng.html' %}
+            {% include 'snippet/celeb/more_about/_celeb_more_about_eng.html' %}
         {% endblock %}
     </div>
     <div class="row">

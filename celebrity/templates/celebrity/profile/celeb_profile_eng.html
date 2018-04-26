@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 {% block lang_code %}
-<html lang="en">
+    <html lang="en">
 {% endblock %}
 <head>
-    <title>{% block title %}Title{% endblock %}</title>
+    <title>{% block title %}SajuFortune -{{ celeb.celebrityenglish.name }}{% endblock %}</title>
 
     {% include 'snippet/others/header_static.html' %}
+    {% include 'snippet/others/favicon.html' %}
 
     {% load static from staticfiles %}
     <script src="{% static 'js/buttons_adding_text.js' %}"></script>
     <script src="{% static 'js/day_buttons_links_for_celeb.js' %}"></script>
+    {% block meta %}
+        <meta name="keywords"
+              content="saju, sajufortune, fortune, horoscope, astrology, celebrity, {{ celeb.celebrityenglish.name }}"/>
+        <meta name="author" content="SajuFortune"/>
+        <meta name="title" content="SajuFortune"/>
+        <meta name="description" content="{{ celeb.celebrityenglish.name }}"/>
 
+        <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="SajuFortune"/>
+        <meta property="og:site_name" content="SajuFortune"/>
+        <meta property="og:description" content="{{ celeb.celebrityenglish.name }}"/>
+
+        {% if post.photo %}
+            <meta property="og:image" content="{{ celeb.photo.url }}"/>
+            <meta name="twitter:image" content="{{ celeb.photo.url }}">
+        {% else %}
+            <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+            <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+        {% endif %}
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@SajuFortune"/>
+        <meta name="twitter:creator" content="@SajuFortune">
+
+        <meta property="fb:app_id" content="2043859895827697"/>
+    {% endblock %}
 </head>
 
 <body>
@@ -34,93 +61,93 @@
         <div class="btn_padder"></div>
     </div>
     <!--여기서부턴 정사각형 목록-->
-{% block celeb %}
-{% if celeb %}
-    <div class="row">
-        <!--이건 더미 정사각형-->
-        <div class="center-block square_list_wrapper">
-            <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
-            {% if celeb.photo %}
-                <img class="img_350_250" src="{{ celeb.photo.url }}">
-            {% else %}
-                <div class="text-center">
-                    <div class="fa btn_saju img_350_250">
-                        Sorry, No Image
-                    </div>
-                </div>
-            {% endif %}
-            <!-- text -->
-            {% block info %}
-            <div class="text-center">
-                <p class="h3 list_text">
-                {{ celeb.celebrityenglish.name }}</p>
-            </div>
-            <div class="text-center">
-                <p class="h4 list_text">
-                Birth: {{ celeb.birthday_year }}-{{ celeb.birthday_month }}-{{ celeb.birthday_day }}</p>
-            </div>
-            {% endblock %}
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-12 padding_side_5">
-            {% include 'ad/_ad_square_detail.html' %}
-        </div>
-    </div>
-{% endif %}
-    <!--row 당 2개씩 -->
-    <div class="row">
-        <div class="btn_padder"></div>
-        <div class="btn_padder"></div>
-    </div>
-{% endblock %}
-
-{% block posts %}
-    {% if posts %}
-    <div class="row">
-        <div class="media">
-            <div class="media-body text-center">
-                <p class="media-heading h4">
-                    {{ celeb.celebrityenglish.name }} Posts
-                </p>
-
-            </div>
-            <br>
-        </div>
-        <!--이건 더미 정사각형-->
-            {% for post in posts %}
-                {% if posts|length == 1 %}
-                    <div class="col-sm-6 col-sm-offset-3 padding_side_5">
-                        {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
-                    </div>
-                {% else %}
-                    {% if forloop.counter0 == 2 %}
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
-                        </div>
-                        <!--adsense 버전-->
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'ad/_ad_square_list.html' %}
-                        </div>
-                    {% elif forloop.counter0 == 6 %}
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
-                        </div>
-                        <!--adsense 버전-->
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'ad/_ad_square_list.html' %}
-                        </div>
+    {% block celeb %}
+        {% if celeb %}
+            <div class="row">
+                <!--이건 더미 정사각형-->
+                <div class="center-block square_list_wrapper">
+                    <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
+                    {% if celeb.photo %}
+                        <img class="img_350_250" src="{{ celeb.photo.url }}">
                     {% else %}
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
+                        <div class="text-center">
+                            <div class="fa btn_saju img_350_250">
+                                Sorry, No Image
+                            </div>
                         </div>
                     {% endif %}
-                {% endif %}
-            {% endfor %}
-    </div>
-    {% endif %}
-{% endblock %}
+                    <!-- text -->
+                    {% block info %}
+                        <div class="text-center">
+                            <p class="h3 list_text">
+                                {{ celeb.celebrityenglish.name }}</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="h4 list_text">
+                                Birth: {{ celeb.birthday_year }}-{{ celeb.birthday_month }}-{{ celeb.birthday_day }}</p>
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 padding_side_5">
+                    {% include 'ad/_ad_square_detail.html' %}
+                </div>
+            </div>
+        {% endif %}
+        <!--row 당 2개씩 -->
+        <div class="row">
+            <div class="btn_padder"></div>
+            <div class="btn_padder"></div>
+        </div>
+    {% endblock %}
+
+    {% block posts %}
+        {% if posts %}
+            <div class="row">
+                <div class="media">
+                    <div class="media-body text-center">
+                        <p class="media-heading h4">
+                            {{ celeb.celebrityenglish.name }} Posts
+                        </p>
+
+                    </div>
+                    <br>
+                </div>
+                <!--이건 더미 정사각형-->
+                {% for post in posts %}
+                    {% if posts|length == 1 %}
+                        <div class="col-sm-6 col-sm-offset-3 padding_side_5">
+                            {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
+                        </div>
+                    {% else %}
+                        {% if forloop.counter0 == 2 %}
+                            <div class="col-sm-6 padding_side_5">
+                                {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
+                            </div>
+                            <!--adsense 버전-->
+                            <div class="col-sm-6 padding_side_5">
+                                {% include 'ad/_ad_square_list.html' %}
+                            </div>
+                        {% elif forloop.counter0 == 6 %}
+                            <div class="col-sm-6 padding_side_5">
+                                {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
+                            </div>
+                            <!--adsense 버전-->
+                            <div class="col-sm-6 padding_side_5">
+                                {% include 'ad/_ad_square_list.html' %}
+                            </div>
+                        {% else %}
+                            <div class="col-sm-6 padding_side_5">
+                                {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endblock %}
 
     <!-- Share btn -->
     <div class="row">
@@ -136,7 +163,7 @@
     </div>
 
 
-<div class="row">
+    <div class="row">
         <div class="col-sm-offset-3 col-sm-6">
 
             <div class="col-xs-4">
@@ -149,19 +176,21 @@
                             <a class="fa btn_saju width_100percent"
                                href="{% url 'celebrity:profile' lang=lang num=celeb.get_next_by_created.pk %}">
                         {% endif %}
-                        <span class="glyphicon glyphicon glyphicon-chevron-left"></span>
+                    <span class="glyphicon glyphicon glyphicon-chevron-left"></span>
                     </a>
-                {% else %}
-                {% endif %}
+                    {% else %}
+                    {% endif %}
                 </div>
             </div>
             <div class="col-xs-4">
                 <div class="text-center">
-                {% if request.GET.f %}
-                    <a type="button" class="fa btn_saju width_80percent" href="{% url 'celebrity:list' lang=lang page=request.GET.f %}">
-                {% else %}
-                    <a type="button" class="fa btn_saju width_80percent" href="{% url 'celebrity:list' lang=lang page='1' %}">
-                {% endif %}
+                    {% if request.GET.f %}
+                        <a type="button" class="fa btn_saju width_80percent"
+                           href="{% url 'celebrity:list' lang=lang page=request.GET.f %}">
+                    {% else %}
+                        <a type="button" class="fa btn_saju width_80percent"
+                           href="{% url 'celebrity:list' lang=lang page='1' %}">
+                    {% endif %}
                     {% block go_list %}
                         <span class="glyphicon glyphicon glyphicon glyphicon-th-large"></span><span>  list</span>
                     {% endblock %}
@@ -179,10 +208,10 @@
                             <a class="fa btn_saju width_100percent"
                                href="{% url 'celebrity:profile' lang=lang num=celeb.get_previous_by_created.pk %}">
                         {% endif %}
-                        <span class="glyphicon glyphicon glyphicon-chevron-right"></span>
+                    <span class="glyphicon glyphicon glyphicon-chevron-right"></span>
                     </a>
-                {% else %}
-                {% endif %}
+                    {% else %}
+                    {% endif %}
                 </div>
 
             </div>
@@ -194,13 +223,13 @@
         <div class="center-block">
             <div class="text-center">
                 {% block who_s %}
-                <p class="h3 list_text">
-                {{ celeb.celebrityenglish.name }} '..</p>
+                    <p class="h3 list_text">
+                        {{ celeb.celebrityenglish.name }} '..</p>
                 {% endblock %}
             </div>
         </div>
         {% block buttons_day %}
-        {% include 'snippet/buttons/_buttons_day_eng.html' %}
+            {% include 'snippet/buttons/_buttons_day_eng.html' %}
         {% endblock %}
 
     </div>
@@ -247,12 +276,13 @@
 </div>
 
 
-    <div class="mobile_display_none desktop_display_none" id="data_by" data-sj="{{ birthday.year }}"></div>
-    <div class="mobile_display_none desktop_display_none" id="data_bm" data-sj="{{ birthday.month }}"></div>
-    <div class="mobile_display_none desktop_display_none" id="data_bd" data-sj="{{ birthday.day }}"></div>
+<div class="mobile_display_none desktop_display_none" id="data_by" data-sj="{{ birthday.year }}"></div>
+<div class="mobile_display_none desktop_display_none" id="data_bm" data-sj="{{ birthday.month }}"></div>
+<div class="mobile_display_none desktop_display_none" id="data_bd" data-sj="{{ birthday.day }}"></div>
 
-    <div class="mobile_display_none desktop_display_none" id="data_celeb_pk" data-sj="{{ celeb.pk }}"></div>
-    <div class="mobile_display_none desktop_display_none" id="data_celeb_day_url" data-sj="{% url 'celebrity:day' lang=lang num=celeb.pk %}"></div>
+<div class="mobile_display_none desktop_display_none" id="data_celeb_pk" data-sj="{{ celeb.pk }}"></div>
+<div class="mobile_display_none desktop_display_none" id="data_celeb_day_url"
+     data-sj="{% url 'celebrity:day' lang=lang num=celeb.pk %}"></div>
 
 
 </body>

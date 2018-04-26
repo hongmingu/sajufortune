@@ -1,50 +1,74 @@
 {% extends 'celebrity/list/celeb_text_list_eng.html' %}
 {% block lang_code %}
-<html lang="pt">
+    <html lang="pt">
 {% endblock %}
-        
-{% block title %}Sajufortune lista de celebridades sin foto {{ celebs.number }}{% endblock %}
 
-{% block about_saju %}
+{% block title %}Sajufortune lista de celebridades sem foto{% endblock %}
+{% block meta %}
+    <meta name="keywords" content="saju, sajufortune, fortune, horoscope, astrology, celebrity"/>
+    <meta name="author" content="SajuFortune"/>
+    <meta name="title" content="SajuFortune"/>
+
+    <meta name="description" content="lista de celebridades sem foto"/>
+
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="SajuFortune"/>
+    <meta property="og:site_name" content="SajuFortune"/>
+    <meta property="og:description" content="lista de celebridades sem foto"/>
+
+    <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+    <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@SajuFortune"/>
+    <meta name="twitter:creator" content="@SajuFortune">
+
+    <meta property="fb:app_id" content="2043859895827697"/>
+{% endblock %}
+{% block back %}
     {% if request.GET.f %}
-    <a href="{% url 'celebrity:list' lang=lang page=request.GET.f %}"><p class="h3 about_saju">de volta à lista com foto</p>
+        <a href="{% url 'celebrity:list' lang=lang page=request.GET.f %}">
+        <p class="h3 about_saju">de volta à lista com foto</p>
     {% else %}
-    <a href="{% url 'celebrity:list' lang=lang page='1' %}"><p class="h3 about_saju">de volta à lista com foto</p>
+        <a href="{% url 'celebrity:list' lang=lang page='1' %}"><p class="h3 about_saju">de volta à lista com foto</p>
     {% endif %}
-    </a>
+</a>
 {% endblock %}
 
 
 {% block celebs %}
-<!--이건 더미 정사각형-->
-<div class="media">
+    <!--이건 더미 정사각형-->
+    <div class="media">
 
-    {% if celebs %}
-        {% for celeb in celebs %}
-            {% if forloop.counter0|divisibleby:'40' %}
-                <div class="col-xs-12 padding_side_5">
-                    <br>
-                    {% include 'ad/_ad_square_detail.html' %}
-                    <br>
-                </div>
+        {% if celebs %}
+            {% for celeb in celebs %}
+                {% if forloop.counter0|divisibleby:'40' %}
+                    <div class="col-xs-12 padding_side_5">
+                        <br>
+                        {% include 'ad/_ad_square_detail.html' %}
+                        <br>
+                    </div>
 
-                <div class="col-sm-4">
-                    <div class="media-body">
-                        <p class="media-heading h3 text-center">
-                            <a class="inherit_color" href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">{{ celeb.celebrityportuguese.name }}</a>
-                        </p>
+                    <div class="col-sm-4">
+                        <div class="media-body">
+                            <p class="media-heading h3 text-center">
+                                <a class="inherit_color"
+                                   href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">{{ celeb.celebrityportuguese.name }}</a>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            {% else %}
-                <div class="col-sm-4">
-                    <div class="media-body">
-                        <p class="media-heading h3 text-center">
-                            <a class="inherit_color" href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">{{ celeb.celebrityportuguese.name }}</a>
-                        </p>
+                {% else %}
+                    <div class="col-sm-4">
+                        <div class="media-body">
+                            <p class="media-heading h3 text-center">
+                                <a class="inherit_color"
+                                   href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">{{ celeb.celebrityportuguese.name }}</a>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-</div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}

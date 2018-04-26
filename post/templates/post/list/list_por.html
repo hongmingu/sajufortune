@@ -1,48 +1,70 @@
 {% extends 'post/list/list_eng.html' %}
+{% block lang_code %}
+    <html lang="pt">
+{% endblock %}
 
-{% block title %}Title{% endblock %}
+{% block title %}SajuFortune - {{ posts.num }}{% endblock %}
+{% block meta %}
+    <meta name="keywords" content="saju, sajufortune, fortune, horoscope, astrology, celebrity"/>
+    <meta name="author" content="SajuFortune"/>
+    <meta name="title" content="SajuFortune"/>
+    <meta name="description" content="Verifique sua fortuna. Ou verifique a sorte das celebridades."/>
 
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="SajuFortune"/>
+    <meta property="og:site_name" content="SajuFortune"/>
+    <meta property="og:description" content="Verifique sua fortuna. Ou verifique a sorte das celebridades."/>
+    <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@SajuFortune"/>
+    <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+    <meta name="twitter:creator" content="@SajuFortune">
+
+    <meta property="fb:app_id" content="2043859895827697"/>
+{% endblock %}
 {% block posts %}
-        {% if posts %}
-            {% if posts|length < 10 %}
-                {% for post in posts %}
+    {% if posts %}
+        {% if posts|length < 10 %}
+            {% for post in posts %}
+                <div class="col-sm-6 padding_side_5">
+                    {% include 'snippet/square_list/_square_list_por.html' %}
+                </div>
+            {% endfor %}
+            <!--adsense 버전-->
+            <div class="col-sm-6 padding_side_5">
+                {% include 'ad/_ad_square_list.html' %}
+            </div>
+            <!--adsense 버전-->
+            <div class="col-sm-6 padding_side_5">
+                {% include 'ad/_ad_square_list.html' %}
+            </div>
+        {% else %}
+            {% for post in posts %}
+                {% if forloop.counter0 == 2 %}
                     <div class="col-sm-6 padding_side_5">
                         {% include 'snippet/square_list/_square_list_por.html' %}
                     </div>
-                {% endfor %}
-                <!--adsense 버전-->
-                <div class="col-sm-6 padding_side_5">
-                    {% include 'ad/_ad_square_list.html' %}
-                </div>
-                <!--adsense 버전-->
-                <div class="col-sm-6 padding_side_5">
-                    {% include 'ad/_ad_square_list.html' %}
-                </div>
-            {% else %}
-                {% for post in posts %}
-                    {% if forloop.counter0 == 2 %}
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/square_list/_square_list_por.html' %}
-                        </div>
-                        <!--adsense 버전-->
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'ad/_ad_square_list.html' %}
-                        </div>
-                    {% elif forloop.counter0 == 6 %}
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/square_list/_square_list_por.html' %}
-                        </div>
-                        <!--adsense 버전-->
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'ad/_ad_square_list.html' %}
-                        </div>
-                    {% else %}
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/square_list/_square_list_por.html' %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
+                    <!--adsense 버전-->
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'ad/_ad_square_list.html' %}
+                    </div>
+                {% elif forloop.counter0 == 6 %}
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'snippet/square_list/_square_list_por.html' %}
+                    </div>
+                    <!--adsense 버전-->
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'ad/_ad_square_list.html' %}
+                    </div>
+                {% else %}
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'snippet/square_list/_square_list_por.html' %}
+                    </div>
+                {% endif %}
+            {% endfor %}
         {% endif %}
-    
+    {% endif %}
+
 {% endblock %}

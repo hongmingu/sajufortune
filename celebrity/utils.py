@@ -6,7 +6,7 @@ def switch_profile_celeb_template_by_lang(lang):
         'eng': 'celebrity/profile/celeb_profile_eng.html',
         'por': 'celebrity/profile/celeb_profile_por.html',
         'spa': 'celebrity/profile/celeb_profile_spa.html',
-    }.get(lang, 'celebrity/profile/celeb_profile_spa.html')
+    }.get(lang, 'celebrity/profile/celeb_profile_eng.html')
 
 
 def switch_celeb_text_list_template_by_lang(lang):
@@ -16,7 +16,7 @@ def switch_celeb_text_list_template_by_lang(lang):
         'eng': 'celebrity/list/celeb_text_list_eng.html',
         'por': 'celebrity/list/celeb_text_list_por.html',
         'spa': 'celebrity/list/celeb_text_list_spa.html',
-    }.get(lang, 'celebrity/list/celeb_text_list_spa.html')
+    }.get(lang, 'celebrity/list/celeb_text_list_eng.html')
 
 
 def switch_celeb_list_template_by_lang(lang):

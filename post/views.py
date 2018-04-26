@@ -1,50 +1,11 @@
-from .models import *
-from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate, logout
-from django.urls import reverse
-from django.shortcuts import redirect, render
-from django.template import RequestContext
-from django.http import Http404
-
-from django.shortcuts import get_object_or_404, get_list_or_404
-from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.core.mail import EmailMessage
-import re
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth import get_user_model
-from django.conf import settings
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
-from django.template.loader import render_to_string
-from django.db import IntegrityError
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_text
-from django.utils.http import urlsafe_base64_decode
-from django.utils.timezone import now, timedelta
-import json
-import urllib
-from urllib.parse import urlparse
-import ssl
-from bs4 import BeautifulSoup
-from django.core.mail import send_mail
-from django.http import HttpResponse, HttpResponseNotFound, Http404
-from django.db.models import Q
+from django.core.cache import cache
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
 
 from post.models import Post
 from post.utils import *
 from website.utils import *
 
-from dayemotion.models import DayEmotion
-from daylove.models import DayLove
-from daymoney.models import DayMoney
-from dayrelationships.models import DayRelationships
-from dayoverall.models import DayOverall
-from daywork.models import DayWork
-
-from django.core.cache import cache
 
 # Create your views here.
 
@@ -162,7 +123,7 @@ def post_detail(request, num, lang):
                                                 'money': cache_list[3],
                                                 'relationships': cache_list[4],
                                                 'work': cache_list[5], })
-            cache.set('post_detail' + lang + num, render_post_detail,timeout=60*15)
+            cache.set('post_detail' + lang + num, render_post_detail, timeout=60*15)
             return render_post_detail
 
     else:

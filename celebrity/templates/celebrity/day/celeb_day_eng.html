@@ -1,14 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+{% block lang_code %}
+    <html lang="en">
+{% endblock %}
 <head>
 
-    <title>{% block title %}Title{% endblock %}</title>
+    <title>{% block title %}SajuFortune - {{ celeb.celebrityenglish.name }} @{{ target.year }}-{{ target.month }}-
+        {{ target.day }}{% endblock %}</title>
 
     {% include 'snippet/others/header_static.html' %}
+    {% include 'snippet/others/favicon.html' %}
 
     {% load static from staticfiles %}
     <script src="{% static 'js/buttons_adding_text_with_removing.js' %}"></script>
     <script src="{% static 'js/day_buttons_links_for_celeb.js' %}"></script>
+
+    {% block meta %}
+        <meta name="keywords"
+              content="saju, sajufortune, fortune, horoscope, astrology, celebrity, {{ celeb.celebrityenglish.name }}"/>
+        <meta name="author" content="SajuFortune"/>
+        <meta name="title" content="SajuFortune -{{ celeb.celebrityenglish.name }}"/>
+        <meta name="description"
+              content="{{ celeb.celebrityenglish.name }} @{{ target.year }}-{{ target.month }}-{{ target.day }}"/>
+
+        <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="SajuFortune -{{ celeb.celebrityenglish.name }}"/>
+        <meta property="og:site_name" content="SajuFortune"/>
+        <meta property="og:description"
+              content="{{ celeb.celebrityenglish.name }} @{{ target.year }}-{{ target.month }}-{{ target.day }}"/>
+
+        {% if post.photo %}
+            <meta property="og:image" content="{{ celeb.photo.url }}"/>
+            <meta name="twitter:image" content="{{ celeb.photo.url }}">
+        {% else %}
+            <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+            <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+        {% endif %}
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@SajuFortune"/>
+        <meta name="twitter:creator" content="@SajuFortune">
+
+        <meta property="fb:app_id" content="2043859895827697"/>
+    {% endblock %}
 
 </head>
 
@@ -33,23 +67,23 @@
         <div class="btn_padder"></div>
     </div>
     <!--여기서부턴 정사각형 목록-->
-{% if celeb %}
-    <div class="row">
-    {% block photo_and_name %}
-        {% include 'snippet/celeb/photo_and_name/_celeb_photo_and_name_eng.html' %}
-    {% endblock %}
+    {% if celeb %}
+        <div class="row">
+            {% block photo_and_name %}
+                {% include 'snippet/celeb/photo_and_name/_celeb_photo_and_name_eng.html' %}
+            {% endblock %}
 
-    </div>
-
-    <div class="row">
-        <div class="btn_padder"></div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 padding_side_5">
-            {% include 'ad/_ad_square_detail.html' %}
         </div>
-    </div>
-{% endif %}
+
+        <div class="row">
+            <div class="btn_padder"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 padding_side_5">
+                {% include 'ad/_ad_square_detail.html' %}
+            </div>
+        </div>
+    {% endif %}
 
     <!--row 당 2개씩 -->
     <div class="row">
@@ -59,16 +93,16 @@
 
     <div class="row">
         {% block detail %}
-        {% include 'snippet/day/detail/_day_detail_eng.html' %}
+            {% include 'snippet/day/detail/_day_detail_eng.html' %}
         {% endblock %}
     </div>
 
     {% if posts %}
-    <div class="row">
-    {% block other_posts %}
-        {% include 'snippet/celeb/other_posts/_celeb_other_posts_eng.html' %}
-    {% endblock %}
-    </div>
+        <div class="row">
+            {% block other_posts %}
+                {% include 'snippet/celeb/other_posts/_celeb_other_posts_eng.html' %}
+            {% endblock %}
+        </div>
     {% endif %}
 
     <!-- Share btn -->
@@ -87,14 +121,14 @@
         <div class="center-block">
             <div class="text-center">
                 {% block who_s %}
-                <p class="h3 list_text">
-                {{ celeb.celebrityenglish.name }} 's..</p>
+                    <p class="h3 list_text">
+                        {{ celeb.celebrityenglish.name }} 's..</p>
                 {% endblock %}
             </div>
         </div>
-    {% block buttons %}
-        {% include 'snippet/buttons/_buttons_day_eng.html' %}
-    {% endblock %}
+        {% block buttons %}
+            {% include 'snippet/buttons/_buttons_day_eng.html' %}
+        {% endblock %}
     </div>
     <div class="row">
         <div class="btn_padder"></div>
@@ -143,16 +177,17 @@
     </div>
 </div>
 
-    <div class="mobile_display_none desktop_display_none" id="url_day" data-sj="{% url 'website:day' lang=lang %}"></div>
+<div class="mobile_display_none desktop_display_none" id="url_day" data-sj="{% url 'website:day' lang=lang %}"></div>
 
-    <div class="mobile_display_none desktop_display_none" id="data_by" data-sj="{{ birthday.year }}"></div>
-    <div class="mobile_display_none desktop_display_none" id="data_bm" data-sj="{{ birthday.month }}"></div>
-    <div class="mobile_display_2none desktop_display_none" id="data_bd" data-sj="{{ birthday.day }}"></div>
+<div class="mobile_display_none desktop_display_none" id="data_by" data-sj="{{ birthday.year }}"></div>
+<div class="mobile_display_none desktop_display_none" id="data_bm" data-sj="{{ birthday.month }}"></div>
+<div class="mobile_display_2none desktop_display_none" id="data_bd" data-sj="{{ birthday.day }}"></div>
 
-    <div class="mobile_display_none desktop_display_none" id="data_td" data-sj="{{ target.day }}"></div>
+<div class="mobile_display_none desktop_display_none" id="data_td" data-sj="{{ target.day }}"></div>
 
-    <div class="mobile_display_none desktop_display_none" id="data_celeb_pk" data-sj="{{ celeb.pk }}"></div>
-    <div class="mobile_display_none desktop_display_none" id="data_celeb_day_url" data-sj="{% url 'celebrity:day' lang=lang num=celeb.pk %}"></div>
+<div class="mobile_display_none desktop_display_none" id="data_celeb_pk" data-sj="{{ celeb.pk }}"></div>
+<div class="mobile_display_none desktop_display_none" id="data_celeb_day_url"
+     data-sj="{% url 'celebrity:day' lang=lang num=celeb.pk %}"></div>
 
 {% include 'snippet/others/bootstrap_tester.html' %}
 

@@ -1,58 +1,85 @@
 {% extends 'post/detail/detail_eng.html' %}
+{% block lang_code %}
+    <html lang="ar">
+{% endblock %}
 {% block title %}SajuFortune {{ post.postarabic.title }}{% endblock %}
+{% block meta %}
+    <meta name="keywords"
+          content="saju, sajufortune, fortune, horoscope, astrology, celebrity, {{ post.celebrity.celebrityarabic.name }}"/>
+    <meta name="author" content="SajuFortune"/>
+    <meta name="title" content="SajuFortune"/>
+    <meta name="description" content="{{ post.postarabic.title }}"/>
 
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="SajuFortune"/>
+    <meta property="og:site_name" content="SajuFortune"/>
+    <meta property="og:description" content="{{ post.postarabic.title }}"/>
+    {% if post.photo %}
+        <meta property="og:image" content="{{ post.photo.url }}"/>
+        <meta name="twitter:image" content="{{ post.photo.url }}">
+    {% else %}
+        <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+        <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+    {% endif %}
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@SajuFortune"/>
+    <meta name="twitter:creator" content="@SajuFortune">
+
+    <meta property="fb:app_id" content="2043859895827697"/>
+{% endblock %}
 
 {% block post_info %}
-{% if post %}
+    {% if post %}
 
-<div class="row">
-    <!--이건 더미 정사각형-->
+        <div class="row">
+            <!--이건 더미 정사각형-->
 
-    <div class="center-block square_list_wrapper">
-        <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
-        {% if post.photo %}
-            <img class="img_350_250" src="{{ post.photo.url }}">
-        {% else %}
-            <div class="text-center">
-                <div class="fa btn_saju img_350_250">
-                    Sorry, No Image
+            <div class="center-block square_list_wrapper">
+                <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
+                {% if post.photo %}
+                    <img class="img_350_250" src="{{ post.photo.url }}">
+                {% else %}
+                    <div class="text-center">
+                        <div class="fa btn_saju img_350_250">
+                            Sorry, No Image
+                        </div>
+                    </div>
+                {% endif %}
+                <!-- text -->
+                <div class="text-center">
+                    <p class="h3 list_text">
+                        {{ post.celebrity.celebrityarabic.name }}</p>
+                </div>
+                <div class="text-center">
+                    <p class="h5 list_text">
+                        {{ post.postarabic.title }}</p>
                 </div>
             </div>
-        {% endif %}
-        <!-- text -->
-        <div class="text-center">
-            <p class="h3 list_text">
-            {{ post.celebrity.celebrityarabic.name }}</p>
         </div>
-        <div class="text-center">
-            <p class="h5 list_text">
-            {{ post.postarabic.title }}</p>
-        </div>
-    </div>
-</div>
 
-<div class="row">
-    {% include 'snippet/day/detail/_day_detail_ara.html' %}
-</div>
-{% endif %}
+        <div class="row">
+            {% include 'snippet/day/detail/_day_detail_ara.html' %}
+        </div>
+    {% endif %}
 {% endblock %}
 
 
-                {% block go_list %}
-                    <span class="glyphicon glyphicon glyphicon glyphicon-th-large"></span><span>  قائمة  </span>
-                {% endblock %}
-    {% block more_about %}
+{% block go_list %}
+    <span class="glyphicon glyphicon glyphicon glyphicon-th-large"></span><span>  قائمة  </span>
+{% endblock %}
+{% block more_about %}
     {% include 'snippet/celeb/more_about/_celeb_more_about_ara.html' %}
-    {% endblock %}
+{% endblock %}
 
-            {% block other_posts_text %}
-                <p class="h3 about_saju">وظائف اخرى</p>
-            {% endblock %}
+{% block other_posts_text %}
+    <p class="h3 about_saju">وظائف اخرى</p>
+{% endblock %}
 
-        {% block other_posts_objects %}
-            {% for post in other_posts %}
-                <div class="col-sm-6 padding_side_5">
-                    {% include 'snippet/square_list/_square_list_ara.html' %}
-                </div>
-            {% endfor %}
-        {% endblock %}
+{% block other_posts_objects %}
+    {% for post in other_posts %}
+        <div class="col-sm-6 padding_side_5">
+            {% include 'snippet/square_list/_square_list_ara.html' %}
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,44 +1,70 @@
 {% extends 'celebrity/profile/celeb_profile_eng.html' %}
 {% block lang_code %}
-<html lang="es">
+    <html lang="es">
 {% endblock %}
-{% block title %}SajuFortune - {{ celeb.celebrityspanish.name }}{% endblock %}
+{% block title %}SajuFortune -{{ celeb.celebrityspanish.name }}{% endblock %}
+{% block meta %}
+    <meta name="keywords"
+          content="saju, sajufortune, fortune, horoscope, astrology, celebrity, {{ celeb.celebrityspanish.name }}"/>
+    <meta name="author" content="SajuFortune"/>
+    <meta name="title" content="SajuFortune"/>
+    <meta name="description" content="{{ celeb.celebrityspanish.name }}"/>
 
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="SajuFortune"/>
+    <meta property="og:site_name" content="SajuFortune"/>
+    <meta property="og:description" content="{{ celeb.celebrityspanish.name }}"/>
+
+    {% if post.photo %}
+        <meta property="og:image" content="{{ celeb.photo.url }}"/>
+        <meta name="twitter:image" content="{{ celeb.photo.url }}">
+    {% else %}
+        <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+        <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+    {% endif %}
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@SajuFortune"/>
+    <meta name="twitter:creator" content="@SajuFortune">
+
+    <meta property="fb:app_id" content="2043859895827697"/>
+{% endblock %}
 {% block celeb %}
-{% if celeb %}
-    <div class="row">
-        <!--이건 더미 정사각형-->
-        <div class="center-block square_list_wrapper">
-            <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
-            {% if celeb.photo %}
-                <img class="img_350_250" src="{{ celeb.photo.url }}">
-            {% else %}
-                <div class="text-center">
-                    <div class="fa btn_saju img_350_250">
-                        Sorry, No Image
+    {% if celeb %}
+        <div class="row">
+            <!--이건 더미 정사각형-->
+            <div class="center-block square_list_wrapper">
+                <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
+                {% if celeb.photo %}
+                    <img class="img_350_250" src="{{ celeb.photo.url }}">
+                {% else %}
+                    <div class="text-center">
+                        <div class="fa btn_saju img_350_250">
+                            Sorry, No Image
+                        </div>
                     </div>
-                </div>
-            {% endif %}
-            <!-- text -->
-            {% block info %}
-            <div class="text-center">
-                <p class="h3 list_text">
-                {{ celeb.celebrityspanish.name }}</p>
+                {% endif %}
+                <!-- text -->
+                {% block info %}
+                    <div class="text-center">
+                        <p class="h3 list_text">
+                            {{ celeb.celebrityspanish.name }}</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="h4 list_text">
+                            cumpleaños: {{ celeb.birthday_year }}-{{ celeb.birthday_month }}-{{ celeb.birthday_day }}</p>
+                    </div>
+                {% endblock %}
             </div>
-            <div class="text-center">
-                <p class="h4 list_text">
-                cumpleaños: {{ celeb.birthday_year }}-{{ celeb.birthday_month }}-{{ celeb.birthday_day }}</p>
-            </div>
-            {% endblock %}
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-xs-12 padding_side_5">
-            {% include 'ad/_ad_square_detail.html' %}
+        <div class="row">
+            <div class="col-xs-12 padding_side_5">
+                {% include 'ad/_ad_square_detail.html' %}
+            </div>
         </div>
-    </div>
-{% endif %}
+    {% endif %}
     <!--row 당 2개씩 -->
     <div class="row">
         <div class="btn_padder"></div>
@@ -48,17 +74,17 @@
 
 {% block posts %}
     {% if posts %}
-    <div class="row">
-        <div class="media">
-            <div class="media-body text-center">
-                <p class="media-heading h4">
-                    {{ celeb.celebrityspanish.name }} publicaciones
-                </p>
+        <div class="row">
+            <div class="media">
+                <div class="media-body text-center">
+                    <p class="media-heading h4">
+                        {{ celeb.celebrityspanish.name }} publicaciones
+                    </p>
 
+                </div>
+                <br>
             </div>
-            <br>
-        </div>
-        <!--이건 더미 정사각형-->
+            <!--이건 더미 정사각형-->
             {% for post in posts %}
                 {% if posts|length == 1 %}
                     <div class="col-sm-6 col-sm-offset-3 padding_side_5">
@@ -88,7 +114,7 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
-    </div>
+        </div>
     {% endif %}
 {% endblock %}
 
@@ -97,12 +123,12 @@
 {% endblock %}
 
 {% block who_s %}
-<p class="h3 list_text">
-{{ celeb.celebrityspanish.name }} ..</p>
+    <p class="h3 list_text">
+        {{ celeb.celebrityspanish.name }} ..</p>
 {% endblock %}
 
 {% block buttons_day %}
-{% include 'snippet/buttons/_buttons_day_spa.html' %}
+    {% include 'snippet/buttons/_buttons_day_spa.html' %}
 {% endblock %}
 {% block more_posts %}
     <a class="fa btn_saju btn_today_or_other" href="{% url 'post:list' lang=lang page='1' %}">más publicaciones</a>

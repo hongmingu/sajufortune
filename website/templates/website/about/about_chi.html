@@ -1,10 +1,29 @@
 {% extends 'website/about/about_eng.html' %}
 {% block lang_code %}
-<html lang="zh-cn">
+    <html lang="zh-cn">
 {% endblock %}
 
 {% block title %}SajuFortune - 关于{% endblock %}
+{% block meta %}
+    <meta name="keywords" content="saju, sajufortune, fortune, horoscope, astrology, celebrity, about, explanation"/>
+    <meta name="author" content="SajuFortune"/>
+    <meta name="title" content="SajuFortune"/>
+    <meta name="description" content="检查你的财富。或者检查名人的命运。"/>
 
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="SajuFortune"/>
+    <meta property="og:site_name" content="SajuFortune"/>
+    <meta property="og:description" content="检查你的财富。或者检查名人的命运。"/>
+    <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@SajuFortune"/>
+    <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+    <meta name="twitter:creator" content="@SajuFortune">
+
+    <meta property="fb:app_id" content="2043859895827697"/>
+{% endblock %}
 
 {% block what_is_saju %}什么是Saju？{% endblock %}
 {% block saju_detail %}Saju是东方的财富。它类似于塔罗牌或占星术。基于生日。{% endblock %}
@@ -22,6 +41,6 @@
 {% block back_to_main %}返回主页{% endblock %}
 
 {% block choose_phrase %}
-<div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="请你选择你的生日？"></div>
+    <div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="请你选择你的生日？"></div>
 {% endblock %}
 

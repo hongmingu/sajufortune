@@ -1,9 +1,28 @@
 {% extends 'website/main/main_eng.html' %}
 {% block lang_code %}
-<html lang="es">
+    <html lang="es">
 {% endblock %}
-{% block title %}SajuFortune - Verifique sua fortuna. Ou verifique a sorte das celebridades.{% endblock %}
+{% block title %}SajuFortune - Mira tu fortuna O revisa la suerte de las celebridades.{% endblock %}
+{% block meta %}
+    <meta name="keywords" content="saju, sajufortune, fortune, horoscope, astrology, celebrity"/>
+    <meta name="author" content="SajuFortune"/>
+    <meta name="title" content="SajuFortune"/>
+    <meta name="description" content="Mira tu fortuna O revisa la suerte de las celebridades."/>
 
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="SajuFortune"/>
+    <meta property="og:site_name" content="SajuFortune"/>
+    <meta property="og:description" content="Mira tu fortuna O revisa la suerte de las celebridades."/>
+    <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@SajuFortune"/>
+    <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+    <meta name="twitter:creator" content="@SajuFortune">
+
+    <meta property="fb:app_id" content="2043859895827697"/>
+{% endblock %}
 {% block birthday_selecting %}Seleção de Aniversário{% endblock %}
 {% block year %}Año{% endblock %}
 {% block month %}Mes{% endblock %}
@@ -68,6 +87,8 @@
 {% block about %}acerca de{% endblock %}
 
 {% block choose_phrase %}
-<div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="Por favor, ¿elegirías tu cumpleaños?"></div>
-<div class="mobile_display_none desktop_display_none" id="phrase_language" data-sj="Por favor, establece tu idioma."></div>
+    <div class="mobile_display_none desktop_display_none" id="phrase_birthday"
+         data-sj="Por favor, ¿elegirías tu cumpleaños?"></div>
+    <div class="mobile_display_none desktop_display_none" id="phrase_language"
+         data-sj="Por favor, establece tu idioma."></div>
 {% endblock %}

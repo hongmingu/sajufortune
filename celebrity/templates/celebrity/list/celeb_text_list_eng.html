@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 {% block lang_code %}
-<html lang="en">
+    <html lang="en">
 {% endblock %}
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Title{% endblock %}</title>
+    <title>{% block title %}SajuFortune celebrities list without photo{% endblock %}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     {% include 'snippet/others/header_static.html' %}
+    {% include 'snippet/others/favicon.html' %}
+
+
+    {% block meta %}
+        <meta name="keywords" content="saju, sajufortune, fortune, horoscope, astrology, celebrity"/>
+        <meta name="author" content="SajuFortune"/>
+        <meta name="title" content="SajuFortune"/>
+
+        <meta name="description" content="celebrities list without photo"/>
+
+        <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="SajuFortune"/>
+        <meta property="og:site_name" content="SajuFortune"/>
+        <meta property="og:description" content="celebrities list without photo"/>
+
+        <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+        <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@SajuFortune"/>
+        <meta name="twitter:creator" content="@SajuFortune">
+
+        <meta property="fb:app_id" content="2043859895827697"/>
+    {% endblock %}
 </head>
 <style>
 
@@ -21,7 +46,7 @@
             <div class="text-center">
                 <p class="sajufortune_text">
                     <a class="text_hover_none ban_bs_text_link" href="{% url 'website:main_lang' lang=lang %}">
-                    SajuFortune
+                        SajuFortune
                     </a>
                 </p>
             </div>
@@ -41,13 +66,15 @@
 
     <div class="row">
         <div class="col-xs-12 text-center">
-            {% block about_saju %}
+            {% block back %}
                 {% if request.GET.f %}
-                <a href="{% url 'celebrity:list' lang=lang page=request.GET.f %}"><p class="h3 about_saju">back to list with photo</p>
+                    <a href="{% url 'celebrity:list' lang=lang page=request.GET.f %}">
+                    <p class="h3 about_saju">back to list with photo</p>
                 {% else %}
-                <a href="{% url 'celebrity:list' lang=lang page='1' %}"><p class="h3 about_saju">back to list with photo</p>
+                    <a href="{% url 'celebrity:list' lang=lang page='1' %}">
+                    <p class="h3 about_saju">back to list with photo</p>
                 {% endif %}
-                </a>
+            </a>
             {% endblock %}
         </div>
     </div>
@@ -60,38 +87,40 @@
 
     <div class="row">
         {% block celebs %}
-        <!--이건 더미 정사각형-->
-        <div class="media">
+            <!--이건 더미 정사각형-->
+            <div class="media">
 
-            {% if celebs %}
-                {% for celeb in celebs %}
-                    {% if forloop.counter0|divisibleby:'40' %}
-                        <div class="col-xs-12 padding_side_5">
-                            <br>
-                            {% include 'ad/_ad_square_detail.html' %}
-                            <br>
-                        </div>
+                {% if celebs %}
+                    {% for celeb in celebs %}
+                        {% if forloop.counter0|divisibleby:'40' %}
+                            <div class="col-xs-12 padding_side_5">
+                                <br>
+                                {% include 'ad/_ad_square_detail.html' %}
+                                <br>
+                            </div>
 
-                        <div class="col-sm-4">
-                            <div class="media-body">
-                                <p class="media-heading h3 text-center">
-                                    <a class="inherit_color" href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">{{ celeb.celebrityenglish.name }}</a>
-                                </p>
+                            <div class="col-sm-4">
+                                <div class="media-body">
+                                    <p class="media-heading h3 text-center">
+                                        <a class="inherit_color"
+                                           href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">{{ celeb.celebrityenglish.name }}</a>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    {% else %}
-                        <div class="col-sm-4">
-                            <div class="media-body">
-                                <p class="media-heading h3 text-center">
-                                    <a class="inherit_color" href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">{{ celeb.celebrityenglish.name }}</a>
-                                </p>
+                        {% else %}
+                            <div class="col-sm-4">
+                                <div class="media-body">
+                                    <p class="media-heading h3 text-center">
+                                        <a class="inherit_color"
+                                           href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">{{ celeb.celebrityenglish.name }}</a>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-        </div>
-    {% endblock %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endblock %}
     </div>
 
 

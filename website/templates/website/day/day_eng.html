@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 {% block lang_code %}
-<html lang="en">
+    <html lang="en">
 {% endblock %}
 <head>
-    <title>SajuFortune {{ birthday.year }}-{{ birthday.month }}-{{ birthday.day }} & {{ target.year }}-{{ target.month }}-{{ target.day }}</title>
+    <title>SajuFortune {{ birthday.year }}-{{ birthday.month }}-{{ birthday.day }}
+        @{{ target.year }}-{{ target.month }}-{{ target.day }}</title>
     {% include 'snippet/others/header_static.html' %}
 
+    {% include 'snippet/others/favicon.html' %}
 
     {% load static from staticfiles %}
     <script src="{% static 'js/buttons_adding_text_with_removing.js' %}"></script>
     <script src="{% static 'js/day_buttons_links_day.js' %}"></script>
 
+    {% block meta %}
+        <meta name="keywords"
+              content="saju, sajufortune, fortune, horoscope, astrology, celebrity, {{ birthday.year }}-{{ birthday.month }}-{{ birthday.day }}, {{ target.year }}-{{ target.month }}-{{ target.day }}"/>
+        <meta name="author" content="SajuFortune"/>
+        <meta name="title"
+              content="SajuFortune {{ birthday.year }}-{{ birthday.month }}-{{ birthday.day }}@{{ target.year }}-{{ target.month }}-{{ target.day }}"/>
+        <meta name="description"
+              content="{{ birthday.year }}-{{ birthday.month }}-{{ birthday.day }}@{{ target.year }}-{{ target.month }}-{{ target.day }}"/>
+
+        <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title"
+              content="SajuFortune {{ birthday.year }}-{{ birthday.month }}-{{ birthday.day }}@{{ target.year }}-{{ target.month }}-{{ target.day }}"/>
+        <meta property="og:site_name" content="SajuFortune"/>
+        <meta property="og:description"
+              content="{{ birthday.year }}-{{ birthday.month }}-{{ birthday.day }}@{{ target.year }}-{{ target.month }}-{{ target.day }}"/>
+        <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@SajuFortune"/>
+        <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+        <meta name="twitter:creator" content="@SajuFortune">
+
+        <meta property="fb:app_id" content="2043859895827697"/>
+    {% endblock %}
 </head>
 <body>
 <div class="container">
@@ -82,73 +109,75 @@
             <div class="col-xs-offset-4 col-xs-4">
                 <div class="text-center">
                     <a type="button" class="fa btn_saju width_80percent" href="{% url 'website:main_lang' lang=lang %}">
-                    {% block go_to_main %}
-                        go to main
-                    {% endblock %}
+                        {% block go_to_main %}
+                            go to main
+                        {% endblock %}
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
-{% block what_about_others %}
-    {% if other_celebs %}
-        <div class="row">
-            <div class="btn_padder"></div>
-            <div class="col-xs-12 text-center">
-                <p class="h3 about_saju">What about theirs</p>
+    {% block what_about_others %}
+        {% if other_celebs %}
+            <div class="row">
+                <div class="btn_padder"></div>
+                <div class="col-xs-12 text-center">
+                    <p class="h3 about_saju">What about theirs</p>
+                </div>
+                <div class="btn_padder"></div>
+
             </div>
-            <div class="btn_padder"></div>
-
-        </div>
-        <div class="row">
-            <!--이건 더미 정사각형-->
-            {% block other_posts_objects %}
-                {% for celeb in other_celebs %}
-                    <div class="col-sm-6 padding_side_5">
-                        <div class="center-block square_list_wrapper">
-                            <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
-                            {% if request.GET.ty and request.GET.tm and request.GET.ty %}
-                                <a href="{% url 'celebrity:day' lang=lang num=celeb.pk %}?ty={{ request.GET.ty }}&tm={{ request.GET.tm }}&td={{ request.GET.td }}">
-                            {% else %}
-                                <a href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">
-                            {% endif %}
-                            {% if celeb.photo %}
-                                <img class="img_350_250 img_clickable" src="{{ celeb.photo.url }}">
-                            {% else %}
-                                <div class="text-center">
-                                    <div class="fa btn_saju img_clickable img_350_250">
-                                        Sorry, No Image
-                                    </div>
-                                </div>
-                            {% endif %}
-                            </a>
-                            <div class="btn_padder"></div>
-                            <!-- text -->
-                            <div class="text-center">
+            <div class="row">
+                <!--이건 더미 정사각형-->
+                {% block other_posts_objects %}
+                    {% for celeb in other_celebs %}
+                        <div class="col-sm-6 padding_side_5">
+                            <div class="center-block square_list_wrapper">
+                                <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
                                 {% if request.GET.ty and request.GET.tm and request.GET.ty %}
-
-                                <p class="inherit_color">
-                                    <a class="ban_bs_text_link list_text h3" href="{% url 'celebrity:day' lang=lang num=celeb.pk %}?ty={{ request.GET.ty }}&tm={{ request.GET.tm }}&td={{ request.GET.td }}">
-                                        {{ celeb.celebrityenglish.name }}
-                                    </a>
-                                </p>
+                                    <a href="{% url 'celebrity:day' lang=lang num=celeb.pk %}?ty={{ request.GET.ty }}&tm={{ request.GET.tm }}&td={{ request.GET.td }}">
                                 {% else %}
-                                <p class="inherit_color">
-                                    <a class="ban_bs_text_link list_text h3" href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">
-                                        {{ celeb.celebrityenglish.name }}
-                                    </a>
-                                </p>
+                                    <a href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">
                                 {% endif %}
+                                {% if celeb.photo %}
+                                    <img class="img_350_250 img_clickable" src="{{ celeb.photo.url }}">
+                                {% else %}
+                                    <div class="text-center">
+                                        <div class="fa btn_saju img_clickable img_350_250">
+                                            Sorry, No Image
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                </a>
+                                <div class="btn_padder"></div>
+                                <!-- text -->
+                                <div class="text-center">
+                                    {% if request.GET.ty and request.GET.tm and request.GET.ty %}
 
+                                        <p class="inherit_color">
+                                            <a class="ban_bs_text_link list_text h3"
+                                               href="{% url 'celebrity:day' lang=lang num=celeb.pk %}?ty={{ request.GET.ty }}&tm={{ request.GET.tm }}&td={{ request.GET.td }}">
+                                                {{ celeb.celebrityenglish.name }}
+                                            </a>
+                                        </p>
+                                    {% else %}
+                                        <p class="inherit_color">
+                                            <a class="ban_bs_text_link list_text h3"
+                                               href="{% url 'celebrity:profile' lang=lang num=celeb.pk %}">
+                                                {{ celeb.celebrityenglish.name }}
+                                            </a>
+                                        </p>
+                                    {% endif %}
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-            {% endblock %}
-        </div>
-    {% endif %}
-{% endblock %}
+                    {% endfor %}
+                {% endblock %}
+            </div>
+        {% endif %}
+    {% endblock %}
 
     <div class="row">
 
@@ -163,12 +192,12 @@
 
 </div>
 
-    <div class="mobile_display_none desktop_display_none" id="url_day" data-sj="{% url 'website:day' lang=lang %}"></div>
-    <div class="mobile_display_none desktop_display_none" id="data_by" data-sj-by="{{ birthday.year }}"></div>
-    <div class="mobile_display_none desktop_display_none" id="data_bm" data-sj-bm="{{ birthday.month }}"></div>
-    <div class="mobile_display_none desktop_display_none" id="data_bd" data-sj-bd="{{ birthday.day }}"></div>
+<div class="mobile_display_none desktop_display_none" id="url_day" data-sj="{% url 'website:day' lang=lang %}"></div>
+<div class="mobile_display_none desktop_display_none" id="data_by" data-sj-by="{{ birthday.year }}"></div>
+<div class="mobile_display_none desktop_display_none" id="data_bm" data-sj-bm="{{ birthday.month }}"></div>
+<div class="mobile_display_none desktop_display_none" id="data_bd" data-sj-bd="{{ birthday.day }}"></div>
 
-    <div class="mobile_display_none desktop_display_none" id="data_td" data-sj="{{ target.day }}"></div>
+<div class="mobile_display_none desktop_display_none" id="data_td" data-sj="{{ target.day }}"></div>
 {% include 'snippet/others/bootstrap_tester.html' %}
 
 </body>

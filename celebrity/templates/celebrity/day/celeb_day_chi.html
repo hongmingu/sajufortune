@@ -1,6 +1,40 @@
 {% extends 'celebrity/day/celeb_day_eng.html' %}
-{% block title %}Title{% endblock %}
+{% block lang_code %}
+    <html lang="zh-cn">
+{% endblock %}
+{% block title %}SajuFortune - {{ celeb.celebritychinese.name }} @{{ target.year }}-{{ target.month }}-
+    {{ target.day }}{% endblock %}
+{% block meta %}
+    <meta name="keywords"
+          content="saju, sajufortune, fortune, horoscope, astrology, celebrity, {{ celeb.celebrityenglish.name }}"/>
+    <meta name="author" content="SajuFortune"/>
+    <meta name="title" content="SajuFortune -{{ celeb.celebritychinese.name }}"/>
+    <meta name="description"
+          content="{{ celeb.celebritychinese.name }} @{{ target.year }}-{{ target.month }}-{{ target.day }}"/>
 
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="SajuFortune -{{ celeb.celebritychinese.name }}"/>
+    <meta property="og:site_name" content="SajuFortune"/>
+    <meta property="og:description"
+          content="{{ celeb.celebritychinese.name }} @{{ target.year }}-{{ target.month }}-{{ target.day }}"/>
+
+    {% if post.photo %}
+        <meta property="og:image" content="{{ celeb.photo.url }}"/>
+        <meta name="twitter:image" content="{{ celeb.photo.url }}">
+    {% else %}
+        <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+        <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+    {% endif %}
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@SajuFortune"/>
+    <meta name="twitter:creator" content="@SajuFortune">
+
+    <meta property="fb:app_id" content="2043859895827697"/>
+{% endblock %}
+<!--셀럽데이랑 포스트 전체 다 언어 설정하자
+그 후에 구글 광고 처리하고 테스트 한 후에 배포한다.-->
 {% block photo_and_name %}
     {% include 'snippet/celeb/photo_and_name/_celeb_photo_and_name_chi.html' %}
 {% endblock %}
@@ -15,7 +49,7 @@
 
 {% block who_s %}
     <p class="h3 list_text">
-    {{ celeb.celebritychinese.name }} ..
+        {{ celeb.celebritychinese.name }} ..
     </p>
 {% endblock %}
 

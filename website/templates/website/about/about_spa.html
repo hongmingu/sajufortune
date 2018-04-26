@@ -1,13 +1,33 @@
 {% extends 'website/about/about_eng.html' %}
 {% block lang_code %}
-<html lang="es">
+    <html lang="es">
 {% endblock %}
 
 {% block title %}SajuFortune - acerca de{% endblock %}
+{% block meta %}
+    <meta name="keywords" content="saju, sajufortune, fortune, horoscope, astrology, celebrity, about, explanation"/>
+    <meta name="author" content="SajuFortune"/>
+    <meta name="title" content="SajuFortune"/>
+    <meta name="description" content="Mira tu fortuna O revisa la suerte de las celebridades."/>
 
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="SajuFortune"/>
+    <meta property="og:site_name" content="SajuFortune"/>
+    <meta property="og:description" content="Mira tu fortuna O revisa la suerte de las celebridades."/>
+    <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@SajuFortune"/>
+    <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+    <meta name="twitter:creator" content="@SajuFortune">
+
+    <meta property="fb:app_id" content="2043859895827697"/>
+{% endblock %}
 
 {% block what_is_saju %}Qué es Saju?{% endblock %}
-{% block saju_detail %}Saju es una fortuna oriental. Es similar a una carta de tarot u horóscopo. Basado en cumpleaños{% endblock %}
+{% block saju_detail %}Saju es una fortuna oriental. Es similar a una carta de tarot u horóscopo. Basado en
+    cumpleaños{% endblock %}
 {% block birthday_selecting %}Seleção de Aniversário{% endblock %}
 {% block year %}Año{% endblock %}
 {% block month %}Mes{% endblock %}
@@ -22,6 +42,7 @@
 {% block back_to_main %}Volver al inicio de{% endblock %}
 
 {% block choose_phrase %}
-<div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="Por favor, ¿elegirías tu cumpleaños?"></div>
+    <div class="mobile_display_none desktop_display_none" id="phrase_birthday"
+         data-sj="Por favor, ¿elegirías tu cumpleaños?"></div>
 {% endblock %}
 

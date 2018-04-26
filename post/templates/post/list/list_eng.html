@@ -1,8 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+{% block lang_code %}
+    <html lang="en">
+{% endblock %}
 <head>
-    <title>{% block title %}Title{% endblock %}</title>
+    <title>{% block title %}SajuFortune - {{ posts.num }}{% endblock %}</title>
     {% include 'snippet/others/header_static.html' %}
+    {% include 'snippet/others/favicon.html' %}
+
+    {% block meta %}
+        <meta name="keywords" content="saju, sajufortune, fortune, horoscope, astrology, celebrity"/>
+        <meta name="author" content="SajuFortune"/>
+        <meta name="title" content="SajuFortune"/>
+        <meta name="description" content="Check your fortune. Or check the fortunes of celebrities."/>
+
+        <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="SajuFortune"/>
+        <meta property="og:site_name" content="SajuFortune"/>
+        <meta property="og:description" content="Check your fortune. Or check the fortunes of celebrities."/>
+        <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@SajuFortune"/>
+        <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+        <meta name="twitter:creator" content="@SajuFortune">
+
+        <meta property="fb:app_id" content="2043859895827697"/>
+    {% endblock %}
+
 </head>
 
 <body>
@@ -37,50 +62,50 @@
 
     <div class="row">
         <!--이건 더미 정사각형-->
-{% block posts %}
-        {% if posts %}
-            {% if posts|length < 10 %}
-                {% for post in posts %}
+        {% block posts %}
+            {% if posts %}
+                {% if posts|length < 10 %}
+                    {% for post in posts %}
+                        <div class="col-sm-6 padding_side_5">
+                            {% include 'snippet/square_list/_square_list_eng.html' %}
+                        </div>
+                    {% endfor %}
+                    <!--adsense 버전-->
                     <div class="col-sm-6 padding_side_5">
-                        {% include 'snippet/square_list/_square_list_eng.html' %}
+                        {% include 'ad/_ad_square_list.html' %}
                     </div>
-                {% endfor %}
-                <!--adsense 버전-->
-                <div class="col-sm-6 padding_side_5">
-                    {% include 'ad/_ad_square_list.html' %}
-                </div>
-                <!--adsense 버전-->
-                <div class="col-sm-6 padding_side_5">
-                    {% include 'ad/_ad_square_list.html' %}
-                </div>
-            {% else %}
-                {% for post in posts %}
-                    {% if forloop.counter0 == 2 %}
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/square_list/_square_list_eng.html' %}
-                        </div>
-                        <!--adsense 버전-->
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'ad/_ad_square_list.html' %}
-                        </div>
-                    {% elif forloop.counter0 == 6 %}
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/square_list/_square_list_eng.html' %}
-                        </div>
-                        <!--adsense 버전-->
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'ad/_ad_square_list.html' %}
-                        </div>
-                    {% else %}
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/square_list/_square_list_eng.html' %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                    <!--adsense 버전-->
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'ad/_ad_square_list.html' %}
+                    </div>
+                {% else %}
+                    {% for post in posts %}
+                        {% if forloop.counter0 == 2 %}
+                            <div class="col-sm-6 padding_side_5">
+                                {% include 'snippet/square_list/_square_list_eng.html' %}
+                            </div>
+                            <!--adsense 버전-->
+                            <div class="col-sm-6 padding_side_5">
+                                {% include 'ad/_ad_square_list.html' %}
+                            </div>
+                        {% elif forloop.counter0 == 6 %}
+                            <div class="col-sm-6 padding_side_5">
+                                {% include 'snippet/square_list/_square_list_eng.html' %}
+                            </div>
+                            <!--adsense 버전-->
+                            <div class="col-sm-6 padding_side_5">
+                                {% include 'ad/_ad_square_list.html' %}
+                            </div>
+                        {% else %}
+                            <div class="col-sm-6 padding_side_5">
+                                {% include 'snippet/square_list/_square_list_eng.html' %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
             {% endif %}
-        {% endif %}
 
-{% endblock %}
+        {% endblock %}
     </div>
     <!-- more btn -->
 
@@ -91,9 +116,9 @@
                     {% if posts.has_previous %}
                         <a class="fa btn_saju width_100percent"
                            href="{% url 'post:list' lang=lang page=posts.previous_page_number %}">
-                        {% block previous %}
-                            <span class="glyphicon glyphicon glyphicon-chevron-left"></span>
-                        {% endblock %}
+                            {% block previous %}
+                                <span class="glyphicon glyphicon glyphicon-chevron-left"></span>
+                            {% endblock %}
                         </a>
                     {% else %}
                     {% endif %}
@@ -111,9 +136,9 @@
                     {% if posts.has_next %}
                         <a class="fa btn_saju width_100percent"
                            href="{% url 'post:detail' lang=lang num=posts.next_page_number %}">
-                        {% block next %}
-                            <span class="glyphicon glyphicon glyphicon-chevron-right"></span>
-                        {% endblock %}
+                            {% block next %}
+                                <span class="glyphicon glyphicon glyphicon-chevron-right"></span>
+                            {% endblock %}
                         </a>
                     {% else %}
                     {% endif %}

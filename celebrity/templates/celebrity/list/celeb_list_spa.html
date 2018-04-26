@@ -1,51 +1,72 @@
 {% extends 'celebrity/list/celeb_list_eng.html' %}
 {% block lang_code %}
-<html lang="es">
+    <html lang="es">
 {% endblock %}
+{% block title %}SajuFortune Famosos -{{ celebs.number }}{% endblock %}
+{% block meta %}
+    <meta name="keywords" content="saju, sajufortune, fortune, horoscope, astrology, celebrity"/>
+    <meta name="author" content="SajuFortune"/>
+    <meta name="title" content="SajuFortune"/>
 
-        {% block title %}SajuFortune lista de celebridades{% endblock %}
+    <meta name="description" content="Famosos -{{ celebs.number }}"/>
 
-            {% block about_saju %}
-                <a href="{% url 'celebrity:list_text' lang=lang %}?f={{ celebs.number }}"><p class="h3 about_saju">lista sin foto</p></a>
-            {% endblock %}
+    <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="SajuFortune"/>
+    <meta property="og:site_name" content="SajuFortune"/>
+    <meta property="og:description" content="Famosos -{{ celebs.number }}"/>
+
+    <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
+    <meta name="twitter:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png">
+
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@SajuFortune"/>
+    <meta name="twitter:creator" content="@SajuFortune">
+
+    <meta property="fb:app_id" content="2043859895827697"/>
+{% endblock %}
+{% block list_without_photo %}
+    <a href="{% url 'celebrity:list_text' lang=lang %}?f={{ celebs.number }}"><p class="h3 about_saju">lista sin
+        foto</p></a>
+{% endblock %}
 {% block celebs %}
-        {% if celebs %}
-            {% if celebs|length < 10 %}
-                {% for celeb in celebs %}
-                    {% include 'snippet/celeb/square_list/_celeb_square_list_spa.html' %}
-                {% endfor %}
-                <!--adsense 버전-->
-                <div class="col-sm-6 padding_side_5">
-                    {% include 'ad/_ad_square_list.html' %}
-                </div>
-                <!--adsense 버전-->
-                <div class="col-sm-6 padding_side_5">
-                    {% include 'ad/_ad_square_list.html' %}
-                </div>
-            {% else %}
-                {% for celeb in celebs %}
-                    {% if forloop.counter0 == 2 %}
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/square_list/_square_list_spa.html' %}
-                        </div>
-                        <!--adsense 버전-->
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'ad/_ad_square_list.html' %}
-                        </div>
-                    {% elif forloop.counter0 == 6 %}
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/square_list/_square_list_spa.html' %}
-                        </div>
-                        <!--adsense 버전-->
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'ad/_ad_square_list.html' %}
-                        </div>
-                    {% else %}
-                        <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/square_list/_square_list_spa.html' %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
+    {% if celebs %}
+        {% if celebs|length < 10 %}
+            {% for celeb in celebs %}
+                {% include 'snippet/celeb/square_list/_celeb_square_list_spa.html' %}
+            {% endfor %}
+            <!--adsense 버전-->
+            <div class="col-sm-6 padding_side_5">
+                {% include 'ad/_ad_square_list.html' %}
+            </div>
+            <!--adsense 버전-->
+            <div class="col-sm-6 padding_side_5">
+                {% include 'ad/_ad_square_list.html' %}
+            </div>
+        {% else %}
+            {% for celeb in celebs %}
+                {% if forloop.counter0 == 2 %}
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'snippet/square_list/_square_list_spa.html' %}
+                    </div>
+                    <!--adsense 버전-->
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'ad/_ad_square_list.html' %}
+                    </div>
+                {% elif forloop.counter0 == 6 %}
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'snippet/square_list/_square_list_spa.html' %}
+                    </div>
+                    <!--adsense 버전-->
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'ad/_ad_square_list.html' %}
+                    </div>
+                {% else %}
+                    <div class="col-sm-6 padding_side_5">
+                        {% include 'snippet/square_list/_square_list_spa.html' %}
+                    </div>
+                {% endif %}
+            {% endfor %}
         {% endif %}
+    {% endif %}
 {% endblock %}

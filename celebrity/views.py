@@ -1,52 +1,14 @@
-from .models import *
-from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate, logout
-from django.urls import reverse
-from django.shortcuts import redirect, render
-from django.template import RequestContext
-from django.http import Http404
-
-from django.shortcuts import get_object_or_404, get_list_or_404
-from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.core.mail import EmailMessage
-import re
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth import get_user_model
-from django.conf import settings
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
-from django.template.loader import render_to_string
-from django.db import IntegrityError
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_text
-from django.utils.http import urlsafe_base64_decode
-from django.utils.timezone import now, timedelta
-import json
-import urllib
-from urllib.parse import urlparse
-import ssl
-from bs4 import BeautifulSoup
-from django.core.mail import send_mail
-from django.http import HttpResponse, HttpResponseNotFound, Http404
-from django.db.models import Q
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import get_object_or_404
-
-from post.models import Post
-from post.models import PostEnglish
-
-from dayemotion.models import DayEmotion
-from daylove.models import DayLove
-from daymoney.models import DayMoney
-from dayrelationships.models import DayRelationships
-from dayoverall.models import DayOverall
-from daywork.models import DayWork
-from website.utils import *
 from django.core.cache import cache
-from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models.functions import Lower
+from django.http import JsonResponse
+
 from celebrity.utils import *
+from post.models import Post
+from website.utils import *
+from .models import *
+
+
 # Create your views here.
 
 
