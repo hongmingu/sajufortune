@@ -1,7 +1,10 @@
-from django.urls import re_path
+from django.contrib.sitemaps import views as sitemap_views
+from django.urls import re_path, path
 from django.views.decorators.cache import cache_page
+from django.views.generic import TemplateView
 
 from . import views
+from website.sitemaps import sitemaps
 
 app_name = 'website'
 
@@ -16,4 +19,11 @@ urlpatterns = [
 
     re_path(r'^about/(?P<lang>ara|chi|eng|por|spa)/$', cache_page(60 * 60 * 12)(views.about), name='about'),
     re_path(r'^ping/', cache_page(60 * 60 * 24)(views.ping_test), name='ping_test'),
+
+    re_path(r'^robots\.txt$', TemplateView.as_view(template_name="snippet/others/robots.txt", content_type="text/plain"), name="robots"),
+
+    path('sitemap.xml', sitemap_views.index, {'sitemaps': sitemaps, 'sitemap_url_name': 'website:sitemaps'}),
+    path('sitemap-<section>.xml', sitemap_views.sitemap, {'sitemaps': sitemaps},
+         name='sitemaps'),
+
 ]
