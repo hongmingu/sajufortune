@@ -2,6 +2,7 @@ from django.core.cache import cache
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models.functions import Lower
 from django.http import JsonResponse
+from django.shortcuts import render
 
 from celebrity.utils import *
 from post.models import Post

@@ -33,10 +33,7 @@
     {% if post %}
 
         <div class="row">
-            <!--이건 더미 정사각형-->
-
             <div class="center-block square_list_wrapper">
-                <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
                 {% if post.photo %}
                     <img class="img_350_250" src="{{ post.photo.url }}">
                 {% else %}
@@ -46,7 +43,6 @@
                         </div>
                     </div>
                 {% endif %}
-                <!-- text -->
                 <div class="text-center">
                     <p class="h3 list_text">
                         {{ post.celebrity.celebrityarabic.name }}</p>

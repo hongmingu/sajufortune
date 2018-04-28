@@ -51,9 +51,6 @@
             {% include 'ad/_ad_banner.html' %}
         </div>
     </div>
-    <!--forloop counter를쓰자-->
-    <!--페이지는 12개불러오면 13개까지 불러와보고 12개만 보낸 후에 라스트인지 아닌지 변수를 자바스크립트로 보내서 넥스트 누를 시에 마지막페이지면 마지막페이지라고 알리는 형식
-    get 요청 파라미터로 페이지 순서 부르더라도 없는 페이지 부르면 404리다이렉트-->
 
     <div class="row">
         <div class="col-sm-offset-3 col-sm-6">
@@ -140,13 +137,9 @@
         <div class="btn_padder"></div>
         <div class="btn_padder"></div>
     </div>
-    <!--여기서부턴 정사각형 목록-->
-
-    <!--row 당 2개씩 -->
     {% block posts %}
 
         <div class="row">
-            <!--이건 더미 정사각형-->
             {% if posts %}
                 {% if posts|length < 10 %}
                     {% for post in posts %}
@@ -154,11 +147,9 @@
                             {% include 'snippet/square_list/_square_list_eng.html' %}
                         </div>
                     {% endfor %}
-                    <!--adsense 버전-->
                     <div class="col-sm-6 padding_side_5">
                         {% include 'ad/_ad_square_list.html' %}
                     </div>
-                    <!--adsense 버전-->
                     <div class="col-sm-6 padding_side_5">
                         {% include 'ad/_ad_square_list.html' %}
                     </div>
@@ -168,7 +159,6 @@
                             <div class="col-sm-6 padding_side_5">
                                 {% include 'snippet/square_list/_square_list_eng.html' %}
                             </div>
-                            <!--adsense 버전-->
                             <div class="col-sm-6 padding_side_5">
                                 {% include 'ad/_ad_square_list.html' %}
                             </div>
@@ -176,7 +166,6 @@
                             <div class="col-sm-6 padding_side_5">
                                 {% include 'snippet/square_list/_square_list_eng.html' %}
                             </div>
-                            <!--adsense 버전-->
                             <div class="col-sm-6 padding_side_5">
                                 {% include 'ad/_ad_square_list.html' %}
                             </div>
@@ -190,8 +179,6 @@
             {% endif %}
         </div>
     {% endblock %}
-    <!-- more btn -->
-
     <div class="row">
         <div class="col-xs-12 text-center">
             <a class="fa btn_saju btn_today_or_other" href="{% url 'post:list' lang=lang page='1' %}">

@@ -2,7 +2,7 @@ from django.core.cache import cache
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
 from django.http import JsonResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from celebrity.models import Celebrity
@@ -208,3 +208,4 @@ def about(request, lang):
 
 def ping_test(request):
     return HttpResponse("pong", content_type='text/plain')
+

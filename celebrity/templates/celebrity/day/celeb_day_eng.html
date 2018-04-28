@@ -59,14 +59,9 @@
             {% include 'ad/_ad_banner.html' %}
         </div>
     </div>
-    <!--forloop counter를쓰자-->
-    <!--페이지는 12개불러오면 13개까지 불러와보고 12개만 보낸 후에 라스트인지 아닌지 변수를 자바스크립트로 보내서 넥스트 누를 시에 마지막페이지면 마지막페이지라고 알리는 형식
-    get 요청 파라미터로 페이지 순서 부르더라도 없는 페이지 부르면 404리다이렉트-->
-
     <div class="row">
         <div class="btn_padder"></div>
     </div>
-    <!--여기서부턴 정사각형 목록-->
     {% if celeb %}
         <div class="row">
             {% block photo_and_name %}
@@ -85,7 +80,6 @@
         </div>
     {% endif %}
 
-    <!--row 당 2개씩 -->
     <div class="row">
         <div class="btn_padder"></div>
         <div class="btn_padder"></div>
@@ -105,7 +99,6 @@
         </div>
     {% endif %}
 
-    <!-- Share btn -->
     <div class="row">
         {% include 'snippet/others/_share_buttons.html' %}
     </div>

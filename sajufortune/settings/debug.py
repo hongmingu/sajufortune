@@ -19,6 +19,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'storages',
     'dayoverall',
     'daywork',
@@ -32,6 +34,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
 ]
 
+SITE_ID = 1
 # django-debug-toolbar
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -68,7 +71,7 @@ DATABASES = {
 }
 
 # WSGI application
-WSGI_APPLICATION = 'sajufortune.wsgi.local.application'
+WSGI_APPLICATION = 'sajufortune.wsgi.debug.application'
 
 # Static settings
 STATIC_URL = '/static/'

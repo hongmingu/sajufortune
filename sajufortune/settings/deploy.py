@@ -19,6 +19,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'storages',
     'dayoverall',
     'daywork',
@@ -31,6 +33,8 @@ INSTALLED_APPS = [
     'website',
 ]
 
+SITE_ID = 1
+# django-debug-toolbar
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -61,7 +65,7 @@ DATABASES = {
 }
 
 # WSGI application
-WSGI_APPLICATION = 'sajufortune.wsgi.local.application'
+WSGI_APPLICATION = 'sajufortune.wsgi.deploy.application'
 
 # Static settings
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -70,7 +74,7 @@ AWS_ACCESS_KEY_ID = 'AKIAJTAXI3XLOAQCOXPA'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'sajufortune-s3'
 AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
+    'CacheControl': 'max-age=259200',
 }
 
 AWS_S3_CUSTOM_DOMAIN = 'd3m4mlntjbzekh.cloudfront.net'

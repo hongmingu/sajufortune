@@ -50,12 +50,10 @@
 
         </div>
         <div class="row">
-            <!--이건 더미 정사각형-->
             {% block other_posts_objects %}
                 {% for celeb in other_celebs %}
                     <div class="col-sm-6 padding_side_5">
                         <div class="center-block square_list_wrapper">
-                            <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
                             {% if request.GET.ty and request.GET.tm and request.GET.ty %}
                                 <a href="{% url 'celebrity:day' lang=lang num=celeb.pk %}?ty={{ request.GET.ty }}&tm={{ request.GET.tm }}&td={{ request.GET.td }}">
                             {% else %}
@@ -72,7 +70,6 @@
                             {% endif %}
                             </a>
                             <div class="btn_padder"></div>
-                            <!-- text -->
                             <div class="text-center">
                                 {% if request.GET.ty and request.GET.tm and request.GET.ty %}
 

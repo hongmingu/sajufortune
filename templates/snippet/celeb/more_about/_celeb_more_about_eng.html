@@ -1,9 +1,8 @@
-        <div class="col-sm-offset-3 col-sm-6">
-            <div class="col-xs-12">
-                {% block go_profile %}
-                    <a class="fa btn_saju width_100percent" href="{% url 'celebrity:profile' lang=lang num=post.celebrity.pk %}">
-                        more about {{ post.celebrity.celebrityenglish.name }}
-                    </a>
-                {% endblock %}
-            </div>
-        </div>
+<div class="col-sm-offset-3 col-sm-6">
+    <div class="col-xs-12">
+        <a class="fa btn_saju width_100percent"
+           href="{% url 'celebrity:profile' lang=lang num=post.celebrity.pk %}">
+            more about {{ post.celebrity.celebrityenglish.name }}
+        </a>
+    </div>
+</div>

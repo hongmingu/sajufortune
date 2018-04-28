@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from dayemotion.models import DayEmotion
 from daylove.models import DayLove
 from daymoney.models import DayMoney

@@ -1,15 +1,14 @@
 from django.contrib.sitemaps import Sitemap
+from django.core.cache import cache
+from django.core.paginator import Paginator
 from django.urls import reverse
 
 from celebrity.models import *
 from post.models import *
-from django.core.cache import cache
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
 
 
 class PostArabicSitemap(Sitemap):
-    changefreq = "daily"
+    changefreq = "weekly"
     priority = 1.0
 
     def items(self):
@@ -19,7 +18,7 @@ class PostArabicSitemap(Sitemap):
         return obj.updated
 
 class PostChineseSitemap(Sitemap):
-    changefreq = "daily"
+    changefreq = "weekly"
     priority = 1.0
 
     def items(self):
@@ -29,7 +28,7 @@ class PostChineseSitemap(Sitemap):
         return obj.updated
 
 class PostEnglishSitemap(Sitemap):
-    changefreq = "daily"
+    changefreq = "weekly"
     priority = 1.0
 
     def items(self):
@@ -39,7 +38,7 @@ class PostEnglishSitemap(Sitemap):
         return obj.updated
 
 class PostPortugueseSitemap(Sitemap):
-    changefreq = "daily"
+    changefreq = "weekly"
     priority = 1.0
 
     def items(self):
@@ -49,7 +48,7 @@ class PostPortugueseSitemap(Sitemap):
         return obj.updated
 
 class PostSpanishSitemap(Sitemap):
-    changefreq = "daily"
+    changefreq = "weekly"
     priority = 1.0
 
     def items(self):
@@ -82,12 +81,13 @@ class PostListSitemap(Sitemap):
         return item_list
 
     def location(self, item):
-        return reverse('celebrity:list', kwargs={'lang': next(iter(item)), 'page': item.get(next(iter(item)))})
+        get_val = next(iter(item))
+        return reverse('celebrity:list', kwargs={'lang': get_val, 'page': item.get(get_val)})
 
 
 
 class CelebrityArabicSitemap(Sitemap):
-    changefreq = "daily"
+    changefreq = "weekly"
     priority = 1.0
 
     def items(self):
@@ -98,7 +98,7 @@ class CelebrityArabicSitemap(Sitemap):
 
 
 class CelebrityChineseSitemap(Sitemap):
-    changefreq = "daily"
+    changefreq = "weekly"
     priority = 1.0
 
     def items(self):
@@ -109,7 +109,7 @@ class CelebrityChineseSitemap(Sitemap):
 
 
 class CelebrityEnglishSitemap(Sitemap):
-    changefreq = "daily"
+    changefreq = "weekly"
     priority = 1.0
 
     def items(self):
@@ -120,7 +120,7 @@ class CelebrityEnglishSitemap(Sitemap):
 
 
 class CelebrityPortugueseSitemap(Sitemap):
-    changefreq = "daily"
+    changefreq = "weekly"
     priority = 1.0
 
     def items(self):
@@ -131,7 +131,7 @@ class CelebrityPortugueseSitemap(Sitemap):
 
 
 class CelebritySpanishSitemap(Sitemap):
-    changefreq = "daily"
+    changefreq = "weekly"
     priority = 1.0
 
     def items(self):
@@ -163,7 +163,8 @@ class CelebrityListSitemap(Sitemap):
         return item_list
 
     def location(self, item):
-        return reverse('celebrity:list', kwargs={'lang': next(iter(item)), 'page': item.get(next(iter(item)))})
+        get_val = next(iter(item))
+        return reverse('celebrity:list', kwargs={'lang': get_val, 'page': item.get(get_val)})
 
 
 class CelebrityListTextSitemap(Sitemap):

@@ -1,6 +1,7 @@
 from django.core.cache import cache
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
+from django.shortcuts import render
 
 from post.models import Post
 from post.utils import *
@@ -143,7 +144,6 @@ def post_list(request, page, lang):
                 post_queryset = Post.objects.all().order_by('-created')
                 cache.set('post_objects_all_order_by_created', post_queryset, timeout=60*60)
 
-            page = request.GET.get(page, 1)
             post_list = post_queryset
             post_paginator = Paginator(post_list, 10)
             try:
@@ -156,6 +156,7 @@ def post_list(request, page, lang):
             template = switch_post_list_template_by_lang(lang)
 
             render_post_list = render(request, template, {'posts': posts, 'lang': lang})
+
             cache.set('post_list'+lang+page, render_post_list, timeout=60*15)
             return render_post_list
 
