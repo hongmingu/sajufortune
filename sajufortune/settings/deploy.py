@@ -49,7 +49,7 @@ MIDDLEWARE = [
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": settings_json['redis']['default']['location'],
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
@@ -59,8 +59,12 @@ CACHES = {
 # database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': settings_json['database']['default']['engine'],
+        'NAME': settings_json['database']['default']['name'],
+        'USER': settings_json['database']['default']['user'],
+        'PASSWORD': settings_json['database']['default']['password'],
+        'HOST': settings_json['database']['default']['host'],
+        'PORT': settings_json['database']['default']['port'],
     }
 }
 
@@ -70,9 +74,9 @@ WSGI_APPLICATION = 'sajufortune.wsgi.deploy.application'
 # Static settings
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_ACCESS_KEY_ID = 'AKIAJTAXI3XLOAQCOXPA'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'sajufortune-s3'
+AWS_ACCESS_KEY_ID = settings_json['cdn']['aws']['aws_access_key_id']
+AWS_SECRET_ACCESS_KEY = settings_json['cdn']['aws']['aws_secret_access_key']
+AWS_STORAGE_BUCKET_NAME = settings_json['cdn']['aws']['aws_storage_bucket_name']
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=259200',
 }
