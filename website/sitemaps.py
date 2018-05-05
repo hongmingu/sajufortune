@@ -12,7 +12,7 @@ class PostArabicSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return PostArabic.objects.all()
+        return PostArabic.objects.all().order_by('-created')
 
     def lastmod(self, obj):
         return obj.updated
@@ -22,7 +22,7 @@ class PostChineseSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return PostChinese.objects.all()
+        return PostChinese.objects.all().order_by('-created')
 
     def lastmod(self, obj):
         return obj.updated
@@ -32,7 +32,7 @@ class PostEnglishSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return PostEnglish.objects.all()
+        return PostEnglish.objects.all().order_by('-created')
 
     def lastmod(self, obj):
         return obj.updated
@@ -42,7 +42,7 @@ class PostPortugueseSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return PostPortuguese.objects.all()
+        return PostPortuguese.objects.all().order_by('-created')
 
     def lastmod(self, obj):
         return obj.updated
@@ -52,7 +52,7 @@ class PostSpanishSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return PostSpanish.objects.all()
+        return PostSpanish.objects.all().order_by('-created')
 
     def lastmod(self, obj):
         return obj.updated
@@ -91,7 +91,7 @@ class CelebrityArabicSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return CelebrityArabic.objects.all()
+        return CelebrityArabic.objects.all().order_by('-created')
 
     def lastmod(self, obj):
         return obj.updated
@@ -102,7 +102,7 @@ class CelebrityChineseSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return CelebrityChinese.objects.all()
+        return CelebrityChinese.objects.all().order_by('-created')
 
     def lastmod(self, obj):
         return obj.updated
@@ -113,7 +113,7 @@ class CelebrityEnglishSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return CelebrityEnglish.objects.all()
+        return CelebrityEnglish.objects.all().order_by('-created')
 
     def lastmod(self, obj):
         return obj.updated
@@ -124,7 +124,7 @@ class CelebrityPortugueseSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return CelebrityPortuguese.objects.all()
+        return CelebrityPortuguese.objects.all().order_by('-created')
 
     def lastmod(self, obj):
         return obj.updated
@@ -135,7 +135,7 @@ class CelebritySpanishSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        return CelebritySpanish.objects.all()
+        return CelebritySpanish.objects.all().order_by('-created')
 
     def lastmod(self, obj):
         return obj.updated
@@ -146,12 +146,12 @@ class CelebrityListSitemap(Sitemap):
     priority = 1.0
 
     def items(self):
-        cache_celeb_objects_all = cache.get('celebrity_objects_all')
+        cache_celeb_objects_all = cache.get('celebrity_objects_all_order_by_created')
         if cache_celeb_objects_all is not None:
             celeb_all = cache_celeb_objects_all
         else:
-            celeb_all = Celebrity.objects.all()
-            cache.set('celebrity_objects_all', celeb_all, timeout=60 * 60)
+            celeb_all = Celebrity.objects.all().order_by('-created')
+            cache.set('celebrity_objects_all_order_by_created', celeb_all, timeout=60 * 60)
 
         celeb_paginator = Paginator(celeb_all, 10)
         pages_number = celeb_paginator.num_pages

@@ -85,13 +85,12 @@ def celeb_list(request, lang, page):
         if cache_celeb_list is not None:
             return cache_celeb_list
         else:
-            cache_celeb_objects_all = cache.get('celebrity_objects_all')
+            cache_celeb_objects_all = cache.get('celebrity_objects_all_order_by_created')
             if cache_celeb_objects_all is not None:
                 celeb_all = cache_celeb_objects_all
             else:
-                celeb_all = Celebrity.objects.all()
-                cache.set('celebrity_objects_all', celeb_all, timeout=60*60)
-
+                celeb_all = Celebrity.objects.all().order_by('-created')
+                cache.set('celebrity_objects_all_order_by_created', celeb_all, timeout=60*60)
             celeb_paginator = Paginator(celeb_all, 10)
 
             try:
