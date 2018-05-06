@@ -65,6 +65,9 @@ DATABASES = {
         'PASSWORD': settings_json['database']['default']['password'],
         'HOST': settings_json['database']['default']['host'],
         'PORT': settings_json['database']['default']['port'],
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
