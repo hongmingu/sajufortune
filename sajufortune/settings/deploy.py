@@ -81,7 +81,7 @@ AWS_ACCESS_KEY_ID = settings_json['cdn']['aws']['aws_access_key_id']
 AWS_SECRET_ACCESS_KEY = settings_json['cdn']['aws']['aws_secret_access_key']
 AWS_STORAGE_BUCKET_NAME = settings_json['cdn']['aws']['aws_storage_bucket_name']
 AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=259200',
+    'CacheControl': settings_json['cdn']['aws']['aws_s3_object_parameters']['cachecontrol'],
 }
 
 AWS_S3_CUSTOM_DOMAIN = 'd3m4mlntjbzekh.cloudfront.net'
@@ -90,4 +90,4 @@ AWS_S3_CUSTOM_DOMAIN = 'd3m4mlntjbzekh.cloudfront.net'
 STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 
 # Media Setting
-MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+MEDIA_URL = "https://%s/media/" % AWS_S3_CUSTOM_DOMAIN
