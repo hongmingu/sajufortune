@@ -18,7 +18,7 @@
         <meta name="title" content="SajuFortune"/>
         <meta name="description" content="{{ celeb.celebrityenglish.name }}"/>
 
-        <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+        <meta property="og:url" content="https://www.sajufortune.com{{ request.get_full_path }}"/>
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="SajuFortune"/>
         <meta property="og:site_name" content="SajuFortune"/>
@@ -53,20 +53,13 @@
             {% include 'ad/_ad_banner.html' %}
         </div>
     </div>
-    <!--forloop counter를쓰자-->
-    <!--페이지는 12개불러오면 13개까지 불러와보고 12개만 보낸 후에 라스트인지 아닌지 변수를 자바스크립트로 보내서 넥스트 누를 시에 마지막페이지면 마지막페이지라고 알리는 형식
-    get 요청 파라미터로 페이지 순서 부르더라도 없는 페이지 부르면 404리다이렉트-->
-
     <div class="row">
         <div class="btn_padder"></div>
     </div>
-    <!--여기서부턴 정사각형 목록-->
     {% block celeb %}
         {% if celeb %}
             <div class="row">
-                <!--이건 더미 정사각형-->
                 <div class="center-block square_list_wrapper">
-                    <!-- 이미지인데 여기서 이미지는 이미지 자체가 350*250이다 -->
                     {% if celeb.photo %}
                         <img class="img_350_250" src="{{ celeb.photo.url }}">
                     {% else %}
@@ -76,7 +69,6 @@
                             </div>
                         </div>
                     {% endif %}
-                    <!-- text -->
                     {% block info %}
                         <div class="text-center">
                             <p class="h3 list_text">
@@ -126,7 +118,7 @@
                             <div class="col-sm-6 padding_side_5">
                                 {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
                             </div>
-                            <!--adsense 버전-->
+                            <!--adsense-->
                             <div class="col-sm-6 padding_side_5">
                                 {% include 'ad/_ad_square_list.html' %}
                             </div>
@@ -134,7 +126,7 @@
                             <div class="col-sm-6 padding_side_5">
                                 {% include 'snippet/celeb/square_in_profile/_celeb_square_in_profile_eng.html' %}
                             </div>
-                            <!--adsense 버전-->
+                            <!--adsense-->
                             <div class="col-sm-6 padding_side_5">
                                 {% include 'ad/_ad_square_list.html' %}
                             </div>
