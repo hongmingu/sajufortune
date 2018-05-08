@@ -13,12 +13,15 @@ from website.utils import get_day_fortune_model_by_index
 
 def day(request, lang):
     if request.method == "GET":
-        birthday_year_raw = request.GET.get('by', None)
-        birthday_month_raw = request.GET.get('bm', None)
-        birthday_day_raw = request.GET.get('bd', None)
-        target_year_raw = request.GET.get('ty', None)
-        target_month_raw = request.GET.get('tm', None)
-        target_day_raw = request.GET.get('td', None)
+        get_all_date = request.GET.get('d', None)
+        get_all_date = get_all_date.split('_')
+
+        birthday_year_raw = get_all_date[0]
+        birthday_month_raw = get_all_date[1]
+        birthday_day_raw = get_all_date[2]
+        target_year_raw = get_all_date[3]
+        target_month_raw = get_all_date[4]
+        target_day_raw = get_all_date[5]
 
         cache_day = cache.get('dayall' + lang +
                               birthday_year_raw + birthday_month_raw + birthday_day_raw +

@@ -113,10 +113,12 @@ def celeb_list(request, lang, page):
 
 def celeb_day(request, lang, num):
     if request.method == "GET":
+        get_all_date = request.GET.get('d', None)
+        get_all_date = get_all_date.split('_')
 
-        target_year_raw = request.GET.get('ty', None)
-        target_month_raw = request.GET.get('tm', None)
-        target_day_raw = request.GET.get('td', None)
+        target_year_raw = get_all_date[0]
+        target_month_raw = get_all_date[1]
+        target_day_raw = get_all_date[2]
 
         cache_celeb_day = cache.get('celeb_day' + lang + num +
                               target_year_raw + target_month_raw + target_day_raw)
