@@ -3,10 +3,9 @@
     <html lang="en">
 {% endblock %}
 <head>
+    {% include 'snippet/others/header_static.html' %}
     <title>SajuFortune {{ birthday.year }}-{{ birthday.month }}-{{ birthday.day }}
         @{{ target.year }}-{{ target.month }}-{{ target.day }}</title>
-    {% include 'snippet/others/header_static.html' %}
-
     {% include 'snippet/others/favicon.html' %}
 
     {% load static from staticfiles %}

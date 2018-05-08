@@ -3,11 +3,9 @@
     <html lang="en">
 {% endblock %}
 <head>
-
+    {% include 'snippet/others/header_static.html' %}
     <title>{% block title %}SajuFortune - {{ celeb.celebrityenglish.name }} @{{ target.year }}-{{ target.month }}-
         {{ target.day }}{% endblock %}</title>
-
-    {% include 'snippet/others/header_static.html' %}
     {% include 'snippet/others/favicon.html' %}
 
     {% load static from staticfiles %}

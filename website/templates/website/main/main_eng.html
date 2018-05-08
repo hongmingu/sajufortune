@@ -3,10 +3,9 @@
     <html lang="en">
 {% endblock %}
 <head>
+    {% include 'snippet/others/header_static.html' %}
     <title>{% block title %}SajuFortune - Check your fortune. Or check the fortunes of
         celebrities.{% endblock %}</title>
-    {% include 'snippet/others/header_static.html' %}
-
     {% load static from staticfiles %}
     <script src="{% static 'js/buttons_adding_text.js' %}"></script>
     <script src="{% static 'js/birthday.js' %}"></script>
