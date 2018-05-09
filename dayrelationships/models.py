@@ -15,8 +15,8 @@ class DayRelationshipsEnglish(models.Model):
 
     day_relationships = models.OneToOneField(DayRelationships, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -28,8 +28,8 @@ class DayRelationshipsEnglish(models.Model):
 class DayRelationshipsSpanish(models.Model):
     day_relationships = models.OneToOneField(DayRelationships, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -41,8 +41,8 @@ class DayRelationshipsSpanish(models.Model):
 class DayRelationshipsChinese(models.Model):
     day_relationships = models.OneToOneField(DayRelationships, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -54,8 +54,8 @@ class DayRelationshipsChinese(models.Model):
 class DayRelationshipsArabic(models.Model):
     day_relationships = models.OneToOneField(DayRelationships, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -67,8 +67,8 @@ class DayRelationshipsArabic(models.Model):
 class DayRelationshipsPortuguese(models.Model):
     day_relationships = models.OneToOneField(DayRelationships, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

@@ -15,8 +15,8 @@ class DayMoneyEnglish(models.Model):
 
     day_money = models.OneToOneField(DayMoney, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -28,8 +28,8 @@ class DayMoneyEnglish(models.Model):
 class DayMoneySpanish(models.Model):
     day_money = models.OneToOneField(DayMoney, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -41,8 +41,8 @@ class DayMoneySpanish(models.Model):
 class DayMoneyChinese(models.Model):
     day_money = models.OneToOneField(DayMoney, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -54,8 +54,8 @@ class DayMoneyChinese(models.Model):
 class DayMoneyArabic(models.Model):
     day_money = models.OneToOneField(DayMoney, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -67,8 +67,8 @@ class DayMoneyArabic(models.Model):
 class DayMoneyPortuguese(models.Model):
     day_money = models.OneToOneField(DayMoney, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

@@ -15,8 +15,8 @@ class DayOverallEnglish(models.Model):
 
     day_whole = models.OneToOneField(DayOverall, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -28,8 +28,8 @@ class DayOverallEnglish(models.Model):
 class DayOverallSpanish(models.Model):
     day_whole = models.OneToOneField(DayOverall, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -41,8 +41,8 @@ class DayOverallSpanish(models.Model):
 class DayOverallChinese(models.Model):
     day_whole = models.OneToOneField(DayOverall, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -54,8 +54,8 @@ class DayOverallChinese(models.Model):
 class DayOverallArabic(models.Model):
     day_whole = models.OneToOneField(DayOverall, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

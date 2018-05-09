@@ -14,8 +14,8 @@ class DayWork(models.Model):
 class DayWorkEnglish(models.Model):
     day_work = models.OneToOneField(DayWork, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -27,8 +27,8 @@ class DayWorkEnglish(models.Model):
 class DayWorkSpanish(models.Model):
     day_work = models.OneToOneField(DayWork, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -40,8 +40,8 @@ class DayWorkSpanish(models.Model):
 class DayWorkChinese(models.Model):
     day_work = models.OneToOneField(DayWork, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -53,8 +53,8 @@ class DayWorkChinese(models.Model):
 class DayWorkArabic(models.Model):
     day_work = models.OneToOneField(DayWork, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -66,8 +66,8 @@ class DayWorkArabic(models.Model):
 class DayWorkPortuguese(models.Model):
     day_work = models.OneToOneField(DayWork, on_delete=models.CASCADE)
 
-    text = models.TextField(max_length=800)
-    quote = models.TextField(max_length=200)
+    text = models.TextField(max_length=800, null=True, blank=True)
+    quote = models.TextField(max_length=200, null=True, blank=True)
 
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
