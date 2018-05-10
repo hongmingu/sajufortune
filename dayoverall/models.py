@@ -23,4 +23,4 @@ class DayOverall(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "DayOverall pk: %s, quote: %s" % (self.num, self.quote)
+        return "DayOverall num: %s, quote: %s" % (self.num, self.quote)

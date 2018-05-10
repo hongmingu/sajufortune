@@ -23,5 +23,5 @@ class DayRelationships(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "DayRelationships pk: %s, quote: %s" % (self.num, self.quote)
+        return "DayRelationships num: %s, quote: %s" % (self.num, self.quote)
 

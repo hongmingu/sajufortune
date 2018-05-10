@@ -23,5 +23,5 @@ class DayWork(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "DayWork pk: %s, quote: %s" % (self.num, self.quote)
+        return "DayWork num: %s, quote: %s" % (self.num, self.quote)
 
