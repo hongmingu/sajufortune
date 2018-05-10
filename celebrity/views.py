@@ -188,7 +188,7 @@ def celeb_day(request, lang, num):
             for i in range_cache_list:
                 if cache_list[i] is None:
                     try:
-                        result = get_day_fortune_model_by_index(i).objects.get(pk=num_list[i])
+                        result = get_day_fortune_model_by_index(i).objects.get(num=num_list[i])
                     except get_day_fortune_model_by_index(i).DoesNotExist:
                         result = None
                     cache.set('day' + str(i) + ':' + num_list[i], result, timeout=60*60*24)
