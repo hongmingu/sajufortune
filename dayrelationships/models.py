@@ -23,5 +23,47 @@ class DayRelationships(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "DayRelationships num: %s, quote: %s" % (self.num, self.quote)
+        if self.arabic is "":
+            ara = "0"
+        else:
+            ara = "1"
+        if self.chinese is "":
+            chi = "0"
+        else:
+            chi = "1"
+        if self.english is "":
+            eng = "0"
+        else:
+            eng = "1"
+        if self.portuguese is "":
+            por = "0"
+        else:
+            por = "1"
+        if self.spanish is "":
+            spa = "0"
+        else:
+            spa = "1"
+        if self.quote_arabic is "":
+            quote_ara = "0"
+        else:
+            quote_ara = "1"
+        if self.quote_chinese is "":
+            quote_chi = "0"
+        else:
+            quote_chi = "1"
+        if self.quote_english is "":
+            quote_eng = "0"
+        else:
+            quote_eng = "1"
+        if self.quote_portuguese is "":
+            quote_por = "0"
+        else:
+            quote_por = "1"
+        if self.quote_spanish is "":
+            quote_spa = "0"
+        else:
+            quote_spa = "1"
+        return "num: %s,  %s-%s-%s-%s-%s, quote: %s-%s-%s-%s-%s" % (self.num, ara, chi, eng, por, spa, quote_ara, quote_chi, quote_eng, quote_por, quote_spa)
+
+
 
