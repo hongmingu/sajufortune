@@ -10,6 +10,7 @@ from post.models import *
 class PostArabicSitemap(Sitemap):
     changefreq = "weekly"
     priority = 1.0
+    protocol = "https"
 
     def items(self):
         return PostArabic.objects.all().order_by('-created')
@@ -17,9 +18,11 @@ class PostArabicSitemap(Sitemap):
     def lastmod(self, obj):
         return obj.updated
 
+
 class PostChineseSitemap(Sitemap):
     changefreq = "weekly"
     priority = 1.0
+    protocol = "https"
 
     def items(self):
         return PostChinese.objects.all().order_by('-created')
@@ -30,6 +33,7 @@ class PostChineseSitemap(Sitemap):
 class PostEnglishSitemap(Sitemap):
     changefreq = "weekly"
     priority = 1.0
+    protocol = "https"
 
     def items(self):
         return PostEnglish.objects.all().order_by('-created')
@@ -40,6 +44,7 @@ class PostEnglishSitemap(Sitemap):
 class PostPortugueseSitemap(Sitemap):
     changefreq = "weekly"
     priority = 1.0
+    protocol = "https"
 
     def items(self):
         return PostPortuguese.objects.all().order_by('-created')
@@ -50,6 +55,7 @@ class PostPortugueseSitemap(Sitemap):
 class PostSpanishSitemap(Sitemap):
     changefreq = "weekly"
     priority = 1.0
+    protocol = "https"
 
     def items(self):
         return PostSpanish.objects.all().order_by('-created')
@@ -61,6 +67,7 @@ class PostSpanishSitemap(Sitemap):
 class PostListSitemap(Sitemap):
     changefreq = "daily"
     priority = 1.0
+    protocol = "https"
 
     def items(self):
         cache_post_queryset = cache.get('post_objects_all_order_by_created')
@@ -89,6 +96,7 @@ class PostListSitemap(Sitemap):
 class CelebrityArabicSitemap(Sitemap):
     changefreq = "weekly"
     priority = 1.0
+    protocol = "https"
 
     def items(self):
         return CelebrityArabic.objects.all().order_by('-created')
@@ -100,6 +108,7 @@ class CelebrityArabicSitemap(Sitemap):
 class CelebrityChineseSitemap(Sitemap):
     changefreq = "weekly"
     priority = 1.0
+    protocol = "https"
 
     def items(self):
         return CelebrityChinese.objects.all().order_by('-created')
@@ -111,6 +120,7 @@ class CelebrityChineseSitemap(Sitemap):
 class CelebrityEnglishSitemap(Sitemap):
     changefreq = "weekly"
     priority = 1.0
+    protocol = "https"
 
     def items(self):
         return CelebrityEnglish.objects.all().order_by('-created')
@@ -122,6 +132,7 @@ class CelebrityEnglishSitemap(Sitemap):
 class CelebrityPortugueseSitemap(Sitemap):
     changefreq = "weekly"
     priority = 1.0
+    protocol = "https"
 
     def items(self):
         return CelebrityPortuguese.objects.all().order_by('-created')
@@ -133,6 +144,7 @@ class CelebrityPortugueseSitemap(Sitemap):
 class CelebritySpanishSitemap(Sitemap):
     changefreq = "weekly"
     priority = 1.0
+    protocol = "https"
 
     def items(self):
         return CelebritySpanish.objects.all().order_by('-created')
@@ -144,6 +156,7 @@ class CelebritySpanishSitemap(Sitemap):
 class CelebrityListSitemap(Sitemap):
     changefreq = "daily"
     priority = 1.0
+    protocol = "https"
 
     def items(self):
         cache_celeb_objects_all = cache.get('celebrity_objects_all_order_by_created')
@@ -170,6 +183,7 @@ class CelebrityListSitemap(Sitemap):
 class CelebrityListTextSitemap(Sitemap):
     changefreq = "weeekly"
     priority = 0.8
+    protocol = "https"
 
     def items(self):
         return ['ara', 'chi', 'eng', 'por', 'spa']
@@ -181,6 +195,7 @@ class CelebrityListTextSitemap(Sitemap):
 class MainSitemap(Sitemap):
     changefreq = "daily"
     priority = 1.0
+    protocol = "https"
 
     def items(self):
         return ['website:main']
@@ -192,6 +207,7 @@ class MainSitemap(Sitemap):
 class Main_LangSitemap(Sitemap):
     changefreq = "daily"
     priority = 1.0
+    protocol = "https"
 
     def items(self):
         return ['ara', 'chi', 'eng', 'por', 'spa']
@@ -203,6 +219,7 @@ class Main_LangSitemap(Sitemap):
 class AboutSitemap(Sitemap):
     changefreq = "weeekly"
     priority = 0.8
+    protocol = "https"
 
     def items(self):
         return ['ara', 'chi', 'eng', 'por', 'spa']
