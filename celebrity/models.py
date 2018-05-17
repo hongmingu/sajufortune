@@ -27,7 +27,7 @@ class CelebrityEnglish(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "name: %s English" % self.celebrity.name
+        return "pk: %s, name: %s - %s" % (self.celebrity.name, self.name, self.celebrity.pk)
 
     def get_absolute_url(self):
         from django.urls import reverse
@@ -43,7 +43,7 @@ class CelebrityChinese(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "name: %s Chinese" % self.celebrity.name
+        return "pk: %s, name: %s - %s" % (self.celebrity.name, self.name, self.celebrity.pk)
 
     def get_absolute_url(self):
         from django.urls import reverse
@@ -59,7 +59,7 @@ class CelebrityArabic(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "name: %s Arabic" % self.celebrity.name
+        return "pk: %s, name: %s - %s" % (self.celebrity.name, self.name, self.celebrity.pk)
 
     def get_absolute_url(self):
         from django.urls import reverse
@@ -75,7 +75,7 @@ class CelebrityPortuguese(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "name: %s Portuguese" % self.celebrity.name
+        return "pk: %s, name: %s - %s" % (self.celebrity.name, self.name, self.celebrity.pk)
 
     def get_absolute_url(self):
         from django.urls import reverse
@@ -91,7 +91,7 @@ class CelebritySpanish(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "name: %s Spanish" % self.celebrity.name
+        return "pk: %s, name: %s - %s" % (self.celebrity.name, self.name, self.celebrity.pk)
 
     def get_absolute_url(self):
         from django.urls import reverse

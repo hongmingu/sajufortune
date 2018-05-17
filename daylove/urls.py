@@ -7,5 +7,4 @@ app_name = 'daylove'
 # I do not want to use project_name/urls.py except include
 
 urlpatterns = [
-    #re_path(r'^password/change/$', views.main_create_log_in, name='main'),
 ]

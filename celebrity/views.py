@@ -42,7 +42,7 @@ def celeb_profile(request, lang, num):
                                               'celeb': celeb,
                                               'posts': posts, })
 
-            cache.set('celeb_profile' + lang + num, render_celeb_profile, timeout=60*60)
+            cache.set('celeb_profile' + lang + num, render_celeb_profile, timeout=60*15)
 
             return render_celeb_profile
     else:
@@ -66,14 +66,14 @@ def celeb_list_text(request, lang):
                     celebs_all = Celebrity.objects.all()
                     cache.set('celebrity_objects_all', celebs_all, timeout=60*60)
 
-                celebs = Celebrity.objects.all().order_by(Lower('celebrityenglish__name'))
+                celebs = celebs_all.order_by(Lower('celebrityenglish__name'))
                 cache.set('celebrity_objects_all_lower', celebs, timeout=60*60)
 
         template = switch_celeb_text_list_template_by_lang(lang)
 
         render_celeb_list_text = render(request, template, {'celebs': celebs, 'lang': lang})
 
-        cache.set('celeb_list_text'+lang, render_celeb_list_text, timeout=60*60)
+        cache.set('celeb_list_text'+lang, render_celeb_list_text, timeout=60*15)
         return render_celeb_list_text
     else:
         return JsonResponse({'error': 'You\'ve tried bad access'})
@@ -104,7 +104,7 @@ def celeb_list(request, lang, page):
 
             render_celeb_list = render(request, template, {'celebs': celebs, 'lang': lang})
 
-            cache.set('celeb_list'+lang+page, render_celeb_list, timeout=60*60)
+            cache.set('celeb_list'+lang+page, render_celeb_list, timeout=60*15)
             return render_celeb_list
 
     else:

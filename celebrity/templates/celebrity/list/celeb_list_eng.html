@@ -81,23 +81,17 @@
                 {% else %}
                     {% for celeb in celebs %}
                         {% if forloop.counter0 == 2 %}
-                            <div class="col-sm-6 padding_side_5">
-                                {% include 'snippet/square_list/_square_list_eng.html' %}
-                            </div>
+                            {% include 'snippet/celeb/square_list/_celeb_square_list_eng.html' %}
                             <div class="col-sm-6 padding_side_5">
                                 {% include 'ad/_ad_square_list.html' %}
                             </div>
                         {% elif forloop.counter0 == 6 %}
-                            <div class="col-sm-6 padding_side_5">
-                                {% include 'snippet/square_list/_square_list_eng.html' %}
-                            </div>
+                            {% include 'snippet/celeb/square_list/_celeb_square_list_eng.html' %}
                             <div class="col-sm-6 padding_side_5">
                                 {% include 'ad/_ad_square_list.html' %}
                             </div>
                         {% else %}
-                            <div class="col-sm-6 padding_side_5">
-                                {% include 'snippet/square_list/_square_list_eng.html' %}
-                            </div>
+                            {% include 'snippet/celeb/square_list/_celeb_square_list_eng.html' %}
                         {% endif %}
                     {% endfor %}
                 {% endif %}
