@@ -7,7 +7,7 @@ SETTINGS_FILE = os.path.join(SETTINGS_DIR, 'debug.json')
 with open(SETTINGS_FILE) as f:
     settings_json = json.loads(f.read())
 
-DEBUG = False
+DEBUG = True
 
 SECRET_KEY = settings_json['django']['secret_key']
 ALLOWED_HOSTS = settings_json['django']['allowed_hosts']

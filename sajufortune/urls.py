@@ -22,8 +22,6 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    re_path(r'^admin/', admin.site.urls),
-    re_path(r'^', include('website.urls')),
     re_path(r'^dayoverall/', include('dayoverall.urls')),
     re_path(r'^daywork/', include('daywork.urls')),
     re_path(r'^daylove/', include('daylove.urls')),
@@ -32,18 +30,20 @@ urlpatterns = [
     re_path(r'^dayemotion/', include('dayemotion.urls')),
     re_path(r'^post/', include('post.urls')),
     re_path(r'^celeb/', include('celebrity.urls')),
-
+    re_path(r'^', include('website.urls')),
 ]
 
-#이 아래 부분 미디어 파일 디벨롭 모드에서 쓰기 위해 필요
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# 이 아래 부분 미디어 파일 디벨롭 모드에서 쓰기 위해 필요
 
 
 if settings.DEBUG:
     import debug_toolbar
 
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += [
         re_path(r'^__debug__/', include(debug_toolbar.urls)),
+        re_path(r'^admin/', admin.site.urls),
     ]
 '''
     url(r'^accounts/', include('dayoverall.urls', namespace='accounts')),

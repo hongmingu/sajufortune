@@ -13,7 +13,7 @@ SECRET_KEY = settings_json['django']['secret_key']
 ALLOWED_HOSTS = settings_json['django']['allowed_hosts']
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
