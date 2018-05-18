@@ -181,7 +181,7 @@ class CelebrityListSitemap(Sitemap):
 
 
 class CelebrityListTextSitemap(Sitemap):
-    changefreq = "weeekly"
+    changefreq = "weekly"
     priority = 0.8
     protocol = "https"
 
@@ -217,7 +217,7 @@ class Main_LangSitemap(Sitemap):
 
 
 class AboutSitemap(Sitemap):
-    changefreq = "weeekly"
+    changefreq = "weekly"
     priority = 0.8
     protocol = "https"
 
