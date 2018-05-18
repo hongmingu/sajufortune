@@ -1,19 +1,19 @@
 {% extends 'website/main/main_eng.html' %}
 {% block lang_code %}
-    <html lang="ar">
+    <html lang="zh-cn">
 {% endblock %}
-{% block title %}SajuFortune - تحقق ثروتك. أو تحقق من ثروات المشاهير.{% endblock %}
+{% block title %}SajuFortune - 检查你的财富。或者检查名人的命运。{% endblock %}
 {% block meta %}
     <meta name="keywords" content="saju, sajufortune, fortune, horoscope, astrology, celebrity"/>
     <meta name="author" content="SajuFortune"/>
     <meta name="title" content="SajuFortune"/>
-    <meta name="description" content="تحقق ثروتك. أو تحقق من ثروات المشاهير"/>
+    <meta name="description" content="检查你的财富。或者检查名人的命运。"/>
 
     <meta property="og:url" content="https://www.sajufortune.com{{ request.get_full_path }}"/>
     <meta property="og:type" content="article"/>
     <meta property="og:title" content="SajuFortune"/>
     <meta property="og:site_name" content="SajuFortune"/>
-    <meta property="og:description" content="تحقق ثروتك. أو تحقق من ثروات المشاهير"/>
+    <meta property="og:description" content="检查你的财富。或者检查名人的命运。"/>
     <meta property="og:image" content="https://d3m4mlntjbzekh.cloudfront.net/etc/image-sajufortune.png"/>
 
     <meta name="twitter:card" content="summary"/>
@@ -23,14 +23,17 @@
 
     <meta property="fb:app_id" content="2043859895827697"/>
 {% endblock %}
-{% block birthday_selecting %}اختيار عيد ميلاد{% endblock %}
-{% block year %}عام{% endblock %}
-{% block month %}شهر{% endblock %}
-{% block day %}يوم{% endblock %}
+{% block birthday_selecting %}生日选择{% endblock %}
+{% block year %}年{% endblock %}
+{% block month %}月{% endblock %}
+{% block day %}天{% endblock %}
 
 {% block buttons_day %}
-    {% include 'snippet/buttons/_buttons_day_ara.html' %}
+    {% include 'snippet/buttons/_buttons_day_chi.html' %}
 {% endblock %}
+
+{% block language %}语言{% endblock %}
+{% block select_language %}选择{% endblock %}
 
 {% block posts %}
     <div class="row">
@@ -38,7 +41,7 @@
             {% if posts|length < 10 %}
                 {% for post in posts %}
                     <div class="col-sm-6 padding_side_5">
-                        {% include 'snippet/square_list/_square_list_ara.html' %}
+                        {% include 'snippet/square_list/_square_list_chi.html' %}
                     </div>
                 {% endfor %}
                 <div class="col-sm-6 padding_side_5">
@@ -51,21 +54,21 @@
                 {% for post in posts %}
                     {% if forloop.counter0 == 2 %}
                         <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/square_list/_square_list_ara.html' %}
+                            {% include 'snippet/square_list/_square_list_chi.html' %}
                         </div>
                         <div class="col-sm-6 padding_side_5">
                             {% include 'ad/_ad_square_list.html' %}
                         </div>
                     {% elif forloop.counter0 == 6 %}
                         <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/square_list/_square_list_ara.html' %}
+                            {% include 'snippet/square_list/_square_list_chi.html' %}
                         </div>
                         <div class="col-sm-6 padding_side_5">
                             {% include 'ad/_ad_square_list.html' %}
                         </div>
                     {% else %}
                         <div class="col-sm-6 padding_side_5">
-                            {% include 'snippet/square_list/_square_list_ara.html' %}
+                            {% include 'snippet/square_list/_square_list_chi.html' %}
                         </div>
                     {% endif %}
                 {% endfor %}
@@ -74,12 +77,11 @@
     </div>
 {% endblock %}
 
-{% block more_posts %}المزيد من المشاركات{% endblock %}
-{% block more_celebrities %}المزيد من المشاهير{% endblock %}
-{% block about %}حول{% endblock %}
+{% block more_posts %}更多的帖子{% endblock %}
+{% block more_celebrities %}更多名人{% endblock %}
+{% block about %}关于{% endblock %}
 
 {% block choose_phrase %}
-    <div class="mobile_display_none desktop_display_none" id="phrase_birthday"
-         data-sj="من فضلك سوف تختار عيد ميلادك؟"></div>
-    <div class="mobile_display_none desktop_display_none" id="phrase_language" data-sj="يرجى ضبط لغتك."></div>
+    <div class="mobile_display_none desktop_display_none" id="phrase_birthday" data-sj="请你选择你的生日？"></div>
+    <div class="mobile_display_none desktop_display_none" id="phrase_language" data-sj="请设置你的语言。"></div>
 {% endblock %}

@@ -9,7 +9,8 @@
     {% load static from staticfiles %}
     <script src="{% static 'js/buttons_adding_text.js' %}"></script>
     <script src="{% static 'js/birthday.js' %}"></script>
-    <script src="{% static 'js/day_buttons_links_about.js' %}"></script>
+    <script src="{% static 'js/day_buttons_links_main.js' %}"></script>
+    <script src="{% static 'js/lang_selecter_main.js' %}"></script>
 
     {% include 'snippet/others/favicon.html' %}
 
@@ -100,7 +101,32 @@
         <div class="btn_padder"></div>
     </div>
 
-
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6">
+            <form class="form-inline text-center">
+                <div class="form-group col-xs-6">
+                    <select class="form-control form-select" id="select_lang" style="width: 100%">
+                        <option selected disabled value="non_lang">{% block language %}Language{% endblock %}</option>
+                        <!--<option value="ara">‏العربية‏</option>-->
+                        <!--<option value="chi">中文</option>-->
+                        <option value="eng">English</option>
+                        <!--<option value="por">Português</option>-->
+                        <!--<option value="spa">Español</option>-->
+                    </select>
+                </div>
+                <div class="col-xs-6">
+                    <div class="text-center">
+                        <a type="button" class="fa btn_saju width_100percent" id="btn_lang" href=""
+                           style="margin-top: 0px;">
+                            {% block select_language %}
+                                choose
+                            {% endblock %}
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm-offset-3 col-sm-6 text-center warning_color">
             <p class="h4 warning_height" id="p_lang_warning"></p>
