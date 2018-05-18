@@ -92,8 +92,7 @@ class PostListSitemap(Sitemap):
 
     def location(self, item):
         get_val = next(iter(item))
-        return reverse('celebrity:list', kwargs={'lang': get_val, 'page': item.get(get_val)})
-
+        return reverse('post:list', kwargs={'lang': get_val, 'page': item.get(get_val)})
 
 
 class CelebrityArabicSitemap(Sitemap):
