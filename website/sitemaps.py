@@ -79,7 +79,10 @@ class PostListSitemap(Sitemap):
 
         post_paginator = Paginator(post_queryset, 10)
         pages_number = post_paginator.num_pages
-        lang_list = ['ara', 'chi', 'eng', 'por', 'spa']
+        lang_list = ['eng']
+        # 아래가 원본이고 원본에서 lang_list 한 줄만 바꾼 것이다.
+        # lang_list = ['ara', 'chi', 'eng', 'por', 'spa']
+
         item_list = []
         for i in range(len(lang_list)):
             for i_two in range(pages_number):
@@ -168,7 +171,11 @@ class CelebrityListSitemap(Sitemap):
 
         celeb_paginator = Paginator(celeb_all, 10)
         pages_number = celeb_paginator.num_pages
-        lang_list = ['ara', 'chi', 'eng', 'por', 'spa']
+
+        lang_list = ['eng']
+        # 아래가 원본이고 원본에서 lang_list 한 줄만 바꾼 것이다.
+        # lang_list = ['ara', 'chi', 'eng', 'por', 'spa']
+
         item_list = []
         for i in range(len(lang_list)):
             for i_two in range(pages_number):
@@ -186,7 +193,8 @@ class CelebrityListTextSitemap(Sitemap):
     protocol = "https"
 
     def items(self):
-        return ['ara', 'chi', 'eng', 'por', 'spa']
+        return ['eng']
+        # return ['ara', 'chi', 'eng', 'por', 'spa']
 
     def location(self, item):
         return reverse('celebrity:list_text', kwargs={'lang': item})
@@ -210,7 +218,8 @@ class Main_LangSitemap(Sitemap):
     protocol = "https"
 
     def items(self):
-        return ['ara', 'chi', 'eng', 'por', 'spa']
+        return ['eng']
+        # return ['ara', 'chi', 'eng', 'por', 'spa']
 
     def location(self, item):
         return reverse('website:main_lang', kwargs={'lang': item})
@@ -222,24 +231,25 @@ class AboutSitemap(Sitemap):
     protocol = "https"
 
     def items(self):
-        return ['ara', 'chi', 'eng', 'por', 'spa']
+        return ['eng']
+        # return ['ara', 'chi', 'eng', 'por', 'spa']
 
     def location(self, item):
         return reverse('website:about', kwargs={'lang': item})
 
 sitemaps = {
-    'postarabic': PostArabicSitemap,
+    # 'postarabic': PostArabicSitemap,
     'postenglish': PostEnglishSitemap,
-    'postchinese': PostChineseSitemap,
-    'postportuguese': PostPortugueseSitemap,
-    'postspanish': PostSpanishSitemap,
-    'celebrityarabic': CelebrityArabicSitemap,
-    'celebritychinese': CelebrityChineseSitemap,
+    # 'postchinese': PostChineseSitemap,
+    # 'postportuguese': PostPortugueseSitemap,
+    # 'postspanish': PostSpanishSitemap,
+    # 'celebrityarabic': CelebrityArabicSitemap,
+    # 'celebritychinese': CelebrityChineseSitemap,
     'celebrityenglish': CelebrityEnglishSitemap,
-    'celebrityportuguese': CelebrityPortugueseSitemap,
-    'celebrityspanish': CelebritySpanishSitemap,
+    # 'celebrityportuguese': CelebrityPortugueseSitemap,
+    # 'celebrityspanish': CelebritySpanishSitemap,
     'main': MainSitemap,
-    'main_lang': Main_LangSitemap,
+    # 'main_lang': Main_LangSitemap,
     'celeb_list': CelebrityListSitemap,
     'celeb_list_text': CelebrityListTextSitemap,
     'post_list': PostListSitemap,
